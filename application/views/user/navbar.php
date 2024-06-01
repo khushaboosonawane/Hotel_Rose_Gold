@@ -46,33 +46,13 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <!-- Menu -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown"> <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Home <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html" class="dropdown-item"><span>Home Layout 1</span></a></li>
-                            <li><a href="index2.html" class="dropdown-item"><span>Home Layout 2</span></a></li>
-                            <li><a href="index3.html" class="dropdown-item active"><span>Home Layout 3</span></a></li>
-                            <li><a href="index4.html" class="dropdown-item"><span>Home Layout 4</span></a></li>
-                            <li><a href="index5.html" class="dropdown-item"><span>Video 1</span></a></li>
-                            <li><a href="index6.html" class="dropdown-item"><span>Video 2</span></a></li>
-                            <li><a href="index7.html" class="dropdown-item"><span>Video 3</span></a></li>
-                            <li><a href="index8.html" class="dropdown-item"><span>Slideshow 1</span></a></li>
-                            <li><a href="index9.html" class="dropdown-item"><span>Slideshow 2</span></a></li>
-                            <li><a href="index10.html" class="dropdown-item"><span>Slideshow 3</span></a></li>
-                            <li><a href="index11.html" class="dropdown-item"><span>Parallax Image 1</span></a></li>
-                            <li><a href="index12.html" class="dropdown-item"><span>Parallax Image 2</span></a></li>
-                            <li><a href="index13.html" class="dropdown-item"><span>Parallax Image 3</span></a></li>
-                            <li><a href="index14.html" class="dropdown-item"><span>Grid Background 1</span></a></li>
-                            <li><a href="index15.html" class="dropdown-item"><span>Grid Background 2</span></a></li>
-                        </ul>     
+                    <li class="nav-item dropdown"> <a class="nav-link active " href="<?= base_url() ?>/usercontroller/" >Home </a> 
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Rooms & Suites <i class="ti-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="rooms.html" class="dropdown-item"><span>Rooms 1</span></a></li>
-                            <li><a href="rooms2.html" class="dropdown-item"><span>Rooms 2</span></a></li>
-                            <li><a href="rooms3.html" class="dropdown-item"><span>Rooms 3</span></a></li>
-                            <li><a href="room-details.html" class="dropdown-item"><span>Room Details</span></a></li>
-                        </ul>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>/usercontroller/about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="<?= base_url() ?>/usercontroller/rooms_suits" >
+                            Rooms & Suites
+                        </a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="restaurant.html">Restaurant</a></li>
                     <li class="nav-item"><a class="nav-link" href="spa-wellness.html">Spa</a></li>

@@ -2273,6 +2273,29 @@ hr {
     padding: 10px 3px;
     line-height: 1.5em;
 }
+.clients .owl-carousel .clients-logo .item .category {
+    position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      writing-mode: vertical-rl;
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg);
+      text-orientation: mixed;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.5);
+      font-family: 'Barlow Condensed', sans-serif;
+      padding: 10px 3px;
+      line-height: 1.5em;
+  }
 .rooms1 .item .category a {
     color: #fff;
 }
@@ -2317,6 +2340,19 @@ hr {
     font-weight: 400;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.clients .owl-carousel .clients-logo .item  .con h5,
+.clients .owl-carousel .clients-logo .item .con h5 a {
+    position: relative;
+    color: #fff;
+    font-size: 27px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.clients .owl-carousel .clients-logo .item .con h6 i {
+    font-size: 6px;
+    margin-right: 2px;
 }
 .rooms1 .item .con p {
     color: #fff;
@@ -3966,6 +4002,7 @@ button.mfp-arrow {
 .pricing-card {
     background-color: #f8f5f0;
     margin-bottom: 30px;
+    border-radius: 20%;
 }
 .pricing-card .desc {
     padding: 40px;
