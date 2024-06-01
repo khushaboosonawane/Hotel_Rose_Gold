@@ -7,9 +7,9 @@ class UserController extends CI_Controller{
         $this->load->view("user/footer");
     }
     public function index(){
-        $this->navbar();
+        // $this->navbar();
         $this->load->view("user/index");
-        $this->footer();
+        // $this->footer();
     }
     
 }
