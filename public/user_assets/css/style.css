@@ -386,8 +386,9 @@ blockquote cite:before {
 
 .owl-carousel .owl-nav button.owl-next, 
 .owl-carousel .owl-nav button.owl-prev, 
-.owl-carousel button.owl-dot {
-    outline: none;
+.owl-carousel button.owl-dot 
+{
+  outline: none;
 }
 
 /* background & color */
@@ -2291,7 +2292,7 @@ hr {
       font-weight: 400;
       letter-spacing: 3px;
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.5);
+      /* border: 1px solid rgba(255,255,255,0.5); */
       font-family: 'Barlow Condensed', sans-serif;
       padding: 10px 3px;
       line-height: 1.5em;
@@ -2314,9 +2315,10 @@ hr {
     z-index: 20;
     height: auto;
     box-sizing: border-box;
-    background: -moz-linear-gradient(top, transparent 0, rgba(0, 0, 0, .1) 2%, rgba(0, 0, 0, .75) 90%);
-    background: -webkit-linear-gradient(top, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%);
-    background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%);
+    /* background: -moz-linear-gradient(top, transparent 0, rgb(255,81,47) 2%, rgb(252,175,59) 90%); */
+    /* background: -webkit-linear-gradient(top, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%); */
+    /* background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%); */
+    background: linear-gradient(rgba(255,81,47,0.6), rgb(252,175,59,0.2));
 }
 .rooms1 .item .con h6,
 .rooms1 .item .con h6 a {
@@ -2374,12 +2376,121 @@ hr {
 .rooms1 .item .con .butn-light:hover {
     border-color: #aa8453;
 }
+
+/* client rooms design  */
+
+.clients  .owl-carousel .clients-logo .item .con {
+    padding: 20px;
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    text-align: left;
+    z-index: 20;
+    height: auto;
+    box-sizing: border-box;
+    background: -moz-linear-gradient(top, transparent 0, rgba(0, 0, 0, .1) 2%, rgba(0, 0, 0, .75) 90%);
+    background: -webkit-linear-gradient(top, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%);
+    background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .01) 2%, rgba(0, 0, 0, .75) 90%);
+}
+.clients  .owl-carousel .clients-logo .item .con h6,
+.clients  .owl-carousel .clients-logo .item .con h6 a {
+    position: relative;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Barlow Condensed', sans-serif;
+    display: inline;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+.clients  .owl-carousel .clients-logo .item .con h6 i {
+    font-size: 6px;
+    margin-right: 2px;
+}
+.clients  .owl-carousel .clients-logo .item .con h5,
+.clients  .owl-carousel .clients-logo .item .con h5 a {
+    position: relative;
+    color: #fff;
+    font-size: 27px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.clients  .owl-carousel .clients-logo .item .line {
+    text-align: center;
+    height: 1px;
+    width: 60px;
+    background-color: #ff512f;
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    margin: auto 0 30px;
+}
+.clients  .owl-carousel .clients-logo .item:hover .line {
+    width: 100%;
+    transition-property: all;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in-out;
+}
+.clients  .owl-carousel .clients-logo .item .con .facilities ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .clients  .owl-carousel .clients-logo .item .con  .facilities ul li {
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+      letter-spacing: 3px;
+    line-height: 1.2em;
+    padding-bottom: 20px;
+      float: left;
+  }
+  .clients  .owl-carousel .clients-logo .item .con .facilities ul li i {
+    margin-right: 10px;
+  }
+  .clients  .owl-carousel .clients-logo .item .con .permalink {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    height: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    display: inline;
+}
+.clients  .owl-carousel .clients-logo .item .con .permalink a {
+    color: #fff;
+    text-align: right;
+}
+.clients  .owl-carousel .clients-logo .item .con .permalink i {
+   font-size: 10px;
+    text-align: right;
+}
+.clients  .owl-carousel .clients-logo .item .con .permalink a:hover,
+.clients  .owl-carousel .clients-logo .item .con .permalink i:hover {
+color: #aa8453;
+}
+
+
 /* line animation */
 .rooms1 .item .line {
     text-align: center;
     height: 1px;
     width: 60px;
-    background-color: rgba(255, 255, 255, 0.2);
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    background-color: #ff512f;
     transition-property: all;
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
@@ -2391,6 +2502,7 @@ hr {
     transition-duration: 0.8s;
     transition-timing-function: ease-in-out;
 }
+
 /* facilities */
 .rooms1 .facilities ul {
   margin: 0;
@@ -2438,7 +2550,7 @@ hr {
 }
 .rooms1 .item .con .permalink a:hover,
 .rooms1 .item .con .permalink i:hover {
-color: #aa8453;
+color:#ff512f;
 }
 
 
@@ -2630,7 +2742,7 @@ hr.border-2 {
 }
 .reservations .icon span {
     font-size: 40px;
-    color: #8e6d45;
+    color: #ff512f;
 }
 .reservations .icon.color-1 span {
     font-size: 40px;
@@ -2716,7 +2828,7 @@ hr.border-2 {
     font-weight: 400;
     letter-spacing: 3px;
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.5);
+    /* border: 1px solid rgba(255,255,255,0.5); */
     font-family: 'Barlow Condensed', sans-serif;
     padding: 10px 3px;
     line-height: 1.5em;

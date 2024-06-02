@@ -1,12 +1,11 @@
 <?php
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
-
 <!-- Header Banner -->
 <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/1.jpg">
         <div class="container">
             <div class="row">
-				<div class="col-md-12 caption mt-90">
+				<div class="col-md-12 caption mt-90 text-center">
 				    <span>
                         <i class="star-rating"></i>
                         <i class="star-rating"></i>
@@ -15,7 +14,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         <i class="star-rating"></i>
                     </span>
 					<h5>The Cappa Luxury Hotel</h5>
-					<h1>Rooms & Suites</h1>
+					<h1>Foods & Wines</h1>
 				</div>
 			</div>
         </div>
@@ -187,8 +186,13 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div> 
                         <span class="category" ><a href="rooms2.html" >Book</a></span>
                         <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
+                            <h6>
+                                <a href=""><i class="ri-heart-line" style="font-size:28px;"></i></a>
+                                <a href="room-details.html">150$ / Night</a>
+                            </h6>
+                            <h5>
+                                <a href="room-details.html">Junior Suite</a>
+                            </h5>
                             <div class="line"></div>
                             <div class="row facilities">
                                 <div class="col col-md-7">
