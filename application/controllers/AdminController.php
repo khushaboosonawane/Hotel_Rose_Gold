@@ -88,6 +88,9 @@ class AdminController extends CI_Controller{
             redirect(base_url()."admincontroller/slider");
         }
     }
+    public function about_page(){
+        
+    }
 }
 ?>
 
