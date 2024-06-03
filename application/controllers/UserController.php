@@ -1,14 +1,16 @@
 <?php
 class UserController extends CI_Controller{
     private function navbar(){
-        $this->load->view("user/navbar");
+        $data['basic_info']=$this->My_model->select("basic_info");
+        $this->load->view("user/navbar",$data);
     }
     private function footer(){
         $this->load->view("user/footer");
     }
     public function index(){
         $this->navbar();
-        $this->load->view("user/index");
+        $data['slider_info']=$this->My_model->select("slider");
+        $this->load->view("user/index",$data);
         $this->footer();
     }
     public function about(){

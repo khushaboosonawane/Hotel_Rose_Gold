@@ -8604,8 +8604,10 @@ pre {
   background-color: #000000; }
 
 .table-hover tbody tr:hover {
-  color: #212529;
-  background-color: #000000; }
+  color: white;
+  /* background-color: #000000; */
+  background:linear-gradient(66deg,rgba(220,52,85,0.3),rgb(252,175,59,0.2));
+ }
 
 .table-primary,
 .table-primary > th,
@@ -16937,7 +16939,7 @@ code {
   .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=number], .select2-container--default .select2-selection--single:focus, .select2-container--default .select2-selection--single .select2-search__field:focus, .typeahead:focus,
   .tt-query:focus,
   .tt-hint:focus {
-    border: 1px solid rgba(71, 164, 71, 0.5);
+    border: 1px solid #675c52;
     background-color: #2A3038; }
   .form-control.form-control-lg, .form-control-lg.asColorPicker-input, .dataTables_wrapper select.form-control-lg, .jsgrid .jsgrid-table .jsgrid-filter-row input.form-control-lg[type=text],
   .jsgrid .jsgrid-table .jsgrid-filter-row select.form-control-lg, .jsgrid .jsgrid-table .jsgrid-filter-row input.form-control-lg[type=number], .select2-container--default .form-control-lg.select2-selection--single, .select2-container--default .select2-selection--single .form-control-lg.select2-search__field, .form-control-lg.typeahead,
@@ -17898,12 +17900,13 @@ div.tagsinput {
     vertical-align: middle;
     font-size: 0.875rem;
     line-height: 1;
-    white-space: nowrap; }
+    white-space: normal; }
     .table th img, .jsgrid .jsgrid-table th img,
     .table td img,
     .jsgrid .jsgrid-table td img {
-      width: 30px;
-      height: 30px;
+      width: 100px;
+      height: 100px;
+      padding:10px;
       border-radius: 100%; }
     .table th .badge, .jsgrid .jsgrid-table th .badge,
     .table td .badge,

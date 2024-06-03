@@ -18,13 +18,9 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <div class="row">
                 <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp"> 
                     <span>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     </span>
-                    <div class="section-subtitle">The Cappa Luxury Hotel</div>
+                    <div class="section-subtitle"><?= $basic_info[0]['hotel_name'] ?></div>
                     <div class="section-title">Enjoy a Luxury Experience</div>
                     <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
                     <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
@@ -32,7 +28,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="reservations">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p>Reservation</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                         </div>
                     </div>
                 </div>
@@ -47,14 +43,14 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="section-subtitle"><span>Best Prices</span></div>
+                <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     <div class="section-title"><span>Extra Services</span></div>
                     <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
                     <p class="color-2">Orci varius natoque penatibus et magnis disney parturient monte nascete ridiculus mus nellen etesque habitant morbine.</p>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p class="color-2">For information</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                         </div>
                     </div>
                 </div>
@@ -179,7 +175,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
     <section class="facilties section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 text-center">
+                <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     <div class="section-subtitle">Our Services</div>
                     <div class="section-title">Hotel Facilities</div>
                 </div>
@@ -240,7 +237,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
     <section class="team section-padding bg-cream">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 text-center" style="margin-top:-90px">
+                <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     <div class="section-subtitle">Professionals</div>
                     <div class="section-title">Meet The Team</div>
                 </div>

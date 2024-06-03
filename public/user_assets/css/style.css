@@ -923,7 +923,7 @@ color: #aa8453;
     display: block;
     width: 100%;
     position: relative;
-    color: #aa8453;
+    color: black;
     margin-bottom: 0;
     padding: 20px 0;
     letter-spacing: 1px;
@@ -953,7 +953,7 @@ color: #aa8453;
     display: block;
     width: 100%;
     position: relative;
-    color: #aa8453;
+    color: white;
     margin-bottom: 0;
     padding: 20px 0;
     letter-spacing: 1px;
@@ -1979,7 +1979,7 @@ hr {
 }
 
 .banner-header h5 {
-    color: #fff;
+    color: #e02870;
     font-size: 15px;
     font-family: 'Barlow Condensed', sans-serif;
     text-transform: uppercase;

@@ -8,8 +8,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>The Cappa Luxury Hotel</title>
-    <link rel="shortcut icon" href="<?= base_url() ?>/public/user_assets/img/favicon.png" />
+    <title><?= $basic_info[0]['hotel_name'] ?></title>
+    <link rel="shortcut icon" href="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info['0']['hotel_logo'] ?>" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow&amp;family=Barlow+Condensed&amp;family=Gilda+Display&amp;display=swap">
     <link rel="stylesheet" href="<?= base_url() ?>/public/user_assets/css/plugins.css" />
     <link rel="stylesheet" href="<?= base_url() ?>/public/user_assets/css/style.css" />
@@ -39,7 +39,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <!-- Logo -->
             <div class="logo-wrapper">
                 <!-- <a class="logo" href="index.html"> <img src="<?= base_url() ?>/public/user_assets/img/logo.png" class="logo-img" alt=""> </a> -->
-                <a class="logo" href="index.html"> <h2>THE CAPPA <span>Luxury Hotel</span></h2> </a>
+                <a class="logo" href="index.html">
+                     <h2><?= nl2br($basic_info[0]['hotel_name']) ?></h2>
+                     <!-- <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt=""> -->
+                </a>
             </div>
             <!-- Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"><i class="ti-menu"></i></span> </button>

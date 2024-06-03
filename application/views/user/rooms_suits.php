@@ -6,15 +6,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
 <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/1.jpg">
         <div class="container">
             <div class="row">
-				<div class="col-md-12 caption mt-90">
-				    <span>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                    </span>
-					<h5>The Cappa Luxury Hotel</h5>
+				<div class="col-md-12 caption mt-90 text-center">
+					<h5 style=" color: #e02870;"><?= $basic_info[0]['hotel_name'] ?></h5>
 					<h1>Rooms & Suites</h1>
 				</div>
 			</div>
@@ -308,14 +301,14 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="section-subtitle"><span>Best Prices</span></div>
+                    <div class="section-subtitle"><span style=" color: #e02870;"><?= $basic_info[0]['hotel_name'] ?></span></div>
                     <div class="section-title"><span>Extra Services</span></div>
                     <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
                     <p class="color-2">Orci varius natoque penatibus et magnis disney parturient monte nascete ridiculus mus nellen etesque habitant morbine.</p>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p class="color-2">For information</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                         </div>
                     </div>
                 </div>
@@ -381,12 +374,12 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="row">
                     <!-- Reservation -->
                     <div class="col-md-5 mb-30 mt-30">
-                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
+                        <p><img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt=""></p>
                         <h5>Each of our guest rooms feature a private bath, wi-fi, cable television and include full breakfast.</h5>
                         <div class="reservations mb-30">
                             <div class="icon color-1"><span class="flaticon-call"></span></div>
                             <div class="text">
-                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:855-100-4444">855 100 4444</a>
+                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                             </div>
                         </div> 
                         <p><i class="ti-check"></i><small>Call us, it's toll-free.</small></p>

@@ -5,7 +5,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
   <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="3" data-background="<?= base_url() ?>/public/user_assets/img/slider/5.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-left caption mt-90">
+                <div class="col-md-12 text-center caption mt-90">
                     <h5>Get in touch</h5>
                     <h1>Contact Us</h1>
                 </div>
@@ -17,25 +17,24 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="container">
             <div class="row mb-90">
                 <div class="col-md-6 mb-60">
-                    <h3>The Cappa Luxury Hotel</h3>
-                    <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
+                    <h3><?= $basic_info[0]['hotel_name'] ?></h3>
+                    <p><?= $basic_info[0]['hotel_information'] ?></p>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p>Reservation</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                         </div>
                     </div>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-envelope"></span></div>
                         <div class="text">
-                            <p>Email Info</p> <a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a>
+                            <p>Email Info</p> <a href="mailto:info@luxuryhotel.com"><?= $basic_info[0]['hotel_email'] ?></a>
                         </div>
                     </div>
                     <div class="reservations">
                         <div class="icon"><span class="flaticon-location-pin"></span></div>
                         <div class="text">
-                            <p>Address</p> 1616 Broadway NY, New York 10001
-                            <br>United States of America
+                            <p>Address</p> <?= $basic_info[0]['hotel_address'] ?>
                         </div>
                     </div>
                 </div>
@@ -75,24 +74,24 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <!-- Map Section -->
             <div class="row">
                 <div class="col-md-12 map animate-box" data-animate-effect="fadeInUp">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573147.7480448114!2d-74.84628175962355!3d41.04009641088412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25856139b3d33%3A0xb2739f33610a08ee!2s1616%20Broadway%2C%20New%20York%2C%20NY%2010019%2C%20Amerika%20Birle%C5%9Fik%20Devletleri!5e0!3m2!1str!2str!4v1646760525018!5m2!1str!2str" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="<?= $basic_info[0]['hotel_map_link'] ?>" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
     <!-- Reservation & Booking Form -->
     <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/2.jpg" data-overlay-dark="2">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<?= base_url() ?>public/user_assets/img/slider/2.jpg" data-overlay-dark="2">
             <div class="container">
                 <div class="row">
                     <!-- Reservation -->
                     <div class="col-md-5 mb-30 mt-30">
-                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
-                        <h5>Each of our guest rooms feature a private bath, wi-fi, cable television and include full breakfast.</h5>
+                        <p><img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt=""></p>
+                        <h5><?= $basic_info[0]['hotel_information'] ?></h5>
                         <div class="reservations mb-30">
                             <div class="icon color-1"><span class="flaticon-call"></span></div>
                             <div class="text">
-                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:855-100-4444">855 100 4444</a>
+                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                             </div>
                         </div>
                         <p><i class="ti-check"></i><small>Call us, it's toll-free.</small></p>

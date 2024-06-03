@@ -56,7 +56,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Hotel Logo</label>
                                 <div class="col-sm-9">
-                                <input type="file" class="form-control text-white" name="hotel_logo" required />
+                                <input type="file" class="form-control text-white" name="hotel_logo" />
                                 </div>
                             </div>
                         </div>

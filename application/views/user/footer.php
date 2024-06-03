@@ -6,7 +6,7 @@
                     <div class="col-md-4">
                         <div class="footer-column footer-about">
                             <h3 class="footer-title">About Hotel</h3>
-                            <p class="footer-about-text">Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat.</p>
+                            <p class="footer-about-text"><?= $basic_info[0]['hotel_information'] ?></p>
 
                             <div class="footer-language"> <i class="lni ti-world"></i>
                                     <select onchange="location = this.value;">
@@ -32,17 +32,16 @@
                     <div class="col-md-4">
                         <div class="footer-column footer-contact">
                             <h3 class="footer-title">Contact</h3>
-                            <p class="footer-contact-text">1616 Broadway NY, New York 10001<br>United States of America</p>
+                            <p class="footer-contact-text"><?= $basic_info[0]['hotel_address'] ?></p>
                             <div class="footer-contact-info">
-                                <p class="footer-contact-phone"><span class="flaticon-call"></span> 855 100 4444</p>
-                                <p class="footer-contact-mail">info@luxuryhotel.com</p>
+                                <p class="footer-contact-phone"><span class="flaticon-call"></span>+91 <?= $basic_info[0]['hotel_mobile'] ?></p>
+                                <p class="footer-contact-mail"><?= $basic_info[0]['hotel_email'] ?></p>
                             </div>
                             <div class="footer-about-social-list">
-                                <a href="#"><i class="ti-instagram"></i></a>
-                                <a href="#"><i class="ti-twitter"></i></a>
-                                <a href="#"><i class="ti-youtube"></i></a>
-                                <a href="#"><i class="ti-facebook"></i></a>
-                                <a href="#"><i class="ti-pinterest"></i></a>
+                                <a href="<?= $basic_info[0]['instagram_link'] ?>"><i class="ti-instagram"></i></a>
+                                <a href="<?= $basic_info[0]['twitter_link'] ?>"><i class="ti-twitter"></i></a>
+                                <a href="<?= $basic_info[0]['youtube_link'] ?>"><i class="ti-youtube"></i></a>
+                                <a href="<?= $basic_info[0]['facebook_link'] ?>"><i class="ti-facebook"></i></a>
                             </div>
                         </div>
                     </div>

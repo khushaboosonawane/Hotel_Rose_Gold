@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Panel Hotel Rose Gold</title>
+    <title>Admin <?= $basic_info[0]['hotel_name'] ?></title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url() ?>public/admin_assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/admin_assets/vendors/css/vendor.bundle.base.css">
@@ -20,15 +20,24 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url() ?>public/admin_assets/css/style.css">
     <!-- End layout styles -->
-    <!-- <link rel="shortcut icon" href="<?= base_url() ?>public/admin_assets/images/favicon.png" /> -->
+    <link rel="shortcut icon" href="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.html"><img src="<?= base_url() ?>public/admin_assets/images/logo.svg" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="<?= base_url() ?>public/admin_assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" href="index.html">
+            <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:50px;width:50px" alt="logo" />
+            <span style="color:white;font-size:10px"><?= $basic_info[0]['hotel_name'] ?></span>
+          </a>
+          <a class="sidebar-brand brand-logo-mini" href="index.html">
+          <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:50px;width:50px" alt="logo" />
+          </a>
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -104,12 +113,12 @@
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
-              <span class="menu-title">Basic UI Elements</span>
+              <span class="menu-title">Home Page</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/slider">Slider Information</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
               </ul>
