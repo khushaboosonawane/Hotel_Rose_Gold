@@ -240,6 +240,54 @@ class AdminController extends CI_Controller{
         $_SESSION['update_data']="Data Updated Successfully";
         redirect(base_url()."admincontroller/subcategory_data");
     }
+    public function special_offer_room(){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active']);
+        $this->load->view("admin/special_offer_room",$data);
+        $this->footer();
+    }
+    public function getSubCateUseAjax($cat_id){
+        $cond=['cat_id'=>$cat_id];
+        $data=$this->My_model->select("sub_category",$cond);
+        echo json_encode($data);
+    }
+    public function save_room(){
+        $roomname=time().rand(1111,9999).$_FILES['room_image']['name'];
+        move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$roomname");
+        $_POST['room_image']=$roomname;
+        $this->My_model->insert("rooms",$_POST);
+        $_SESSION['save_data']="Rooms Data Save Successfully...";
+        redirect(base_url()."admincontroller/rooms_data");
+    }
+    public function rooms_data(){
+        $this->navbar();
+        $data['special_room']=$this->My_model->select_special_room();
+        $this->load->view("admin/rooms_data",$data);
+        $this->footer();
+    }
+    public function delete_special_rooms_data($room_id){
+        $this->My_model->delete("rooms",['room_id'=>$room_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully..";
+        redirect(base_url()."admincontroller/romms_data");
+    }
+    public function edit_special_rooms_data($room_id){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>"Active"]);
+        $data['special_rooms_data']=$this->My_model->select_special_room_with_id($room_id);
+        $this->load->view("admin/edit_special_rooms_data",$data);
+        $this->footer();
+    }
+    public function update_special_room(){
+        if($_FILES['room_image']!=""){
+            $roomname=time().rand(1111,9999).$_FILES['room_image']['name'];
+            move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$roomname");
+            $_POST['room_image']=$roomname;
+            $this->My_model->update_special_room("rooms",$_POST);
+        }else{
+            $this->My_model->update_special_room("rooms",$_POST);
+
+        }
+    }
 }
 ?>
 

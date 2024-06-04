@@ -118,9 +118,9 @@
             </a>
             <div class="collapse" id="home">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/slider">Slider Information</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/about_page">About</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/slider">1 . Slider Information</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/about_page">2 . About</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/special_offer_room">3 . Special Offer <br> Room</a></li>
               </ul>
             </div>
           </li>
