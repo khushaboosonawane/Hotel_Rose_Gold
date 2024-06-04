@@ -11596,6 +11596,11 @@ input[type="button"].btn-block {
     text-decoration: none; }
   .breadcrumb-item.active {
     color: #495057; }
+    .pagination .page-item a.page-link.active {
+      background: #007bff;
+    color: white;
+    font-weight: 500;
+    }
 
 .pagination, .jsgrid .jsgrid-pager {
   display: flex;
@@ -11610,7 +11615,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: white;
   background-color: #000000;
   border: 1px solid #dee2e6; }
   .page-link:hover, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:hover,

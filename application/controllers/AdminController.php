@@ -40,7 +40,33 @@ class AdminController extends CI_Controller{
     }
     public function slider(){
         $this->navbar();
-        $data['slider_info']=$this->My_model->select("slider");
+        $num_records=($this->My_model->num_rows("slider"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/slider"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['slider_info']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"slider",'sli_id');
         $this->load->view("admin/slider",$data);
         $this->footer();
     }
@@ -89,7 +115,38 @@ class AdminController extends CI_Controller{
         }
     }
     public function about_page(){
+        $this->navbar();
+        $data['about_data']=$this->My_model->select("about");
+        $this->load->view("admin/about_page",$data);
+        $this->footer();
+    }
+    public function save_about_info(){
         
+       if($_FILES['about_first_image']['name']!=""){
+        $filepath=($this->My_model->select_image("about",['ab_id'=>1],'about_first_image'))[0]['about_first_image'];
+        $full_path="public/upload/about_image/$filepath";
+        unlink($full_path);
+        $first_image_name=time().rand(1111,9999).$_FILES['about_first_image']['name'];
+        move_uploaded_file($_FILES['about_first_image']['tmp_name'],"public/upload/about_image/$first_image_name");
+        $_POST['about_first_image']=$first_image_name;
+        $this->My_model->update("about",$_POST);
+        $_SESSION['update_data']="About Section Updated Successfully";
+        redirect(base_url()."admincontroller/about_page");
+       }
+       if($_FILES['about_second_image']['name']!=""){
+        $filepath=($this->My_model->select_image("about",['ab_id'=>1],'about_second_image'))[0]['about_second_image'];
+        $full_path="public/upload/about_image/$filepath";
+        unlink($full_path);
+        $second_image_name=time().rand(1111,9999).$_FILES['about_second_image']['name'];
+        move_uploaded_file($_FILES['about_second_image']['tmp_name'],"public/upload/about_image/$second_image_name");
+        $_POST['about_second_image']=$second_image_name;
+        $this->My_model->update("about",$_POST);
+        $_SESSION['update_data']="About Section Updated Successfully";
+        redirect(base_url()."admincontroller/about_page");
+       }
+       $this->My_model->update("about",$_POST);
+       $_SESSION['update_data']="About Section Updated Successfully";
+       redirect(base_url()."admincontroller/about_page");
     }
 }
 ?>

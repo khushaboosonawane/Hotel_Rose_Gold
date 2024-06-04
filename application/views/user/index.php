@@ -57,7 +57,7 @@
                                     </span>
                                     <h4>Luxury Hotel & Best Resort</h4>
                                     <h1>Enjoy a Luxury Experience</h1>
-                                    <button class="btn-hover color-2">BUTTON</button>
+                                    <button class="btn-hover color-2">Book Now</button>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                     </span>
                                     <h4>Unique Place to Relax & Enjoy</h4>
                                     <h1>The Perfect Base For You</h1>
-                                    <div class="butn-light mt-30 mb-30"> <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> </div>
+                                    <button class="btn-hover color-2">Book Now</button>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     </span>
                                     <h4>The Ultimate Luxury Experience</h4>
                                     <h1>Enjoy The Best Moments of Life</h1>
-                                    <div class="butn-light mt-30 mb-30"> <a href="#" data-scroll-nav="1"><span>Rooms & Suites</span></a> </div>
+                                    <button class="btn-hover color-2">Book Now</button>
                                 </div>
                             </div>
                         </div>
@@ -124,14 +124,32 @@
             <div class="row">
                 <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp" >
                     <span>
-                        <!-- <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i>
-                        <i class="star-rating"></i> -->
                         <img src="https://img.freepik.com/premium-vector/illustration-flower-vector-line_761451-44.jpg" alt="" style="height:150px;width:150px;margin-top:-16px">
                     </span>
-                    <div class="section-subtitle">The Cappa Luxury Hotel</div>
+                    <?php
+                    if(count($about_info)>0){
+                    ?>
+                    <div class="section-subtitle"><?= $basic_info[0]['hotel_name'] ?></div>
+                    <div class="section-title"><?= $about_info[0]['about_title'] ?></div>
+                    <p><?= nl2br($about_info[0]['about_description']) ?></p>
+                    <!-- call -->
+                    <div class="reservations">
+                        <div class="icon"><i class="ri-phone-line lead" style="font-size:60px;color:#ff5031"></i></div>
+                        <div class="text">
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>" style="color:#f28744">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+                    <img src="<?= base_url() ?>public/upload/about_image/<?= $about_info[0]['about_first_image'] ?>" alt="" class="mt-90 mb-30" style="box-shadow:0 0 20px #ff5031;height:50%;width:100%;object-fit:cover">
+                </div>
+                <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+                    <img src="<?= base_url() ?>public/upload/about_image/<?= $about_info[0]['about_second_image'] ?>" alt="" style="box-shadow:0 0 20px #ff5031;height:50%;width:100%;object-fit:cover">
+                </div>
+                    <?php
+                    }else{
+                    ?>
+                    <div class="section-subtitle">The Hotel Rose Gold</div>
                     <div class="section-title">Enjoy a Luxury Experience</div>
                     <p>Welcome to the best five-star deluxe hotel in New York. Hotel elementum sesue the aucan vestibulum aliquam justo in sapien rutrum volutpat. Donec in quis the pellentesque velit. Donec id velit ac arcu posuere blane.</p>
                     <p>Hotel ut nisl quam nestibulum ac quam nec odio elementum sceisue the aucan ligula. Orci varius natoque penatibus et magnis dis parturient monte nascete ridiculus mus nellentesque habitant morbine.</p>
@@ -139,7 +157,7 @@
                     <div class="reservations">
                         <div class="icon"><i class="ri-phone-line lead" style="font-size:60px;color:#ff5031"></i></div>
                         <div class="text">
-                            <p>Reservation</p> <a href="tel:855-100-4444" style="color:#f28744">855 100 4444</a>
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['reservation_number'] ?>" style="color:#f28744">+91 <?= $basic_info[0]['reservation_number'] ?></a>
                         </div>
                     </div>
                 </div>
@@ -149,6 +167,10 @@
                 <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
                     <img src="<?= base_url() ?>/public/user_assets/img/rooms/2.jpg" alt="" style="box-shadow:0 0 20px #ff5031">
                 </div>
+                    <?php
+                    }
+                    ?>
+                    
             </div>
         </div>
     </section>

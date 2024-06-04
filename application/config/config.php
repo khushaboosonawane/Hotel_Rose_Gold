@@ -530,3 +530,26 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+// pagination 
+
+$config['full_tag_open']='<ul class="pagination">';
+$config['full_tag_close']='</ul>';
+$config['attributes']=['class'=>'page-link'];
+$config['first_link']=false; 
+$config['last_link']=false; 
+$config['first_tag_open']='<li class="page-item">';
+$config['first_tag_close']='</li>';
+$config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+$config['prev_tag_open']='<li class="page-item">';
+$config['prev_tag_close']='</li>';
+$config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+$config['next_tag_open']='<li class="page-item">';
+$config['next_tag_close']='</li>';
+$config['last_tag_open']='<li class="page-item">'; 
+$config['last_tag_close']='</li>'; 
+$config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+$config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+$config['num_tag_open']='<li class="page-item">';
+$config['num_tag_close']='</li>';  
+

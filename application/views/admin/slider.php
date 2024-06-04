@@ -78,12 +78,16 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Slider Information</h4>
-                        <p class="card-description"> Three Record Display At Time
+                        <p class="card-description"> 2 Record Display At Time
                         </p>
+                        <div class="col-md-12 d-flex justify-content-end">
+                        <?php echo $this->pagination->create_links(); ?>
+                        </div>
                         <div class="table-responsive">
                         <table class="table table-hover text-center text-white table-bordered">
                             <thead>
                             <tr>
+                                <th>Srno</th>
                                 <th>  Image </th>
                                 <th> Title </th>
                                 <th>  SubTitle </th>
@@ -97,6 +101,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                     foreach($slider_info as $key=>$row){
                                 ?>
                                  <tr>
+                                    <td><?= $key+1 ?></td>
                                     <td class="py-1" style="word-wrap:break-word">
                                         <img src="<?= base_url() ?>public/upload/slider_image/<?= $row['slider_image'] ?>" alt="image" />
                                     </td>

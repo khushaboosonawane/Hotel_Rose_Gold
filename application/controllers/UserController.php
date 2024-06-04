@@ -10,6 +10,7 @@ class UserController extends CI_Controller{
     public function index(){
         $this->navbar();
         $data['slider_info']=$this->My_model->select("slider");
+        $data['about_info']=$this->My_model->select("about");
         $this->load->view("user/index",$data);
         $this->footer();
     }
