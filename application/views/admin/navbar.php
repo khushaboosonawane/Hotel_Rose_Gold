@@ -109,14 +109,14 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#home" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
               <span class="menu-title">Home Page</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="home">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/slider">Slider Information</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/about_page">About</a></li>
@@ -124,7 +124,21 @@
               </ul>
             </div>
           </li>
-        
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#cat_sub" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Category And <br> SubCategory</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="cat_sub">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/category">Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/sub_category">SubCategory</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
       <!-- partial -->

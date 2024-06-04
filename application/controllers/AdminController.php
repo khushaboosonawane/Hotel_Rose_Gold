@@ -148,6 +148,98 @@ class AdminController extends CI_Controller{
        $_SESSION['update_data']="About Section Updated Successfully";
        redirect(base_url()."admincontroller/about_page");
     }
+    public function category(){
+        $this->navbar();
+        $this->load->view("admin/category");
+        $this->footer();
+    }
+    public function save_category(){
+        $this->My_model->insert("category",$_POST);
+        $_SESSION['save_data']="Category Data Save Successfully";
+        redirect(base_url()."admincontroller/category_data");
+    }
+    public function category_data(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("category"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/category_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['cat_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"category",'cat_id');
+        $this->load->view("admin/category_data",$data);
+        $this->footer();
+    }
+    public function delete_cat_data($cat_id){
+        $this->My_model->delete("category",['cat_id'=>$cat_id]);
+        $_SESSION['delete_data']="Category data deleted successfully...";
+        redirect(base_url()."admincontroller/category_data");
+    }
+    public function edit_category_data($cat_id){
+        $this->navbar();
+        $data['cat_info']=$this->My_model->select("category",['cat_id'=>$cat_id]);
+        $this->load->view("admin/edit_category_data",$data);
+        $this->footer();
+    }
+    public function update_category(){
+        $this->My_model->update_cond("category",$_POST,['cat_id'=>$_POST['cat_id']]);
+        $_SESSION['update_data']="Category Data Updated Successfully...";
+        redirect(base_url()."admincontroller/category_data");
+    }
+    public function sub_category(){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active']);
+        $this->load->view("admin/sub_category",$data);
+        $this->footer();
+    }
+    public function save_sub_category(){
+        $this->My_model->insert("sub_category",$_POST);
+        $_SESSION['save_data']="Data Save Successfully";
+        redirect(base_url()."admincontroller/subcategory_data");
+    }
+    public function subcategory_data(){
+        $this->navbar();
+        $data['sub_category_data']=$this->My_model->select_category_data();
+        $this->load->view("admin/subcategory_data",$data);
+        $this->footer();
+    }
+    public function delete_sub_cat_data($sub_cat_id){
+        $this->My_model->delete("sub_category",['sub_cat_id'=>$sub_cat_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully..";
+        redirect(base_url()."admincontroller/subcategory_data");
+    }
+    public function edit_sub_cat_data($sub_cat_id){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category");
+       $data['sub_cat_data']=$this->My_model->select_sub_cat($sub_cat_id);
+        $this->load->view("admin/edit_sub_cat_data",$data);
+        $this->footer();
+    }
+    public function update_sub_category(){
+        $this->My_model->update_sub_category("sub_category",$_POST);
+        $_SESSION['update_data']="Data Updated Successfully";
+        redirect(base_url()."admincontroller/subcategory_data");
+    }
 }
 ?>
 
