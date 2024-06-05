@@ -7,8 +7,9 @@ defined("BASEPATH") or exit("no direct script is allowed");
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/romms_data">Rooms Data</a></li>
-                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Special Offer Room</li>
+                  <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/special_offer_room">Add Rooms Data</a></li>
+                  <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/rooms_data">Rooms Data</a></li>
+                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Edit Special Offer Room</li>
                 </ol>
               </nav>
             </div>

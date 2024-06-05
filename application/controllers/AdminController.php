@@ -255,6 +255,8 @@ class AdminController extends CI_Controller{
         $roomname=time().rand(1111,9999).$_FILES['room_image']['name'];
         move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$roomname");
         $_POST['room_image']=$roomname;
+        $_POST['status']='Active';
+        $_POST['order_status']='Active';
         $this->My_model->insert("rooms",$_POST);
         $_SESSION['save_data']="Rooms Data Save Successfully...";
         redirect(base_url()."admincontroller/rooms_data");
@@ -266,9 +268,11 @@ class AdminController extends CI_Controller{
         $this->footer();
     }
     public function delete_special_rooms_data($room_id){
+        $img_name=($this->My_model->select_image("rooms",['room_id'=>$room_id],'room_image'))[0]['room_image'];
+        unlink("public/upload/rooms_image/$img_name");
         $this->My_model->delete("rooms",['room_id'=>$room_id]);
         $_SESSION['delete_data']="Data Deleted Successfully..";
-        redirect(base_url()."admincontroller/romms_data");
+        redirect(base_url()."admincontroller/rooms_data");
     }
     public function edit_special_rooms_data($room_id){
         $this->navbar();
@@ -278,13 +282,19 @@ class AdminController extends CI_Controller{
         $this->footer();
     }
     public function update_special_room(){
-        if($_FILES['room_image']!=""){
+        if($_FILES['room_image']['name']!=""){
+            $img_name=($this->My_model->select_image("rooms",['room_id'=>$_POST['room_id']],'room_image'))[0]['room_image'];
+            unlink("public/upload/rooms_image/$img_name");
             $roomname=time().rand(1111,9999).$_FILES['room_image']['name'];
             move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$roomname");
             $_POST['room_image']=$roomname;
             $this->My_model->update_special_room("rooms",$_POST);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/rooms_data");
         }else{
-            $this->My_model->update_special_room("rooms",$_POST);
+            $this->My_model->update_special_room_without_image("rooms",$_POST);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/rooms_data");
 
         }
     }

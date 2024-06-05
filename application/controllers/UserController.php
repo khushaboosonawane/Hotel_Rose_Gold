@@ -11,6 +11,7 @@ class UserController extends CI_Controller{
         $this->navbar();
         $data['slider_info']=$this->My_model->select("slider");
         $data['about_info']=$this->My_model->select("about");
+        $data['offer_rooms_data']=$this->My_model->select_special_room();
         $this->load->view("user/index",$data);
         $this->footer();
     }

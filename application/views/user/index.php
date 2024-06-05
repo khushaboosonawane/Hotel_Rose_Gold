@@ -177,18 +177,13 @@
     <!-- Rooms -->
     <section class="rooms3 section-padding bg-cream" data-scroll-index="1">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <h1>hello</h1>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-center">
                     <img src="<?= base_url() ?>/public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt="" style="height:100px;width:100px;margin-top:-70px">
                     </div>
-                    <div class="section-subtitle text-center" style="color:white">The Cappa Luxury Hotel</div>
-                    <div class="section-title text-center">Rooms & Suites</div>
+                    <div class="section-subtitle text-center" style="color:white"><?= $basic_info[0]['hotel_name'] ?></div>
+                    <div class="section-title text-center">Special Offer Rooms</div>
                     <div style="width:50%;margin:10px auto;background-color:black;height:1px"></div>
                 </div>
             </div>
@@ -196,213 +191,272 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/1.jpg">
-                            <span class="category" style="border:none;position:absolute;top:-4px;left:-10px">
-                                <!-- <a href="rooms2.html">Book</a> -->
-                                <a href="#" class="btn-effect"><span>Available</span></a>
-                            </span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                        <?php
+                        if(count($offer_rooms_data)>0){
+                            foreach($offer_rooms_data as $key=>$row){
+                        ?>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>">
+                                <span class="category" style="border:none;position:absolute;top:-4px;left:-10px">
+                                    <a href="#" class="btn-effect"><span>Book Now</span></a>
+                                </span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6><?= number_format($row['room_price']) ?> &#8377; / Night</h6>
+                                        <h4><?= $row['room_name'] ?></h4>
+                                    </div>
+                                </div>
+                                <div class="flip-overlay"></div>
+                            </div>
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
+                                    <h6><?= number_format($row['room_price']) ?> &#8377; / Night</h6>
+                                    <h4><?= $row['room_name'] ?></h4>
+                                    <p><?= nl2br($row['room_desc']) ?></p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> <?= $row['person_count'] ?> Persons</li>
+                                                <?php
+                                                if($row['wifi_status']=='Avilable'){
+                                                ?>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                                <?php
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> <?= $row['room_bed'] ?></li>
+                                            <?php
+                                            if($row['room_breakfast']=='Avilable'){
+                                            ?>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            <?php
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>">Details</a></div>
+                                </div>
+                            </div>
+                    </div>
+                        <?php
+                            }
+                        }else{
+                        ?>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/1.jpg">
+                                <span class="category" style="border:none;position:absolute;top:-4px;left:-10px">
+                                    <!-- <a href="rooms2.html">Book</a> -->
+                                    <a href="#" class="btn-effect"><span>Available</span></a>
+                                </span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>150$ / Night</h6>
+                                        <h4>Junior Suite</h4>
+                                    </div>
+                                </div>
+                                <div class="flip-overlay"></div>
+                            </div>
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>150$ / Night</h6>
                                     <h4>Junior Suite</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>150$ / Night</h6>
-                                <h4>Junior Suite</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/2.jpg">
+                                <span class="category"><a href="rooms2.html">Book</a></span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>200$ / Night</h6>
+                                        <h4>Family Room</h4>
                                     </div>
                                 </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
+                                <div class="flip-overlay"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/2.jpg">
-                            <span class="category"><a href="rooms2.html">Book</a></span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>200$ / Night</h6>
                                     <h4>Family Room</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>200$ / Night</h6>
-                                <h4>Family Room</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/3.jpg">
+                                <span class="category"><a href="rooms2.html">Book</a></span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>250$ / Night</h6>
+                                        <h4>Double Room</h4>
                                     </div>
                                 </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
+                                <div class="flip-overlay"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/3.jpg">
-                            <span class="category"><a href="rooms2.html">Book</a></span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>250$ / Night</h6>
                                     <h4>Double Room</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>250$ / Night</h6>
-                                <h4>Double Room</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/6.jpg">
+                                <span class="category"><a href="rooms2.html">Book</a></span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>300$ / Night</h6>
+                                        <h4>Deluxe Room</h4>
                                     </div>
                                 </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
+                                <div class="flip-overlay"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/6.jpg">
-                            <span class="category"><a href="rooms2.html">Book</a></span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>300$ / Night</h6>
                                     <h4>Deluxe Room</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>300$ / Night</h6>
-                                <h4>Deluxe Room</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/8.jpg">
+                                <span class="category"><a href="rooms2.html">Book</a></span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>350$ / Night</h6>
+                                        <h4>Superior Room</h4>
                                     </div>
                                 </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
+                                <div class="flip-overlay"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/8.jpg">
-                            <span class="category"><a href="rooms2.html">Book</a></span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>350$ / Night</h6>
                                     <h4>Superior Room</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>350$ / Night</h6>
-                                <h4>Superior Room</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
+                        <div class="square-flip">
+                            <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/9.jpg">
+                                <span class="category"><a href="rooms2.html">Book</a></span>
+                                <div class="square-container d-flex align-items-end justify-content-end">
+                                    <div class="box-title">
+                                        <h6>400$ / Night</h6>
+                                        <h4>Wellness Room</h4>
                                     </div>
                                 </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
+                                <div class="flip-overlay"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="square-flip">
-                        <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/9.jpg">
-                            <span class="category"><a href="rooms2.html">Book</a></span>
-                            <div class="square-container d-flex align-items-end justify-content-end">
-                                <div class="box-title">
+                            <div class="square2 bg-white">
+                                <div class="square-container2">
                                     <h6>400$ / Night</h6>
                                     <h4>Wellness Room</h4>
+                                    <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
+                                    <div class="row room-facilities mb-30">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li><i class="flaticon-group"></i> 1-2 Persons</li>
+                                                <li><i class="flaticon-wifi"></i> Free Wifi</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul> 
+                                            <li><i class="flaticon-bed"></i> Twin Bed</li>
+                                            <li><i class="flaticon-breakfast"></i> Breakfast</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-line"><a href="room-details.html">Details</a></div>
                                 </div>
                             </div>
-                            <div class="flip-overlay"></div>
                         </div>
-                        <div class="square2 bg-white">
-                            <div class="square-container2">
-                                <h6>400$ / Night</h6>
-                                <h4>Wellness Room</h4>
-                                <p>Hotel viverra tristique ustoni miss vitae sediam neque nivamus aestan.</p>
-                                <div class="row room-facilities mb-30">
-                                    <div class="col-md-6">
-                                        <ul>
-                                            <li><i class="flaticon-group"></i> 1-2 Persons</li>
-                                            <li><i class="flaticon-wifi"></i> Free Wifi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul> 
-                                           <li><i class="flaticon-bed"></i> Twin Bed</li>
-                                           <li><i class="flaticon-breakfast"></i> Breakfast</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="btn-line"><a href="room-details.html">Details</a></div>
-                            </div>
-                        </div>
-                    </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

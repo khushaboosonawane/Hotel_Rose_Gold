@@ -17,9 +17,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Slider Information</h4>
-                        <p class="card-description"> 2 Record Display At Time
-                        </p>
+                        <h4 class="card-title">Special Rooms Information</h4>
                         <div class="col-md-12 d-flex justify-content-end">
                         <?php echo $this->pagination->create_links(); ?>
                         </div>
@@ -66,7 +64,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                         <td><?= $row['room_breakfast'] ?></td>
                                         <td><?= $row['room_bed'] ?></td>
                                         <td><?= $row['person_count'] ?></td>
-                                        <td><?= $row['room_price'] ?></td>
+                                        <td><?= number_format($row['room_price']) ?>&#8377;</td>
                                         <td>
                                             <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="">
                                         </td>
