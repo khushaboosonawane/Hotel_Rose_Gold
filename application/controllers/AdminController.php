@@ -298,6 +298,17 @@ class AdminController extends CI_Controller{
 
         }
     }
+    public function extra_service(){
+        $this->navbar();
+        $data['extra_service']=$this->My_model->select("extra_service");
+        $this->load->view("admin/extra_service",$data);
+        $this->footer();
+    }
+    public function update_extra_service(){
+        $this->My_model->update("extra_service",$_POST);
+        $_SESSION['update_data']="Extra service data updated successfully";
+        redirect(base_url()."admincontroller/extra_service");
+    }
 }
 ?>
 

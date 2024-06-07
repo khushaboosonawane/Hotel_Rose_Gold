@@ -121,6 +121,7 @@
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/slider">1 . Slider Information</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/about_page">2 . About</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/special_offer_room">3 . Special Offer <br> Room</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/extra_service">4 . Extra Services</a></li>
               </ul>
             </div>
           </li>
