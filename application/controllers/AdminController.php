@@ -309,6 +309,75 @@ class AdminController extends CI_Controller{
         $_SESSION['update_data']="Extra service data updated successfully";
         redirect(base_url()."admincontroller/extra_service");
     }
+    public function save_extra_service_slider(){
+        $extra_service_image=time().rand(1111,9999).$_FILES['extra_service_image']['name'];
+        move_uploaded_file($_FILES['extra_service_image']['tmp_name'],"public/upload/extra_service_slider_image/$extra_service_image");
+        $_POST['extra_service_image']=$extra_service_image;
+        $this->My_model->insert("extra_service_slider",$_POST);
+        $_SESSION['save_data']="Data Save Successfully...";
+        redirect(base_url()."admincontroller/extra_service_slider_info");
+    }
+    public function extra_service_slider_info(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("extra_service_slider"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/extra_service_slider_info"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['slider_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"extra_service_slider",'extra_service_id');
+        $this->load->view("admin/extra_service_slider_info",$data);
+        $this->footer();
+    }
+    public function delete_extra_slider_data($extra_service_id){
+        $data=($this->My_model->select_image("extra_service_slider",['extra_service_id'=>$extra_service_id],'extra_service_image'))[0]['extra_service_image'];
+        unlink("public/upload/extra_service_slider_image/$data");
+        $this->My_model->delete("extra_service_slider",['extra_service_id'=>$extra_service_id]);
+        $_SESSION['delete_data']="Data deleted successfully";
+        redirect(base_url()."admincontroller/extra_service_slider_info");
+    }
+    public function edit_extra_slider_data($extra_service_id){
+        $data['slider_data']=$this->My_model->select("extra_service_slider",['extra_service_id'=>$extra_service_id]);
+        $this->navbar();
+        $this->load->view("admin/edit_extra_slider_data",$data);
+        $this->footer();
+    }
+    public function update_extra_service_slider(){
+        if($_FILES['extra_service_image']['name']!=""){
+            $data=($this->My_model->select_image("extra_service_slider",['extra_service_id'=>$_POST['extra_service_id']],'extra_service_image'))[0]['extra_service_image'];
+            unlink("public/upload/extra_service_slider_image/$data");
+            $extra_service_image=time().rand(1111,9999).$_FILES['extra_service_image']['name'];
+            move_uploaded_file($_FILES['extra_service_image']['tmp_name'],"public/upload/extra_service_slider_image/$extra_service_image");
+            $_POST['extra_service_image']=$extra_service_image;
+            $this->My_model->update("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
+            $_SESSION['update_data']="Slider Data Updated Successfully";
+            redirect(base_url()."admincontroller/extra_service_slider_info");
+        }else{
+            $this->My_model->update("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
+            $_SESSION['update_data']="Slider Data Updated Successfully";
+            redirect(base_url()."admincontroller/extra_service_slider_info");
+        }
+    }
 }
 ?>
 

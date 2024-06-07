@@ -486,23 +486,48 @@
     <section class="pricing section-padding">
         <div class="container">
             <div class="row">
+                <?php
+                if(count($extra_service)>0){
+                    ?>
+                    <div class="col-md-12 text-center mb-5" style="margin-top:-90px">
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    <div class="section-subtitle" ><span style="color:#ff5031"><?= $extra_service[0]['extra_service_subtitle'] ?></span></div>
+                    <div class="section-title" ><span style="color:black"><?= $extra_service[0]['extra_service_title'] ?></span></div>
+                    <div style="width:50%;margin:10px auto;background-color:black;height:1px"></div>
+                </div>
+                    <?php
+
+                }else{
+                    ?>
                 <div class="col-md-12 text-center mb-5" style="margin-top:-90px">
                     <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     <div class="section-subtitle" ><span style="color:#ff5031">Best Prices</span></div>
                     <div class="section-title" ><span style="color:black">Extra Services</span></div>
                     <div style="width:50%;margin:10px auto;background-color:black;height:1px"></div>
                 </div>
+                    <?php
+                }
+                ?>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <!-- <div class="section-subtitle"><span>Best Prices</span></div>
-                    <div class="section-title" ><span style="color:black">Extra Services</span></div> -->
-                    <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
+                    <?php
+                    if(count($extra_service)>0){
+                        ?>
+                        <p class="color-2"><?= nl2br($extra_service[0]['extra_service_desc']) ?></p>
+                        <?php
+
+                    }else{
+                        ?>
+                        <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
                     <p class="color-2">Orci varius natoque penatibus et magnis disney parturient monte nascete ridiculus mus nellen etesque habitant morbine.</p>
+                        <?php
+                    }
+                    ?>
                     <div class="reservations mb-30">
                     <div class="icon"><i class="ri-phone-line lead" style="font-size:40px;color:#ff5031"></i></div>
                         <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:855-100-4444">855 100 4444</a>
+                            <p class="color-2">For information</p> <a href="tel:<?= $basic_info[0]['hotel_mobile'] ?>">+91 <?= $basic_info[0]['hotel_mobile'] ?></a>
                         </div>
                     </div>
                 </div>

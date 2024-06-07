@@ -34,14 +34,9 @@ class UserController extends CI_Controller{
         $data['slider_info']=$this->My_model->select("slider");
         $data['about_info']=$this->My_model->select("about");
         $data['offer_rooms_data']=$this->My_model->select_special_room();
+        $data['extra_service']=$this->My_model->select("extra_service");
         if(isset($_SESSION['user_id'])){
             $data['add_to_cart_data']=$this->My_model->select("add_to_cart",['user_id'=>$_SESSION['user_id']]);
-            // echo "<pre>";
-            // print_r($data['add_to_cart_data']);
-            // exit();
-        //    foreach($data['add_to_cart_data'] as $key=>$row){
-            // echo $row['product_id'];
-        //    }
         }
         $this->load->view("user/index",$data);
         $this->footer();
