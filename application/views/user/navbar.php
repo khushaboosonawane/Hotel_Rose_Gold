@@ -40,7 +40,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <div class="logo-wrapper">
                 <!-- <a class="logo" href="index.html"> <img src="<?= base_url() ?>/public/user_assets/img/logo.png" class="logo-img" alt=""> </a> -->
                 <a class="logo" href="index.html">
-                     <h2><?= nl2br($basic_info[0]['hotel_name']) ?></h2>
+                     <h5 class="text-white my-3"><?= nl2br($basic_info[0]['hotel_name']) ?></h5>
                      <!-- <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt=""> -->
                 </a>
             </div>
@@ -63,11 +63,47 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/team">Team</a></li>
                    
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/userprofile"><i class="ri-user-line lead"></i></a></li>
+
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/search_section"><i class="ri-search-2-line lead"></i></a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">
                     <i class="ri-heart-line lead"></i>
                     </a></li>
+
+                    <li class="nav-item">
+                        <?php
+                         if(isset( $_SESSION['user_id'])){
+                            if($user_data[0]['user_image']){
+                        ?>
+                        <a href="<?= base_url() ?>usercontroller/view_profile/<?= $_SESSION['user_id'] ?>" title="View Profile">
+                            <img src="<?= base_url() ?>public/upload/user_image/<?= $user_data[0]['user_image'] ?>" alt="" style="height:50px;width:50px;border-radius:50%">
+                        </a>
+                        <?php
+                        }else{
+                        ?>
+                           <!-- <li class="nav-item"> -->
+                           <!-- <a href="<?= base_url() ?>usercontroller/logout_account/<?= $_SESSION['user_id']?>" class="nav-link">
+                           <button onclick="return confirm('Are You Sure To Logput From Your Account?')">
+                               <i class="ri-logout-circle-r-line text-white lead"></i>
+                           </button>
+                            </a> -->
+                           <!-- </li> -->
+
+                           <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url() ?>usercontroller/view_profile/<?= $_SESSION['user_id'] ?>"><i class="ri-user-line lead"></i></a>
+                          </li>
+                        <?php
+                        }
+                         }else{
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url() ?>usercontroller/userprofile"><i class="ri-user-line lead"></i></a>
+                        </li>
+                        
+                        <?php
+                         }
+                        ?>
+                        
+                    </li>
                 </ul>
             </div>
         </div>

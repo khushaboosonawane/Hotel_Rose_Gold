@@ -109,7 +109,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#home" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" data-target="#home" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
@@ -125,7 +125,7 @@
             </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#cat_sub" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" data-target="#cat_sub" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>

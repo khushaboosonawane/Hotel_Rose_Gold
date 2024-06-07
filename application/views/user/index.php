@@ -211,6 +211,26 @@
                             <div class="square2 bg-white">
                                 <div class="square-container2">
                                     <h6><?= number_format($row['room_price']) ?> &#8377; / Night</h6>
+                                    <!-- add to cart  -->
+                                    <?php
+                                    if(isset($_SESSION['user_id'])){
+                                       if(count($add_to_cart_data)>0){
+                                        for($i=0;$i<count($add_to_cart_data);$i++){
+                                            if($add_to_cart_data[$i]['product_id']==$row['room_id']){
+                                    ?>
+                                     <a href="<?= base_url() ?>usercontroller/remove_product_form_cart/<?=$row['room_id']?>">
+                                        <i class="ri-heart-fill text-danger lead"></i>
+                                    </a>
+                                    <?php
+                                            }
+                                        }
+                                       }
+                                    }
+                                    ?>
+                                    <!-- end add to cart  -->
+
+
+
                                     <h4><?= $row['room_name'] ?></h4>
                                     <p><?= nl2br($row['room_desc']) ?></p>
                                     <div class="row room-facilities mb-30">
@@ -286,7 +306,7 @@
                         </div>
                         <div class="square-flip">
                             <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/2.jpg">
-                                <span class="category"><a href="rooms2.html">Book</a></span>
+                            <a href="#" class="btn-effect"><span>Available</span></a>
                                 <div class="square-container d-flex align-items-end justify-content-end">
                                     <div class="box-title">
                                         <h6>200$ / Night</h6>
@@ -320,7 +340,7 @@
                         </div>
                         <div class="square-flip">
                             <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/3.jpg">
-                                <span class="category"><a href="rooms2.html">Book</a></span>
+                            <a href="#" class="btn-effect"><span>Available</span></a>
                                 <div class="square-container d-flex align-items-end justify-content-end">
                                     <div class="box-title">
                                         <h6>250$ / Night</h6>
@@ -354,7 +374,7 @@
                         </div>
                         <div class="square-flip">
                             <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/6.jpg">
-                                <span class="category"><a href="rooms2.html">Book</a></span>
+                            <a href="#" class="btn-effect"><span>Available</span></a>
                                 <div class="square-container d-flex align-items-end justify-content-end">
                                     <div class="box-title">
                                         <h6>300$ / Night</h6>
@@ -388,7 +408,7 @@
                         </div>
                         <div class="square-flip">
                             <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/8.jpg">
-                                <span class="category"><a href="rooms2.html">Book</a></span>
+                            <a href="#" class="btn-effect"><span>Available</span></a>
                                 <div class="square-container d-flex align-items-end justify-content-end">
                                     <div class="box-title">
                                         <h6>350$ / Night</h6>
@@ -422,7 +442,7 @@
                         </div>
                         <div class="square-flip">
                             <div class="square bg-img" data-background="<?= base_url() ?>/public/user_assets/img/rooms/9.jpg">
-                                <span class="category"><a href="rooms2.html">Book</a></span>
+                            <a href="#" class="btn-effect"><span>Available</span></a>
                                 <div class="square-container d-flex align-items-end justify-content-end">
                                     <div class="box-title">
                                         <h6>400$ / Night</h6>

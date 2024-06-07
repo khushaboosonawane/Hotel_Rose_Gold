@@ -29,6 +29,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 <th>Category Name</th>
                                 <th>Sub Category Name</th>
                                 <th>Room Name</th>
+                                <th>Room Rating</th>
                                 <th>Room Description</th>
                                 <th>Room Wifi</th>
                                 <th>Room Breakfast</th>
@@ -59,6 +60,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                         <td><?= $row['category_name'] ?></td>
                                         <td><?= $row['sub_cat_name'] ?></td>
                                         <td><?= $row['room_name'] ?></td>
+                                        <td><?= $row['rating'] ?></td>
                                         <td><?= $row['room_desc'] ?></td>
                                         <td><?= $row['wifi_status'] ?></td>
                                         <td><?= $row['room_breakfast'] ?></td>

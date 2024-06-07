@@ -45,18 +45,18 @@ class My_model extends CI_Model{
         $this->db->query("update sub_category set sub_cat_name='$sub_cat_name',sub_cat_status='$sub_cat_status',cat_id='$cat_id' where sub_cat_id='$sub_cat_id'");
     }
     public function select_special_room(){
-       return $this->db->query("select * from category,sub_category,rooms where rooms.cat_id=category.cat_id and rooms.sub_cat_id=sub_category.sub_cat_id and rooms.room_type='special_offer_room'")->result_array();
+       return $this->db->query("select * from category,sub_category,rooms where rooms.cat_id=category.cat_id and rooms.sub_cat_id=sub_category.sub_cat_id and rooms.room_type='special_offer_room' order by room_id desc")->result_array();
     }
     public function select_special_room_with_id($room_id){
         return $this->db->query("select * from category,sub_category,rooms where rooms.cat_id=category.cat_id and rooms.sub_cat_id=sub_category.sub_cat_id and rooms.room_id=$room_id")->result_array();
     }
     public function update_special_room($tablename,$data){
         extract($data);
-        $this->db->query("update rooms set cat_id='$cat_id',sub_cat_id='$sub_cat_id',room_name='$room_name',room_desc='$room_desc',room_bed='$room_bed',person_count='$person_count',room_breakfast='$room_breakfast',room_price='$room_price',wifi_status='$wifi_status',room_image='$room_image',status='Active',order_status='Active' where room_id='$room_id'");
+        $this->db->query("update rooms set cat_id='$cat_id',sub_cat_id='$sub_cat_id',room_name='$room_name',room_desc='$room_desc',room_bed='$room_bed',person_count='$person_count',room_breakfast='$room_breakfast',room_price='$room_price',wifi_status='$wifi_status',room_image='$room_image',status='Active',order_status='Active',rating='$rating' where room_id='$room_id'");
     }
     public function update_special_room_without_image($tablename,$data){
         extract($data);
-        $this->db->query("update rooms set cat_id='$cat_id',sub_cat_id='$sub_cat_id',room_name='$room_name',room_desc='$room_desc',room_bed='$room_bed',person_count='$person_count',room_breakfast='$room_breakfast',room_price='$room_price',wifi_status='$wifi_status',status='Active',order_status='Active' where room_id='$room_id'");
+        $this->db->query("update rooms set cat_id='$cat_id',sub_cat_id='$sub_cat_id',room_name='$room_name',room_desc='$room_desc',room_bed='$room_bed',person_count='$person_count',room_breakfast='$room_breakfast',room_price='$room_price',wifi_status='$wifi_status',status='Active',order_status='Active',rating='$rating' where room_id='$room_id'");
     }
     
    

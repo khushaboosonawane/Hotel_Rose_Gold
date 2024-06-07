@@ -1,3 +1,190 @@
+<!-- ppopup design  -->
+<style>
+   
+#card {
+  position: fixed;
+  top: 30%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width: 320px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  z-index:999;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+#card1 {
+  position: fixed;
+  top: 30%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width: 320px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  z-index:999;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#upper-side {
+  padding: 2em;
+  /* background: linear-gradient(66deg,rgba(220,52,85),rgb(252,175,59)); */
+  display: block;
+  color: #fff;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+#checkmark {
+  font-weight: lighter;
+  fill: #fff;
+  margin: -3.5em auto auto 20px;
+}
+
+#status {
+  font-weight: lighter;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1em;
+  margin-top: -.2em;
+  margin-bottom: 0;
+}
+
+#lower-side {
+  padding: 2em 2em 5em 2em;
+  background: #fff;
+  display: block;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+#message {
+  margin-top: -.5em;
+  color: #757575;
+  letter-spacing: 1px;
+}
+
+#contBtn {
+  position: relative;
+  top: 1.5em;
+  text-decoration: none;
+  background: black;
+  color: #fff;
+  margin: auto;
+  padding: .8em 3em;
+  -webkit-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+  -moz-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+  box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+  border-radius: 25px;
+  -webkit-transition: all .4s ease;
+		-moz-transition: all .4s ease;
+		-o-transition: all .4s ease;
+		transition: all .4s ease;
+}
+
+#contBtn:hover {
+  -webkit-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+  -moz-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+  box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+  -webkit-transition: all .4s ease;
+		-moz-transition: all .4s ease;
+		-o-transition: all .4s ease;
+		transition: all .4s ease;
+}
+</style>
+<?php
+if(isset($_SESSION['login_success'])){
+?>
+<div id='card' class="animated fadeIn">
+  <div id='upper-side' style="background: linear-gradient(66deg,rgba(220,52,85,0.6),rgba(252,175,59,0.6));padding:50px">
+      <!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+      <i class="ri-check-double-line" style='font-size:50px;padding:10px;border:1px solid white;border-radius:50%'></i>
+  </div>
+  <div id='lower-side'>
+    <?php
+    if(isset($_SESSION['login_success'])){
+    ?>
+    <p id='message'>
+        <?= $_SESSION['login_success'] ?>
+    </p>
+    <?php
+    }
+    ?>
+    <a href="#" id="contBtn">Close</a>
+  </div>
+</div>
+<?php
+}
+?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+             $("#card").fadeOut(2000);
+        },2000)
+    })
+   
+</script>
+<script>
+    $(document).ready(function(){
+        
+        $("#contBtn").click(function(){
+            $("#card").css({'display':'none'});
+        })
+    })
+</script>
+<?php
+unset($_SESSION['login_success']);
+?>
+
+<?php
+if(isset($_SESSION['login_fail'])){
+?>
+<div id='card1' class="animated fadeIn">
+  <div id='upper-side' style="background: red;padding:50px">
+      <!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+      <i class="ri-close-line" style='font-size:50px;padding:10px;border:1px solid white;border-radius:50%'></i>
+  </div>
+  <div id='lower-side'>
+    <?php
+    if(isset($_SESSION['login_fail'])){
+    ?>
+    <p id='message'>
+        <?= $_SESSION['login_fail'] ?>
+    </p>
+    <?php
+    }
+    ?>
+    <a href="#" id="contBtn">Close</a>
+  </div>
+</div>
+<?php
+}
+?>
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+             $("#card1").fadeOut(2000);
+        },2000)
+    })
+   
+</script>
+<script>
+    $(document).ready(function(){
+        
+        $("#contBtn").click(function(){
+            $("#card1").css({'display':'none'});
+        })
+    })
+</script>
+<?php
+unset($_SESSION['login_fail']);
+?>
+
+<!-- ppopup design  -->
+
+
 <!-- Footer -->
 <footer class="footer">
         <div class="footer-top">
@@ -81,5 +268,4 @@
     <script src="<?= base_url() ?>/public/user_assets/js/custom.js"></script>
 </body>
 
-<!-- Mirrored from duruthemes.com/demo/html/cappa/demo1-light/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 26 Feb 2024 05:24:00 GMT -->
 </html>

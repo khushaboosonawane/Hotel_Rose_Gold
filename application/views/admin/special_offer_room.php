@@ -70,6 +70,16 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
+                                        <span class="input-group-text text-white">Room Rating</span>
+                                        </div>
+                                        <input type="number" class="form-control text-white" placeholder="Enter Room Rating" aria-label="Username" name="rating" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
                                         <span class="input-group-text text-white">Room Description</span>
                                         </div>
                                         <input type="text" class="form-control text-white" placeholder="Enter Room Description" aria-label="Username" name="room_desc" aria-describedby="basic-addon1" required>
