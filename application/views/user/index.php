@@ -533,6 +533,24 @@
                 </div>
                 <div class="col-md-8">
                     <div class="owl-carousel owl-theme">
+                        <?php
+                        if(count($extra_service_slider)>0){
+                            foreach($extra_service_slider as $key=>$row){
+                        ?>
+                        <div class="pricing-card">
+                            <img src="<?= base_url() ?>public/upload/extra_service_slider_image/<?= $row['extra_service_image'] ?>" style='height:35vh;width:100%;object-fit:cover' alt="">
+                            <div class="desc">
+                                <div class="name"><?= $row['extra_service_title'] ?></div>
+                                <div class="amount"><?= number_format($row['extra_service_Price']) ?> &#8377;<span> &nbsp; <?= $row['extra_service_avilable'] ?></span></div>
+                                <div style='width:100%;height:10vh'>
+                                <?= $row['extra_service_desc'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        }else{
+                        ?>
                         <div class="pricing-card">
                             <img src="<?= base_url() ?>/public/user_assets/img/pricing/1.jpg" alt="">
                             <div class="desc">
@@ -581,6 +599,10 @@
                                 </ul>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
                     </div>
                 </div>
             </div>
@@ -592,12 +614,39 @@
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">
                        <span><img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt=""></span>
-                        <div class="section-subtitle"><span>The Cappa Luxury Hotel</span></div>
+                        <div class="section-subtitle"><span><?= $basic_info[0]['hotel_name'] ?></span></div>
+                        <?php
+                        if(count($pro_data)>0){
+                            ?>
+                        <div class="section-title"><span><?= $pro_data[0]['video_title'] ?></span></div>
+
+                            <?php
+                        }else{
+                            ?>
                         <div class="section-title"><span>Promotional Video</span></div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="text-center col-md-12">
+                    <?php
+                    if(count($pro_data)>0){
+                        ?>
+                        <div class="text-center col-md-12">
+                        <a class="vid" href="<?= base_url() ?>public/upload/promotional_video/<?= $pro_data[0]['promotional_video'] ?>" target="_self">
+                        <div class="vid-butn">
+                            <span class="icon">
+                                <i class="ti-control-play"></i>
+                            </span>
+                        </div>
+                    </a>
+                    </div>
+                        <?php
+
+                    }else{
+                        ?>
+                        <div class="text-center col-md-12">
                         <a class="vid" href="https://youtu.be/7BGNAGahig8">
                         <div class="vid-butn">
                             <span class="icon">
@@ -606,6 +655,9 @@
                         </div>
                     </a>
                     </div>
+                        <?php
+                    }
+                    ?>
 
                 </div>
             </div>
@@ -621,60 +673,77 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-world"></span>
-                        <h5>Pick Up & Drop</h5>
-                        <p>We’ll pick up from airport while you comfy on your ride, mus nellentesque habitant.</p>
-                        <div class="facility-shape"> <span class="flaticon-world"></span> </div>
+                <?php
+                if(count($fac_data)>0){
+                    foreach($fac_data as $key=>$row){
+                        ?>
+                        <div class="col-md-4">
+                        <div class="single-facility animate-box" data-animate-effect="fadeInUp">
+                            <h5 style="font-weight:bold"><?= $row['fac_title'] ?></h5>
+                            <p style='white-space:normal !important'><?= $row['fac_desc'] ?></p>
+                            <div class="facility-shape"> </div>
+                        </div>
                     </div>
-                </div>
+                        <?php
+                    }
+
+                }else{
+                    ?>
+                     <div class="col-md-4">
+                        <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
+                            <h5>Pick Up & Drop</h5>
+                            <p>We’ll pick up from airport while you comfy on your ride, mus nellentesque habitant.</p>
+                            <div class="facility-shape"> </div>
+                        </div>
+                    </div>
                 <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-car"></span>
+                    <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
                         <h5>Parking Space</h5>
                         <p>Fusce tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
-                        <div class="facility-shape"> <span class="flaticon-car"></span> </div>
+                        <div class="facility-shape"> </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-bed"></span>
+                    <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
+                        
                         <h5>Room Service</h5>
                         <p>Room tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
-                        <div class="facility-shape"> <span class="flaticon-bed"></span> </div>
+                        <div class="facility-shape"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-swimming"></span>
+                    <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
+
                         <h5>Swimming Pool</h5>
                         <p>Swimming pool tincidunt nise ace park norttito sit space, mus nellentesque habitant.</p>
-                        <div class="facility-shape"> <span class="flaticon-swimming"></span> </div>
+                        <div class="facility-shape"> </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-wifi"></span>
+                    <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
+
                         <h5>Fibre Internet</h5>
                         <p>Wifi tincidunt nis ace park norttito sit amet space, mus nellentesque habitant.</p>
-                        <div class="facility-shape"> <span class="flaticon-wifi"></span> </div>
+                        <div class="facility-shape"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="single-facility animate-box" data-animate-effect="fadeInUp">
-                        <span class="flaticon-breakfast"></span>
+                    <div class="single-facility animate-box p-5" data-animate-effect="fadeInUp">
+                        
                         <h5>Breakfast</h5>
                         <p>Eat tincidunt nisa ace park norttito sit amet space, mus nellentesque habitant</p>
-                        <div class="facility-shape"> <span class="flaticon-breakfast"></span> </div>
+                        <div class="facility-shape"> </div>
                     </div>
                 </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </section>
     <!-- Testiominals -->
     <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<?= base_url() ?>/public/user_assets/img/slider/2.jpg" data-overlay-dark="3">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<?= base_url() ?>public/upload/test_back_img/<?= $test_back_image[0]['test_back_image'] ?>" data-overlay-dark="5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center" style="margin-top:-90px">
@@ -688,6 +757,43 @@
                                 <div class="line"></div>
                             </div>
                             <div class="owl-carousel owl-theme">
+                                <?php
+                                if(count($test_data)>0){
+                                    foreach($test_data as $key=>$row){
+                                        ?>
+                                <div class="item">
+                                    <p><?= $row['test_desc'] ?>/p>
+                                    <div class="info">
+                                        <div class="author-img">
+                                            <img src="<?= base_url() ?>public/upload/testimonial_image/<?= $row['test_image'] ?>" alt="">
+                                        </div>
+                                        
+                                        <div class="cont"> 
+                                            <?php
+                                            if($row['test_rating']<=5){
+                                                for($i=0;$i<$row['test_rating'];$i++){
+                                            ?>
+                                            <i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i>
+                                            <?php
+                                                }
+                                            }else{
+                                                ?>
+                                                <span>
+                                                <i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i>
+                                                </span>
+                                                <?php
+                                            }
+                                            ?>
+                                            
+                                            <h6><?= $row['test_name'] ?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                        <?php
+                                    }
+
+                                }else{
+                                    ?>
                                 <div class="item">
                                     <span class="quote"><img src="<?= base_url() ?>/public/user_assets/img/quot.png" alt=""></span>
                                     <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
@@ -718,6 +824,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                    <?php
+                                }
+                                ?>
+                               
                             </div>
                         </div>
                     </div>

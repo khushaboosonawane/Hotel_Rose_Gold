@@ -578,7 +578,7 @@ color: #aa8453;
 
 /* ======= Owl-Theme custom style ======= */
 .owl-theme .owl-nav.disabled + .owl-dots {
-    margin-top: 0px;
+    margin-top: 10px !important;
     line-height: 1.5;
     display: block;
     outline: none;
@@ -586,7 +586,7 @@ color: #aa8453;
 .owl-theme .owl-dots .owl-dot span {
     width: 12px;
     height: 12px;
-    margin: 0 3px;
+    margin: 0px 3px !important;
     border-radius: 50%;
     background: transparent;
     border: 1px solid #b1260d !important;

@@ -35,6 +35,11 @@ class UserController extends CI_Controller{
         $data['about_info']=$this->My_model->select("about");
         $data['offer_rooms_data']=$this->My_model->select_special_room();
         $data['extra_service']=$this->My_model->select("extra_service");
+        $data['extra_service_slider']=$this->My_model->select("extra_service_slider");
+        $data['pro_data']=$this->My_model->select("promotional_video");
+        $data['fac_data']=$this->My_model->select("hotel_facility");
+        $data['test_data']=$this->My_model->select("testimonial");
+        $data['test_back_image']=$this->My_model->select("test_back_image");
         if(isset($_SESSION['user_id'])){
             $data['add_to_cart_data']=$this->My_model->select("add_to_cart",['user_id'=>$_SESSION['user_id']]);
         }

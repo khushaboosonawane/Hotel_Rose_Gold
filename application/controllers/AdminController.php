@@ -369,14 +369,180 @@ class AdminController extends CI_Controller{
             $extra_service_image=time().rand(1111,9999).$_FILES['extra_service_image']['name'];
             move_uploaded_file($_FILES['extra_service_image']['tmp_name'],"public/upload/extra_service_slider_image/$extra_service_image");
             $_POST['extra_service_image']=$extra_service_image;
-            $this->My_model->update("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
+            $this->My_model->update_cond("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
             $_SESSION['update_data']="Slider Data Updated Successfully";
             redirect(base_url()."admincontroller/extra_service_slider_info");
         }else{
-            $this->My_model->update("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
+            $this->My_model->update_cond("extra_service_slider",$_POST,['extra_service_id'=>$_POST['extra_service_id']]);
             $_SESSION['update_data']="Slider Data Updated Successfully";
             redirect(base_url()."admincontroller/extra_service_slider_info");
         }
+    }
+    public function promotional_video(){
+        $this->navbar();
+        $data['pro_data']=$this->My_model->select('promotional_video');
+        $this->load->view("admin/promotional_video",$data);
+        $this->footer();
+    }
+    public function update_promotional_video(){
+        if($_FILES['promotional_video']['name']!=""){
+            $data=($this->My_model->select_image("promotional_video",['pro_id'=>1],'promotional_video'))[0]['promotional_video'];
+            unlink("public/upload/promotional_video/$data");
+            $promotional_video=time().rand(1111,9999).$_FILES['promotional_video']['name'];
+            move_uploaded_file($_FILES['promotional_video']['tmp_name'],"public/upload/promotional_video/$promotional_video");
+            $_POST['promotional_video']=$promotional_video;
+            $this->My_model->update("promotional_video",$_POST);
+            $_SESSION['update_data']="Data updated successfully..";
+            redirect(base_url()."admincontroller/promotional_video");
+        }else{
+            $this->My_model->update('promotional_video',$_POST);
+            $_SESSION['update_data']="Data updated successfully..";
+            redirect(base_url()."admincontroller/promotional_video");
+        }
+       
+    }
+    public function hotel_facility(){
+        $this->navbar();
+        $this->load->view("admin/hotel_facility");
+        $this->footer();
+    }
+    public function save_facility_info(){
+        $this->My_model->insert("hotel_facility",$_POST);
+        $_SESSION['save_data']='Data Save Successfully...';
+        redirect(base_url()."admincontroller/view_facility_data");
+    }
+    public function view_facility_data(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("hotel_facility"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_facility_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['fac_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"hotel_facility",'fac_id');
+        $this->load->view("admin/view_facility_data",$data);
+        $this->footer();
+    }
+    public function delete_fac_data($fac_id){
+        $this->My_model->delete("hotel_facility",['fac_id'=>$fac_id]);
+        $_SESSION['delete_data']="Data Deleted successfully...";
+        redirect(base_url()."admincontroller/view_facility_data");
+    }
+    public function edit_fac_data($fac_id){
+        $this->navbar();
+        $data['fac_data']=$this->My_model->select("hotel_facility",['fac_id'=>$fac_id]);
+        $this->load->view("admin/edit_fac_data",$data);
+        $this->footer();
+    }
+    public function update_facility_info(){
+        $this->My_model->update_cond("hotel_facility",$_POST,['fac_id'=>$_POST['fac_id']]);
+        $_SESSION['update_data']="Data updated Successfully";
+        redirect(base_url()."admincontroller/view_facility_data");
+    }
+    public function testimonial(){
+        $this->navbar();
+        $data['test_back']=$this->My_model->select("test_back_image");
+        $this->load->view("admin/testimonial",$data);
+        $this->footer();
+    }
+    public function save_test_info(){
+        $test_image=time().rand(1111,9999).$_FILES['test_image']['name'];
+        move_uploaded_file($_FILES['test_image']['tmp_name'],"public/upload/testimonial_image/$test_image");
+        $_POST['test_image']=$test_image;
+        $this->My_model->insert("testimonial",$_POST);
+        $_SESSION['save_data']="Data Added Successfully";
+        redirect(base_url()."admincontroller/view_test_data");
+    }
+    public function view_test_data(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("testimonial"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_test_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['test_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"testimonial",'test_id');
+        $this->load->view("admin/view_test_data",$data);
+        $this->footer();
+    }
+    public function delete_test_data($test_id){
+        $data=($this->My_model->select_image("testimonial",['test_id'=>$test_id],'test_image'))[0]['test_image'];
+        unlink("public/upload/testimonial_image/$data");
+        $this->My_model->delete("testimonial",['test_id'=>$test_id]);
+        $_SESSION['delete_data']="Data deleted successfully!..";
+        redirect(base_url()."admincontroller/view_test_data");
+    }
+    public function edit_test_data($test_id){
+        $this->navbar();
+        $data['test_data']=$this->My_model->select("testimonial",['test_id'=>$test_id]);
+        $this->load->view("admin/edit_test_data",$data);
+        $this->footer();
+    }
+    public function update_test_info(){
+        if($_FILES['test_image']['name']!=""){
+            $data=($this->My_model->select_image("testimonial",['test_id'=>$_POST['test_id']],'test_image'))[0]['test_image'];
+            unlink("public/upload/testimonial_image/$data");
+            $test_image=time().rand(1111,9999).$_FILES['test_image']['name'];
+            move_uploaded_file($_FILES['test_image']['tmp_name'],"public/upload/testimonial_image/$test_image");
+            $_POST['test_image']=$test_image;
+            $this->My_model->update_cond("testimonial",$_POST,['test_id'=>$_POST['test_id']]);
+            $_SESSION['update_data']="Data updated successfully";
+            redirect(base_url()."admincontroller/view_test_data");
+        }else{
+            $this->My_model->update_cond("testimonial",$_POST,['test_id'=>$_POST['test_id']]);
+            $_SESSION['update_data']="Data updated successfully";
+            redirect(base_url()."admincontroller/view_test_data");
+        }
+    }
+    public function update_test_back_info(){
+        $data=($this->My_model->select_image("test_back_image",['test_id'=>1],'test_back_image'))[0]['test_back_image'];
+            unlink("public/upload/test_back_img/$data");
+        $test_back_image=time().rand(1111,9999).$_FILES['test_back_image']['name'];
+        move_uploaded_file($_FILES['test_back_image']['tmp_name'],"public/upload/test_back_img/$test_back_image");
+        $_POST['test_back_image']=$test_back_image;
+        $this->My_model->update_cond("test_back_image ",$_POST,['test_id'=>1]);
+        $_SESSION['update_data']='Background image updated successfully';
+        redirect(base_url()."admincontroller/testimonial");
     }
 }
 ?>
