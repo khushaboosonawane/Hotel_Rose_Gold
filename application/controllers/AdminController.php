@@ -544,6 +544,186 @@ class AdminController extends CI_Controller{
         $_SESSION['update_data']='Background image updated successfully';
         redirect(base_url()."admincontroller/testimonial");
     }
+    public function metting_halls(){
+        $this->navbar();
+        $this->load->view("admin/metting_halls");
+        $this->footer();
+    }
+    public function save_hall_info(){
+        $hall_image=time().rand(1111,9999).$_FILES['hall_image']['name'];
+        move_uploaded_file($_FILES['hall_image']['tmp_name'],"public/upload/hall_image/$hall_image");
+        $_POST['hall_image']=$hall_image;
+        $_POST['book_status']="disabled";
+        $_POST['user_id']=0;
+        $_POST['order_status']='disabled';
+        $this->My_model->insert("metting_halls",$_POST);
+        $_SESSION['save_data']="Data Save successfully!..";
+        redirect(base_url()."admincontroller/view_hall_data");
+    }
+    public function view_hall_data(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("metting_halls"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_hall_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['metting_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"metting_halls",'mt_id');
+        $this->load->view("admin/view_hall_data",$data);
+        $this->footer();
+    }
+    public function delete_metting_data($mt_id){
+        $hall_image=($this->My_model->select_image("metting_halls",['mt_id'=>$mt_id],"hall_image"))[0]['hall_image'];
+        unlink("public/upload/hall_image/$hall_image");
+        $this->My_model->delete("metting_halls",['mt_id'=>$mt_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully";
+        redirect(base_url()."admincontroller/view_hall_data");
+    }
+    public function edit_metting_data($mt_id){
+        $data['metting_data']=$this->My_model->select("metting_halls",['mt_id'=>$mt_id]);
+        $this->navbar();
+        $this->load->view("admin/edit_metting_data",$data);
+        $this->footer();
+    }
+    public function update_hall_info(){
+        if($_FILES['hall_image']['name']!=""){
+            $hall_image=($this->My_model->select_image("metting_halls",['mt_id'=>$_POST['mt_id']],"hall_image"))[0]['hall_image'];
+            unlink("public/upload/hall_image/$hall_image");
+
+            $hall_image=time().rand(1111,9999).$_FILES['hall_image']['name'];
+            move_uploaded_file($_FILES['hall_image']['tmp_name'],"public/upload/hall_image/$hall_image");
+            $_POST['hall_image']=$hall_image;
+            $_POST['book_status']="disabled";
+            $_POST['user_id']=0;
+            $_POST['order_status']='disabled';
+            $this->My_model->update_cond("metting_halls",$_POST,['mt_id'=>$_POST['mt_id']]);
+            $_SESSION['update_data']="Hall Data Updated Successfully";
+            redirect(base_url()."admincontroller/view_hall_data");
+        }else{
+            $this->My_model->update_cond("metting_halls",$_POST,['mt_id'=>$_POST['mt_id']]);
+            $_SESSION['update_data']="Hall data updated successfully";
+            redirect(base_url()."admincontroller/view_hall_data");
+        }
+    }
+    public function blog(){
+        $this->navbar();
+        $this->load->view("admin/blog");
+        $this->footer();
+    }
+    public function save_blog_info(){
+        $blog_img=time().rand(1111,9999).$_FILES['blog_img']['name'];
+        move_uploaded_file($_FILES['blog_img']['tmp_name'],"public/upload/blog_image/$blog_img");
+        $_POST['blog_img']=$blog_img;
+        $this->My_model->insert("blog",$_POST);
+        $_SESSION['save_data']="Data Save Successfully";
+        redirect(base_url()."admincontroller/view_blog_data");
+    }
+    public function view_blog_data(){
+        $this->navbar();
+        $data['blog_data']=$this->My_model->select("blog");
+        $this->load->view("admin/view_blog_data",$data);
+        $this->footer();
+    }
+    public function delete_blog_data($blog_id){
+        $data=($this->My_model->select_image("blog",['blog_id'=>$blog_id],"blog_img"))[0]['blog_img'];
+        unlink("public/upload/blog_image/$data");
+        $this->My_model->delete("blog",['blog_id'=>$blog_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully";
+        redirect(base_url()."admincontroller/view_blog_data");
+    }
+    public function edit_blog_data($blog_id){
+        $this->navbar();
+        $data['blog_data']=$this->My_model->select("blog",['blog_id'=>$blog_id]);
+        $this->load->view("admin/edit_blog_data",$data);
+        $this->footer();
+    }
+    public function update_blog_info(){
+        if($_FILES['blog_img']['name']!=""){
+            $data=$this->My_model->select_image("blog",['blog_id'=>$_POST['blog_id']],"blog_img");
+            unlink("public/upload/blog_image/$data");
+            $blog_img=time().rand(1111,9999).$_FILES['blog_img']['name'];
+            move_uploaded_file($_FILES['blog_img']['tmp_name'],"public/upload/blog_image/$blog_img");
+            $_POST['blog_img']=$blog_img;
+            $this->My_model->update_cond("blog",$_POST,['blog_id'=>$_POST['blog_id']]);
+            $_SESSION['update_data']="Data updated successfully";
+            redirect(base_url()."admincontroller/view_blog_data");
+        }else{
+            $this->My_model->update_cond("blog",$_POST,['blog_id'=>$_POST['blog_id']]);
+            $_SESSION['update_data']="Data updated successfully";
+            redirect(base_url()."admincontroller/view_blog_data");
+        }
+
+    }
+    public function food(){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active','category_name'=>'Food']);
+        $this->load->view("admin/food",$data);
+        $this->footer();
+    }
+    public function save_food(){
+        $food_image=time().rand(1111,9999).$_FILES['food_image']['name'];
+        move_uploaded_file($_FILES['food_image']['tmp_name'],"public/upload/food_image/$food_image");
+        $_POST['food_image']=$food_image;
+        $this->My_model->insert("food",$_POST);
+        $_SESSION['save_data']="Data Save Successfully";
+        redirect(base_url()."admincontroller/food_data");
+    }
+    public function food_data(){
+        $this->navbar();
+        $data['food_data']=$this->My_model->select_food();
+        $this->load->view("admin/food_data",$data);
+        $this->footer();
+    }
+    public function delete_food_data($food_id){
+        $data=($this->My_model->select_image("food",['food_id'=>$food_id],"food_image"))[0]['food_image'];
+        unlink("public/upload/food_image/$data");
+        $this->My_model->delete("food",['food_id'=>$food_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully";
+        redirect(base_url()."admincontroller/food_data");
+    }
+    public function edit_food_data($food_id){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['category_name'=>"Food"]);
+        $data['food_data']=$this->My_model->select_food_data_id($food_id);
+        $this->load->view("admin/edit_food_data",$data);
+        $this->footer();
+    }
+    public function update_food(){
+        if($_FILES['food_image']['name']!=""){
+            $data=($this->My_model->select_image("food",['food_id'=>$_POST['food_id']],"food_image"))[0]['food_image'];
+            unlink("public/upload/food_image/$data");
+            $food_image=time().rand(1111,9999).$_FILES['food_image']['name'];
+            move_uploaded_file($_FILES['food_image']['tmp_name'],"public/upload/food_image/$food_image");
+            $_POST['food_image']=$food_image;
+            $this->My_model->update_cond("food",$_POST,['food_id'=>$_POST['food_id']]);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/food_data");
+        }else{
+            $this->My_model->update_cond("food",$_POST,['food_id'=>$_POST['food_id']]);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/food_data");
+        }
+    }
 }
 ?>
 

@@ -58,6 +58,12 @@ class My_model extends CI_Model{
         extract($data);
         $this->db->query("update rooms set cat_id='$cat_id',sub_cat_id='$sub_cat_id',room_name='$room_name',room_desc='$room_desc',room_bed='$room_bed',person_count='$person_count',room_breakfast='$room_breakfast',room_price='$room_price',wifi_status='$wifi_status',status='Active',order_status='Active',rating='$rating' where room_id='$room_id'");
     }
+    public function select_food(){
+        return $this->db->query("select * from category,sub_category,food where food.cat_id=category.cat_id and food.sub_cat_id=sub_category.sub_cat_id")->result_array();
+    }
+    public function select_food_data_id($food_id){
+        return $this->db->query("select * from category,sub_category,food where food.cat_id=category.cat_id and food.sub_cat_id=sub_category.sub_cat_id and food_id=$food_id")->result_array();
+    }
     
    
 }

@@ -122,9 +122,26 @@
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/about_page">2 . About</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/special_offer_room">3 . Special Offer <br> Room</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/extra_service">4 . Extra Services</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/promotional_video">4 . Promotional Video</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/hotel_facility">4 . Hotel Facility</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/testimonial">4 . Testimonial</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/promotional_video">5 . Promotional Video</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/hotel_facility">5 . Hotel Facility</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/testimonial">6 . Testimonial</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/metting_halls">7 . Metting & Halls</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/blog">8 . Blog</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" data-target="#about" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">About Page</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="about">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/food">1 . Foods</a></li>
+                
               </ul>
             </div>
           </li>

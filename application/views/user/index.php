@@ -839,6 +839,66 @@
     <section class="services section-padding">
         <div class="container">
             <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    <div class="section-subtitle" style="color:#f28744">Our Facility</div>
+                    <div class="section-title">Metting & Halls</div>
+                    <br>
+                </div>
+            </div>
+            <?php
+            if(count($metting_hall)>0){
+                foreach($metting_hall as $key=>$row){
+                    if($key%2==0){
+                        ?>
+                        <div class="row">
+                            <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
+                                <div class="img left">
+                                    <a href="<?= base_url() ?>usercontroller/metting_hall_details/<?= $row['mt_id'] ?>"><img src="<?= base_url() ?>public/upload/hall_image/<?= $row['hall_image'] ?>"  style="height:100%;width:600px;object-fit:cover" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0 bg-cream valign animate-box" data-animate-effect="fadeInRight">
+                                <div class="content">
+                                    <div class="cont text-left">
+                                        <div class="info">
+                                            <h6><?= $row['hall_subtitle'] ?></h6>
+                                        </div>
+                                        <h4><?= $row['hall_title'] ?></h4>
+                                        <p><?= $row['hall_info'] ?></p>
+                                        <a href="<?= base_url() ?>usercontroller/metting_hall_details/<?= $row['mt_id'] ?>" class="btn-effect"><span>Details</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }else{
+                        ?>
+                    <div class="row">
+                        <div class="col-md-6 bg-cream p-0 order2 valign animate-box" data-animate-effect="fadeInLeft">
+                            <div class="content">
+                                <div class="cont text-left">
+                                    <div class="info">
+                                        <h6><?= $row['hall_subtitle'] ?></h6>
+                                    </div>
+                                    <h4><?= $row['hall_title'] ?></h4>
+                                    <p><?= $row['hall_info'] ?>.</p>
+                                    <a href="<?= base_url() ?>usercontroller/metting_hall_details/<?= $row['mt_id'] ?>" class="btn-effect"><span>Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-0 order1 animate-box" data-animate-effect="fadeInRight">
+                            <div class="img">
+                                <a href="<?= base_url() ?>usercontroller/metting_hall_details/<?= $row['mt_id'] ?>"><img src="<?= base_url() ?>public/upload/hall_image/<?= $row['hall_image'] ?>" style="height:50vh;width:600px;object-fit:cover" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                        <?php
+
+                    }
+                }
+            }else{
+                ?>
+            <div class="row">
                 <div class="col-md-6 p-0 animate-box" data-animate-effect="fadeInLeft">
                     <div class="img left">
                         <a href="restaurant.html"><img src="<?= base_url() ?>/public/user_assets/img/restaurant/1.jpg" alt=""></a>
@@ -853,7 +913,7 @@
                             <h4>The Restaurant</h4>
                             <p>Restaurant inilla duiman at elit finibus viverra nec a lacus themo the nesudea seneoice misuscipit non sagie the fermen ziverra tristiue duru the ivite dianne onen nivami acsestion augue artine.</p>
                             <!-- <div class="butn-dark"> <a href="restaurant.html"><span>Learn More</span></a> </div> -->
-                            <a href="#" class="btn-effect"><span>Available</span></a>
+                            <a href="#" class="btn-effect"><span>Details</span></a>
                         </div>
                     </div>
                 </div>
@@ -915,6 +975,10 @@
                     </div>
                 </div>
             </div>
+                <?php
+            }
+            ?>
+
         </div>
     </section>
     <!-- News -->
