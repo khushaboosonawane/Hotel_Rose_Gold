@@ -724,6 +724,34 @@ class AdminController extends CI_Controller{
             redirect(base_url()."admincontroller/food_data");
         }
     }
+    public function order_food(){
+        $this->navbar();
+        $data['order_food']=$this->db->query("select * from food,order_food where order_food.food_id=food.food_id")->result_array();
+        $this->load->view("admin/order_food",$data);
+        $this->footer();
+    }
+    public function cancel_food_order($order_id){
+        $this->My_model->update_cond("order_food",['order_status'=>'Canceled'],['order_id'=>$order_id]);
+        $_SESSION['update_data']="Order Cancel";
+        redirect(base_url()."admincontroller/order_food");
+    }
+    public function deliver_order($order_id){
+        $this->My_model->update_cond("order_food",['order_status'=>'Delivered'],['order_id'=>$order_id]);
+        $_SESSION['update_data']="Order Deliver";
+        redirect(base_url()."admincontroller/order_food");
+    }
+    public function dispatched_order($order_id){
+        $this->My_model->update_cond("order_food",['order_status'=>'Dispatched'],['order_id'=>$order_id]);
+        $_SESSION['update_data']="Order Dispatched";
+        redirect(base_url()."admincontroller/order_food");
+    }
+    public function view_details($order_id){
+        $this->navbar();
+        $data['order_detail']=$this->db->query("select * from user_data,order_food,food where user_data.user_id=order_food.user_id and food.food_id=order_food.food_id and order_id='$order_id'")->result_array();
+        $this->load->view("admin/view_details",$data);
+        $this->footer();
+    }
+    
 }
 ?>
 

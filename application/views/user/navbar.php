@@ -65,10 +65,47 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/contact">Contact</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/search_section"><i class="ri-search-2-line lead"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">
-                    <i class="ri-heart-line lead"></i>
-                    </a></li>
-
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url() ?>usercontroller/cart_page">
+                            <i class="ri-heart-line lead"></i>
+                        </a>
+                    </li>
+                    <?php
+                    if(isset($_SESSION['user_id'])){
+                        if($total>0){
+                            ?>
+                            <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url() ?>usercontroller/order_page">
+                                <div style='height:20px;width:20px;position:absolute;top:20px;right:180px;border:1px solid #ff512f;border-radius:50%;background:#ff512f;color:white;font-weight:bold;text-align:center;font-size:10px;vertical-align:center'>
+                                    <span style="position:relative;top:-5px;left:1px;font-weight:bold"><?= $total ?></span>
+                                </div>
+                            <i class="ri-shopping-cart-line lead"></i>
+                            </a>
+                        </li>
+                            <?php
+                        }else{
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url() ?>usercontroller/order_page">
+                                    <div style='height:20px;width:20px;position:absolute;top:20px;right:180px;border:1px solid #ff512f;border-radius:50%;background:#ff512f;color:white;font-weight:bold;text-align:center;font-size:10px;vertical-align:center'>
+                                        <span style="position:relative;top:-5px;left:1px;font-weight:bold">0</span>
+                                    </div>
+                                <i class="ri-shopping-cart-line lead"></i>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                    }else{
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url() ?>usercontroller/order_page">
+                                <i class="ri-shopping-cart-line lead"></i>
+                            </a>
+                        </li>
+                        <?php
+                    }
+                    ?>
                     <li class="nav-item">
                         <?php
                          if(isset( $_SESSION['user_id'])){

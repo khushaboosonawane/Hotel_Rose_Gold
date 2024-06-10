@@ -116,9 +116,6 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <h6>Children and extra beds</h6>
                             <p>Children are welcome Kids stay free! Children stay free when using existing bedding; children may not be eligible for complimentary breakfast Rollaway/extra beds are available for $ 10 per day.</p>
                         </div>
-                        <div class="col-md-12">
-                            <div class="butn-dark mt-15 mb-30"> <a href="rooms2.html"><span>Check Now</span></a> </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-3 offset-md-1">

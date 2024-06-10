@@ -195,23 +195,83 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-12 my-5">
                 <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
-                    </div>
-                    <div class="clients-logo text-center border p-5">
-                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
-                        <div class="my-3">
-                        <span>345 rs</span>
+                    <?php
+                    if(count($food_data)>0){
+                        foreach($food_data as $key=>$row){
+                        ?>
+                        <div class="clients-logo shadow p-4">
+                        <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>" class="d-flex justify-content-center my-3">
+                            <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" style="height:280px;width:100%;object-fit:cover;border-radius:20%" alt="">
+                        </a>
+                        <span class="my-3" style="font-weight:bold;font-size:18px;color:black">
+                            <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>">
+                            <?= $row['food_name'] ?> &nbsp;&nbsp;(<?= $row['sub_cat_name'] ?>)
+                            </a>
+                        </span>
+                        <div class="my-4 d-flex justify-content-between">
+                        <span style="font-weight:bold;color:black"><?= number_format($row['food_price']) ?> &#8377;</span>
                         <span>
-                        bhdfvdh
+                            <?php
+                            if($row['food_rating']<=0){
+                                for($i=0;$i<$row['food_rating'];$i++){
+                                    ?>
+                                    <i class="ri-star-fill">
+                                    <?php
+                                }
+
+                            }else{
+                                ?>
+                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                                <?php
+                            }
+                            ?>
                         </span>
                         </div>
-                        <p class="text-center">
+                        <span class="my-3">
+                            <b style="color:#ff512f !important;font-weight:bold"><?= $row['off_price'] ?></b>
+                        </span>
+                        <div style="height:100px">
+                        <p class="text-truncate">
+                            <?= $row['food_desc'] ?>
+                        </p>
+                        </div>
+                        <div class=" d-flex justify-content-end text-right">
+                            <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>">
+                                <button class="btn" style="background-color:#f18444;color:white">View Details</button>
+                            </a>
+                        </div>
+                    </div>
+                        <?php
+                        }
+                    }else{
+                    ?>
+                     <div class="clients-logo">
+                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
+                    </div>
+                    <div class="clients-logo">
+                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
+                    </div>
+                    <div class="clients-logo shadow p-4">
+                        <a href="#0" class="d-flex justify-content-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" style="height:200px;width:200px;object-fit:cover" alt="">
+                        </a>
+                        <div class="my-4 d-flex justify-content-between">
+                        <span>345 rs</span>
+                        <span>
+                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </span>
+                        </div>
+                        <span class="my-3">
+                            <b style="color:#ff512f !important;font-weight:bold">20% off 100rs</b>
+                        </span>
+                        <p class="">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci mollitia similique magnam amet aliquid dolorem esse harum distinctio repudiandae accusantium.
                         </p>
+                        <div class=" d-flex justify-content-end text-right">
+                            <a href="">
+                                <button class="btn" style="background-color:#f18444;color:white">View Details</button>
+                            </a>
+                        </div>
                     </div>
                     <div class="clients-logo">
                         <a href="#0"><img src="<?= base_url() ?>/public/user_assets/img/clients/4.png" alt=""></a>
@@ -222,6 +282,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="clients-logo">
                         <a href="#0"><img src="<?= base_url() ?>/public/user_assets/img/clients/6.png" alt=""></a>
                     </div>
+                    <?php
+                    }
+                    ?>
+                    
                 </div>
                 </div>
             </div>
