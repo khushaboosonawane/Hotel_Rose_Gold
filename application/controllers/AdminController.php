@@ -857,6 +857,11 @@ class AdminController extends CI_Controller{
         }
 
     }
+    public function gallery(){
+        $this->navbar();
+        $this->load->view("admin/gallery");
+        $this->footer();
+    }
 }
 ?>
 

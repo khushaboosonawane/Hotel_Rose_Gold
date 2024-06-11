@@ -1,12 +1,55 @@
 <?php
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
+<style>
+    .buttons {
+    margin: 10%;
+    text-align: center;
+}
+
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-2 {
+    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+
+</style>
 <!-- Header Banner -->
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="img/slider/3.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/3.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-left caption mt-90">
-                    <h5>Images & Videos</h5>
+                <div class="col-md-12 text-center caption mt-90">
+                    <h5><?= $basic_info[0]['hotel_name'] ?></h5>
                     <h1>Our Gallery</h1>
                 </div>
             </div>
@@ -16,66 +59,77 @@ defined("BASEPATH") or exit("no direct script is allowed");
     <section class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 my-5">
                     <div class="section-subtitle">Images</div>
                     <div class="section-title">Image Gallery</div>
                 </div>
                 <!-- 3 columns -->
-                <div class="col-md-4 gallery-item">
+                <div class="col-md-4 gallery-item shadow p-5 " style="border-radius:4%">
                     <a href="img/slider/7.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/slider/7.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/7.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                        </div>
+                        <div class="col-md-12 my-3">
+                            <small class="lead">6/7/2009</small>
+                            <p class="">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id praesentium fugit facilis dignissimos quis sunt quod dolor at eaque iusto!
+                            </p>
+                        </div>
+                        <div class="col col-md-12 text-center">
+                            <a href="">
+                            <button class="btn-hover color-2">BUTTON</button>
+                            </a>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-4 gallery-item">
-                    <a href="img/slider/5.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/slider/5.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/slider/5.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/5.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-4 gallery-item">
-                    <a href="img/slider/4.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/slider/4.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/slider/4.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/4.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <!-- 2 columns -->
                 <div class="col-md-6 gallery-item">
-                    <a href="img/slider/2.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/slider/2.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/slider/2.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/2.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-6 gallery-item">
-                    <a href="img/slider/1.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/slider/1.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/slider/1.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/1.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <!-- 3 columns -->
                 <div class="col-md-4 gallery-item">
-                    <a href="img/rooms/8.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/rooms/8.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/rooms/8.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/8.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-4 gallery-item">
-                    <a href="img/rooms/5.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/rooms/5.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/rooms/5.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/5.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-4 gallery-item">
-                    <a href="img/rooms/10.jpg" title="" class="img-zoom">
+                    <a href="<?= base_url() ?>public/user_assets/img/rooms/10.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="img/rooms/10.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/10.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
                         </div>
                     </a>
                 </div>
@@ -93,7 +147,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <!-- 2 columns -->
                 <div class="col-md-6">
                     <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="img/slider/2.jpg" alt="YouTube">
+                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/2.jpg" alt="YouTube">
                             <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
                                     <i class="ti-control-play"></i>
                                 </span> </a>
@@ -102,7 +156,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-6">
                     <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="img/slider/3.jpg" alt="Vimeo">
+                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/3.jpg" alt="Vimeo">
                             <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
                                     <i class="ti-control-play"></i>
                                 </span> </a>
@@ -112,7 +166,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <!-- 3 columns -->
                 <div class="col-md-4">
                     <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="img/slider/4.jpg" alt="YouTube">
+                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/4.jpg" alt="YouTube">
                             <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
                                     <i class="ti-control-play"></i>
                                 </span> </a>
@@ -121,7 +175,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-4">
                     <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="img/slider/7.jpg" alt="YouTube">
+                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/7.jpg" alt="YouTube">
                             <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
                                     <i class="ti-control-play"></i>
                                 </span> </a>
@@ -130,7 +184,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-4">
                     <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="img/slider/1.jpg" alt="YouTube">
+                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/1.jpg" alt="YouTube">
                             <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
                                     <i class="ti-control-play"></i>
                                 </span> </a>
@@ -230,22 +284,22 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-md-7">
                 <div class="owl-carousel owl-theme">
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/1.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/1.png" alt=""></a>
                     </div>
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/2.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/2.png" alt=""></a>
                     </div>
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/3.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/3.png" alt=""></a>
                     </div>
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/4.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/4.png" alt=""></a>
                     </div>
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/5.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/5.png" alt=""></a>
                     </div>
                     <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/6.png" alt=""></a>
+                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/6.png" alt=""></a>
                     </div>
                 </div>
                 </div>
