@@ -64,74 +64,80 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <div class="col-md-8">
                 <table class='table text-center'>
                     <?php
-                    if(count($food_cart_data)>0){
-                        $sub_total=0;
-                        foreach($food_cart_data as $key=>$row){
-                            $sub_total+=$row['qty']*$row['food_price'];
+                    if(isset($_SESSION['user_id'])){
+                        if(count($food_cart_data)>0){
+                            $sub_total=0;
+                            foreach($food_cart_data as $key=>$row){
+                                $sub_total+=$row['qty']*$row['food_price'];
+                                ?>
+                                <tr>
+                                    <td><?= $key+1 ?></td>
+                                    <td><?= $row['food_name'] ?></td>
+                                    <td><?= number_format($row['food_price']) ?> &#8377;</td>
+                                    <td class="d-flex justify-content-around">
+                                       <button class='btn btn-primary' onclick="increaseValue(<?= $row['food_id'] ?>)">+</button> 
+                                       <input type="text" style='height:20%;width:20%;text-align:center' value="<?= $row['qty'] ?>" name="qty" id="quantity_value<?= $row['food_id'] ?>">
+                                       <button class="btn btn-danger" onclick="decreaseValue(<?= $row['food_id'] ?>)">-</button>
+                                    </td>
+                                    <td>
+                                         <span id='totalprice<?= $row['food_id'] ?>'>
+                                            <?= number_format($row['food_price']*$row['qty']) ?>
+                                        </span> &#8377;</td>
+                                    <td>
+                                        <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" alt="" style="height:200px;width:200px;padding:20px">
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                                <tr>
+                                    <td colspan="4">SubTotal</td>
+                                    <td colspan="4" style='text-align:left'><?= number_format($sub_total) ?> &#8377;</td>
+                                </tr>
+                            <?php
+    
+                        }else{
                             ?>
                             <tr>
-                                <td><?= $key+1 ?></td>
-                                <td><?= $row['food_name'] ?></td>
-                                <td><?= number_format($row['food_price']) ?> &#8377;</td>
-                                <td class="d-flex justify-content-around">
-                                   <button class='btn btn-primary' onclick="increaseValue(<?= $row['food_id'] ?>)">+</button> 
-                                   <input type="text" style='height:20%;width:20%;text-align:center' value="<?= $row['qty'] ?>" name="qty" id="quantity_value<?= $row['food_id'] ?>">
-                                   <button class="btn btn-danger" onclick="decreaseValue(<?= $row['food_id'] ?>)">-</button>
-                                </td>
-                                <td>
-                                     <span id='totalprice<?= $row['food_id'] ?>'>
-                                        <?= number_format($row['food_price']*$row['qty']) ?>
-                                    </span> &#8377;</td>
-                                <td>
-                                    <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" alt="" style="height:200px;width:200px;padding:20px">
-                                </td>
+                                <!-- <h2 class="text-center">No Food Added Into Cart</h2> -->
                             </tr>
                             <?php
                         }
-                        ?>
-                            <tr>
-                                <td colspan="4">SubTotal</td>
-                                <td colspan="4" style='text-align:left'><?= number_format($sub_total) ?> &#8377;</td>
-                            </tr>
-                        <?php
-
-                    }else{
-                        ?>
-                        <tr>
-                            <!-- <h2 class="text-center">No Food Added Into Cart</h2> -->
-                        </tr>
-                        <?php
                     }
+                    
                     ?>
                 </table>
             </div>
             <div class="col-md-4">
                 <?php
-                if(count($food_cart_data)>0){
-                    ?>
-                      <table class="table">
-                    <tr>
-                        <th>Subtotal</th>
-                        <th><?= number_format($sub_total) ?> &#8377;</th>
-                    </tr>
-                    <tr>
-                        <th>Charges</th>
-                        <th>0 &#8377;</th>
-                    </tr>
-                    <tr>
-                        <th>Total Amount</th>
-                        <th><?= number_format($sub_total) ?> &#8377;</th>
-                    </tr>
-                    <tr>
-                        <th colspan="2" style="text-align:center">
-                            <a href="<?= base_url() ?>usercontroller/confirm_address">
-                                <button class='btn btn-success'>Proceed To Checkout</button>
-                            </a>
-                        </th>
-                    </tr>
-                </table>
-                    <?php
+                if(isset($_SESSION['user_id'])){
+                    if(count($food_cart_data)>0){
+                        ?>
+                          <table class="table">
+                        <tr>
+                            <th>Subtotal</th>
+                            <th><?= number_format($sub_total) ?> &#8377;</th>
+                        </tr>
+                        <tr>
+                            <th>Charges</th>
+                            <th>0 &#8377;</th>
+                        </tr>
+                        <tr>
+                            <th>Total Amount</th>
+                            <th><?= number_format($sub_total) ?> &#8377;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="text-align:center">
+                                <a href="<?= base_url() ?>usercontroller/confirm_address">
+                                    <button class='btn btn-success'>Proceed To Checkout</button>
+                                </a>
+                            </th>
+                        </tr>
+                    </table>
+                        <?php
+                    }
                 }
+                
                 ?>
             </div>
         </div>

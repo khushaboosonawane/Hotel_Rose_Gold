@@ -149,6 +149,23 @@
             <div class="collapse" id="about">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/food">1 . Foods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/team">2 . Team</a></li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" data-target="#room_suits" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Rooms & Suits</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="room_suits">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/other_rooms">1 . Rooms Data</a></li>
+  
                 
               </ul>
             </div>

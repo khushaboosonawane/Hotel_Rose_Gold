@@ -2,7 +2,7 @@
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
 
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="5" data-background="<?= base_url() ?>/public/user_assets/img/slider/1.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="5" data-background="<?= base_url() ?>public/upload/banner_image/about.jpeg" style="background-position:center center">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 caption mt-90 text-center">
@@ -449,6 +449,32 @@ defined("BASEPATH") or exit("no direct script is allowed");
             </div>
             <div class="row">
                 <div class="col-md-12 owl-carousel owl-theme">
+                    <?php
+                    if(count($team)>0){
+                        foreach($team as $key=>$row){
+                            ?>
+                            <div class="item">
+                                <div class="img"> <img src="<?= base_url() ?>public/upload/team_image/<?= $row['member_img'] ?>" alt="" style="height:300px;width:100%;object-fit:cover"> </div>
+                                <div class="info">
+                                    <h6><?= $row['member_name'] ?></h6>
+                                    <p><?= $row['member_desig'] ?></p>
+                                    <p>(<?= $row['member_edu'] ?>)</p>
+                                    <!-- <div class="social valign">
+                                        <div class="full-width"> 
+                                        <a href="#"><i class="ti-instagram"></i></a> 
+                                        <a href="#"><i class="ti-twitter"></i></a> 
+                                        <a href="#"><i class="ti-facebook"></i></a> 
+                                        <a href="#"><i class="ti-pinterest"></i></a>
+                                        <p>valentina@hotel.com</p>
+                                        </div>
+                                    </div> -->
+                                </div>
+                             </div>
+                            <?php
+                        }
+
+                    }else{
+                        ?>
                     <div class="item">
                         <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/4.jpg" alt=""> </div>
                         <div class="info">
@@ -548,6 +574,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                         </div>
                     </div>
+                        <?php
+                    }
+                    ?>
+                  
                 </div>
             </div>
         </div>

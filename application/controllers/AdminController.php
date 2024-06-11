@@ -676,7 +676,7 @@ class AdminController extends CI_Controller{
     }
     public function food(){
         $this->navbar();
-        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active','category_name'=>'Food']);
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active']);
         $this->load->view("admin/food",$data);
         $this->footer();
     }
@@ -751,7 +751,112 @@ class AdminController extends CI_Controller{
         $this->load->view("admin/view_details",$data);
         $this->footer();
     }
+    public function team(){
+        $this->navbar();
+        $this->load->view("admin/team");
+        $this->footer();
+    }
+    public function save_team_data(){
+        $member_img=time().rand(1111,9999).$_FILES['member_img']['name'];
+        move_uploaded_file($_FILES['member_img']['tmp_name'],"public/upload/team_image/$member_img");
+        $_POST['member_img']=$member_img;
+        $this->My_model->insert("team",$_POST);
+        $_SESSION['data_save']="Data Save Successfully !...";
+        redirect(base_url()."admincontroller/view_team_data");
+    }
+    public function view_team_data(){
+        $this->navbar();
+        $data['team_data']=$this->My_model->select("team");
+        $this->load->view("admin/view_team_data",$data);
+        $this->footer();
+    }
+    public function delete_team_data($team_id){
+        $image=($this->My_model->select_image("team",['team_id'=>$team_id],"member_img"))[0]['member_img'];
+        unlink("public/upload/team_image/$image");
     
+        $this->My_model->delete("team",['team_id'=>$team_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully!..";
+        redirect(base_url()."admincontroller/view_team_data");
+    }
+    public function edit_team_data($team_id){
+        $this->navbar();
+        $data['team_data']=$this->My_model->select("team",['team_id'=>$team_id]);
+        $this->load->view("admin/edit_team_data",$data);
+        $this->footer();
+    }
+    public function update_team_data(){
+        if($_FILES['member_img']['name']!=""){
+            $image=($this->My_model->select_image("team",['team_id'=>$_POST['team_id']],"member_img"))[0]['member_img'];
+            unlink("public/upload/team_image/$image");
+            $member_img=time().rand(1111,9999).$_FILES['member_img']['name'];
+            move_uploaded_file($_FILES['member_img']['tmp_name'],"public/upload/team_image/$member_img");
+            $_POST['member_img']=$member_img;
+            $this->My_model->update_cond("team",$_POST,['team_id'=>$_POST['team_id']]); 
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/view_team_data");
+        }else{
+            $this->My_model->update_cond("team",$_POST,['team_id'=>$_POST['team_id']]); 
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/view_team_data");
+        }
+        
+    }
+    public function other_rooms(){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active']);
+        $this->load->view("admin/other_rooms",$data);
+        $this->footer();
+    }
+    public function save_ac_room(){
+       $room_image=time().rand(1111,9999).$_FILES['room_image']['name'];
+       move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$room_image");
+       $_POST['room_image']=$room_image;
+       $_POST['status']='Active';
+       $_POST['order_status']="Active";
+       $this->My_model->insert('rooms',$_POST);
+       $_SESSION['save_data']="Data Save Successfully!..";
+       redirect(base_url()."admincontroller/view_other_room_data");
+    }
+    public function view_other_room_data(){
+        $this->navbar();
+        $data['room_data']=$this->db->query("select * from category,sub_category,rooms where category.cat_id=rooms.cat_id and sub_category.sub_cat_id=rooms.sub_cat_id and rooms.room_type!='special_offer_room'")->result_array();
+        
+        $this->load->view("admin/view_other_room_data",$data);
+        $this->footer();
+    }
+    public function delete_other_rooms_data($room_id){
+        $image=($this->My_model->select_image("rooms",['room_id'=>$room_id],'room_image'))[0]['room_image'];
+        unlink("public/upload/rooms_image/$image");
+        $this->My_model->delete("rooms",['room_id'=>$room_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully!...";
+        redirect(base_url()."admincontroller/view_other_room_data");
+    }
+    public function edit_other_rooms_data($room_id){
+        $this->navbar();
+        $data['cat_data']=$this->My_model->select("category",['cat_status'=>'Active']);
+        $data['room_data']=$this->db->query("select * from category,sub_category,rooms where category.cat_id=rooms.cat_id and sub_category.sub_cat_id=rooms.sub_cat_id and rooms.room_id='$room_id'")->result_array();
+        $this->load->view("admin/edit_other_rooms_data",$data);
+        $this->footer();
+    }
+    public function update_ac_room(){
+        if($_FILES['room_image']['name']!=""){
+            $image=($this->My_model->select_image("rooms",['room_id'=>$_POST['room_id']],'room_image'))[0]['room_image'];
+            unlink("public/upload/rooms_image/$image");
+            $room_image=time().rand(1111,9999).$_FILES['room_image']['name'];
+            move_uploaded_file($_FILES['room_image']['tmp_name'],"public/upload/rooms_image/$room_image");
+            $_POST['room_image']=$room_image;
+            $_POST['status']='Active';
+            $_POST['order_status']="Active";
+            $this->My_model->update_cond("rooms",$_POST,['room_id'=>$_POST['room_id']]);
+            $_SESSION['update_data']="Data updated successfully!..";
+            redirect(base_url()."admincontroller/view_other_room_data");
+        }else{
+            $this->My_model->update_cond("rooms",$_POST,['room_id'=>$_POST['room_id']]);
+            $_SESSION['update_data']="Data updated successfully!..";
+            redirect(base_url()."admincontroller/view_other_room_data");
+        }
+
+    }
 }
 ?>
 

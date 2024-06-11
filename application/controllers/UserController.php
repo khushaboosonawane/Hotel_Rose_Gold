@@ -74,17 +74,30 @@ class UserController extends CI_Controller{
         $data['test_data']=$this->My_model->select("testimonial");
         $data['test_back_image']=$this->My_model->select("test_back_image");
         $data['food_data']=$this->My_model->select_food();
+        $data['team']=$this->My_model->select("team");
         $this->load->view("user/about",$data);
         $this->footer();
     }
     public function rooms_suits(){
         $this->navbar();
-        $this->load->view("user/rooms_suits");
+        $data['offer_rooms_data']=$this->My_model->select_special_room();
+        $data['ac_rooms']=$this->db->query("select * from category,sub_category,rooms where category.cat_id=rooms.cat_id and sub_category.sub_cat_id=rooms.sub_cat_id and rooms.room_type='Ac Rooms'")->result_array();
+        $data['non_ac_rooms']=$this->db->query("select * from category,sub_category,rooms where category.cat_id=rooms.cat_id and sub_category.sub_cat_id=rooms.sub_cat_id and rooms.room_type='Non Ac Rooms'")->result_array();
+        $data['other_room']=$this->db->query("select * from category,sub_category,rooms where category.cat_id=rooms.cat_id and sub_category.sub_cat_id=rooms.sub_cat_id")->result_array();
+        $data['extra_service']=$this->My_model->select("extra_service");
+        $data['extra_service_slider']=$this->My_model->select("extra_service_slider");
+        $this->load->view("user/rooms_suits",$data);
         $this->footer();
     }
     public function foods(){
         $this->navbar();
-        $this->load->view("user/foods");
+        $data['food_spe']=$this->db->query("select * from category,sub_category,food where category.cat_id=food.cat_id and sub_category.sub_cat_id=food.sub_cat_id and sub_category.sub_cat_name='Maharashtrian'")->result_array();
+        $data['wine_spe']=$this->db->query("select * from category,sub_category,food where category.cat_id=food.cat_id and sub_category.sub_cat_id=food.sub_cat_id and sub_category.sub_cat_name='Wines'")->result_array();
+        $data['food']=$this->My_model->select("food");
+        if(isset($_SESSION['user_id'])){
+            $data['add_to_cart']=$this->My_model->select("add_to_cart",['product_name'=>'food','user_id'=>$_SESSION['user_id']]);
+        }
+        $this->load->view("user/foods",$data);
         $this->footer();
     }
     public function contact(){
@@ -94,7 +107,8 @@ class UserController extends CI_Controller{
     }
     public function services(){
         $this->navbar();
-        $this->load->view("user/services");
+        $data['service']=$this->My_model->select("extra_service_slider");
+        $this->load->view("user/services",$data);
         $this->footer();
     }
     public function gallery(){
@@ -104,7 +118,10 @@ class UserController extends CI_Controller{
     }
     public function team(){
         $this->navbar();
-        $this->load->view("user/team");
+        $data['test_data']=$this->My_model->select("testimonial");
+        $data['test_back_image']=$this->My_model->select("test_back_image");
+        $data['team']=$this->My_model->select("team");
+        $this->load->view("user/team",$data);
         $this->footer();
     }
     public function userprofile(){
@@ -259,7 +276,6 @@ class UserController extends CI_Controller{
              $this->load->view("user/cart_page",$data);
             }else{
             $this->load->view("user/cart_page");
-
             }
         $this->footer();
     }

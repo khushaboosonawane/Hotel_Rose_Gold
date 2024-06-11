@@ -36,7 +36,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
                     </span>
                     <div class="section-subtitle"><?= $basic_info[0]['hotel_name'] ?></div>
-                    <div class="section-title"><?= nl2br($room_details[0]['room_name']) ?></div>
+                    <div class="section-title"><?= nl2br($room_details[0]['room_name']) ?> </div>
+                    <h4 style='display:inline !important'><?= number_format($row['room_price']) ?> &#8377;</h4>
                     <?php
                     if(isset($_SESSION['user_id'])){
                         if(count($add_to_cart_data)>0){

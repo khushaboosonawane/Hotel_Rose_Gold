@@ -2,23 +2,66 @@
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
  <!-- Header Banner -->
- <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="img/slider/5.jpg">
+ <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/upload/banner_image/team.jpeg" style="background-position:center center">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-left caption mt-90">
-                    <h5>Professionals</h5>
+                <div class="col-md-12 text-center caption mt-90">
+                    <h5><?= $basic_info[0]['hotel_name'] ?></h5>
                     <h1>Meet The Team</h1>
                 </div>
             </div>
         </div>
     </div>
+     <!-- About -->
+     <section class="about section-padding">
+        <div class="container">
+        <div class="row">
+                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp"> 
+                    <span>
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    </span>
+                    <div class="section-subtitle"><?= $basic_info[0]['hotel_name'] ?></div>
+                    <div class="section-title">Hotel Owner</div>
+                    <p><?= $basic_info[0]['hotel_owner_information'] ?></p>
+                   
+                    <!-- reservation -->
+                    <div class="reservations">
+                        <div class="icon"><span class="flaticon-call"></span></div>
+                        <div class="text">
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 animate-box" data-animate-effect="fadeInUp">
+                     <img src="<?= base_url() ?>public/upload/banner_image/successful-entrepreneur.jpg" style="height:300px;width:100%;object-fit:cover" alt="" class="mt-90 mb-30"> </div>
+            </div>
+        </div>
+    </section>
     <!-- Team -->
-    <section class="team section-padding bg-cream">
+    <section class="team section-padding">
         <div class="container">
             <div class="row">
+                <?php
+                if(count($team)>0){
+                    foreach($team as $key=>$row){
+                        ?>
+                         <div class="col-md-4">
+                            <div class="item shadow">
+                                <div class="img"> <img src="<?= base_url() ?>public/upload/team_image/<?= $row['member_img'] ?>" alt="" style="height:300px;width:100%;object-fit:cover"> </div>
+                                <div class="info">
+                                    <h6><?= $row['member_name'] ?></h6>
+                                    <p><?= $row['member_desig'] ?></p>
+                                    <p>( <?= $row['member_edu'] ?> )</p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
                 <div class="col-md-4">
                     <div class="item">
-                        <div class="img"> <img src="img/team/4.jpg" alt=""> </div>
+                        <div class="img"> <img src="<?= base_url() ?>public/user_assets/img/team/4.jpg" alt=""> </div>
                         <div class="info">
                             <h6>Valentina Karla</h6>
                             <p>General Manager</p>
@@ -37,7 +80,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-md-4">
                     <div class="item">
                         <div class="img"> 
-                        <img src="img/team/1.jpg" alt=""> </div>
+                        <img src="<?= base_url() ?>public/user_assets/img/team/1.jpg" alt=""> </div>
                         <div class="info">
                             <h6>Micheal White</h6>
                             <p>Guest Service Department</p>
@@ -55,7 +98,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-4">
                     <div class="item">
-                        <div class="img"> <img src="img/team/2.jpg" alt=""> </div>
+                        <div class="<?= base_url() ?>public/user_assets/img"> <img src="img/team/2.jpg" alt=""> </div>
                         <div class="info">
                             <h6>Olivia Martin</h6>
                             <p>Reservations Manager</p>
@@ -75,7 +118,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-4">
                     <div class="item">
-                        <div class="img"> <img src="img/team/5.jpg" alt=""> </div>
+                        <div class="img"> <img src="<?= base_url() ?>public/user_assets/img/team/5.jpg" alt=""> </div>
                         <div class="info">
                             <h6>Mariana Dana</h6>
                             <p>F&B Manager</p>
@@ -93,7 +136,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-4">
                     <div class="item">
-                        <div class="img"> <img src="img/team/3.jpg" alt=""> </div>
+                        <div class="img"> <img src="<?= base_url() ?>public/user_assets/img/team/3.jpg" alt=""> </div>
                         <div class="info">
                             <h6>Enrico Brown</h6>
                             <p>Head Chef</p>
@@ -110,8 +153,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="item">
-                        <div class="img"> <img src="img/team/6.jpg" alt=""> </div>
+                    <div class="item" style="box-shadow: 0 0 20px gray !important">
+                        <div class="img">
+                             <img src="<?= base_url() ?>public/user_assets/img/team/6.jpg" alt="" style="height:300px;width:100%;object-fit:cover"> 
+                        </div>
                         <div class="info">
                             <h6>Victoria Dan</h6>
                             <p>Meetings and Events Manager</p>
@@ -127,85 +172,100 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </div>
                 </div>
+                    <?php
+                }
+                ?>
+                
             </div>
         </div>
     </section>
-    <!-- Reservation & Booking Form -->
-    <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/2.jpg" data-overlay-dark="2">
+     <!-- Testiominals -->
+     <section class="testimonials">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<?= base_url() ?>public/upload/test_back_img/<?= $test_back_image[0]['test_back_image'] ?>" data-overlay-dark="5">
             <div class="container">
                 <div class="row">
-                    <!-- Reservation -->
-                    <div class="col-md-5 mb-30 mt-30">
-                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
-                        <h5>Each of our guest rooms feature a private bath, wi-fi, cable television and include full breakfast.</h5>
-                        <div class="reservations mb-30">
-                            <div class="icon color-1"><span class="flaticon-call"></span></div>
-                            <div class="text">
-                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:855-100-4444">855 100 4444</a>
-                            </div>
-                        </div>
-                        <p><i class="ti-check"></i><small>Call us, it's toll-free.</small></p>
+                    <div class="col-md-12 text-center" style="margin-top:-90px">
+                        <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                        <h3>Testimonials</h3>
                     </div>
-                    <!-- Booking From -->
-                    <div class="col-md-5 offset-md-2">
-                        <div class="booking-box">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="testimonials-box">
                             <div class="head-box">
-                                <h6>Rooms & Suites</h6>
-                                <h4>Hotel Booking Form</h4>
+                                <h4>What Client's Say?</h4>
+                                <div class="line"></div>
                             </div>
-                            <div class="booking-inner clearfix">
-                                <form action="https://duruthemes.com/demo/html/cappa/demo1-light/rooms2.html" class="form1 clearfix">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check in</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check in">
-                                                </div>
-                                            </div>
+                            <div class="owl-carousel owl-theme">
+                                <?php
+                                if(count($test_data)>0){
+                                    foreach($test_data as $key=>$row){
+                                        ?>
+                                <div class="item">
+                                    <p><?= $row['test_desc'] ?>/p>
+                                    <div class="info">
+                                        <div class="author-img">
+                                            <img src="<?= base_url() ?>public/upload/testimonial_image/<?= $row['test_image'] ?>" alt="">
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check out</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check out">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Adults</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Adults</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Children</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Children</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn-form1-submit mt-15">Check Availability</button>
+                                        
+                                        <div class="cont"> 
+                                            <?php
+                                            if($row['test_rating']<=5){
+                                                for($i=0;$i<$row['test_rating'];$i++){
+                                            ?>
+                                            <i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i>
+                                            <?php
+                                                }
+                                            }else{
+                                                ?>
+                                                <span>
+                                                <i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i><i class="ri-star-fill lead" style="color:#ff5031;font-size:15px"></i>
+                                                </span>
+                                                <?php
+                                            }
+                                            ?>
+                                            
+                                            <h6><?= $row['test_name'] ?></h6>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                                        <?php
+                                    }
+
+                                }else{
+                                    ?>
+                                <div class="item">
+                                    <span class="quote"><img src="<?= base_url() ?>/public/user_assets/img/quot.png" alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="<?= base_url() ?>/public/user_assets/img/team/4.jpg" alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Emily Brown</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="quote"><img src="<?= base_url() ?>/public/user_assets/img/quot.png" alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="<?= base_url() ?>/public/user_assets/img/team/1.jpg" alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Nolan White</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="quote"><img src="<?= base_url() ?>/public/user_assets/img/quot.png" alt=""></span>
+                                    <p>Hotel dapibus asue metus the nec feusiate eraten miss hendreri net ve ante the lemon sanleo nectan feugiat erat hendrerit necuis ve ante otel inilla duiman at finibus viverra neca the sene on satien the miss drana inc fermen norttito sit space, mus nellentesque habitan.</p>
+                                    <div class="info">
+                                        <div class="author-img"> <img src="<?= base_url() ?>/public/user_assets/img/team/5.jpg" alt=""> </div>
+                                        <div class="cont"> <span><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></span>
+                                            <h6>Olivia Martin</h6> <span>Guest review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <?php
+                                }
+                                ?>
+                               
                             </div>
                         </div>
                     </div>
@@ -213,32 +273,4 @@ defined("BASEPATH") or exit("no direct script is allowed");
             </div>
         </div>
     </section>
-    <!-- Clients -->
-    <section class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/1.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/2.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/3.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/4.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/5.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="img/clients/6.png" alt=""></a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    

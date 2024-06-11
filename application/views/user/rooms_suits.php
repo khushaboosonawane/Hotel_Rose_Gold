@@ -3,7 +3,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
 
 <!-- Header Banner -->
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/1.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="5" data-background="<?= base_url() ?>public/upload/banner_image/rooms.jpeg" style="background-position:center center">
         <div class="container">
             <div class="row">
 				<div class="col-md-12 caption mt-90 text-center">
@@ -17,162 +17,239 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="container">
             <div class="row">
                 <div class="col-md-12 my-5 text-center">
-                    <h1>Special Rooms</h1>
+                    <h1>Special Offer Rooms</h1>
                 </div>
                 <div class="col-md-12">
                 <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> 
-                            <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> 
-                        </div> 
-                        <span class="category">
-                            <!-- <a href="rooms2.html">Book</a> -->
-                            <a href="#" class="btn-effect"><span>Available</span></a>
-                        </span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
+                    <?php
+                    if(count($offer_rooms_data)>0){
+                        foreach($offer_rooms_data as $key=>$row){
+                            ?>
+                            <div class="clients-logo">
+                                <div class="item">
+                                    <div class="position-re o-hidden"> 
+                                        <img src="<?= base_url() ?>public/upload/rooms_image/<?=  $row['room_image'] ?>" style="height:380px;width:100%" alt=""> 
+                                    </div> 
+                                    <span class="category">
+                                        <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>" class="btn-effect" style="padding:15px 9px !important"><span>Details</span></a>
+                                    </span>
+                                    <div class="con">
+                                        <h6><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= number_format($row['room_price']) ?> &#8377; / Day & Night</a></h6>
+                                        <h5><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= $row['room_name'] ?></a> </h5>
+                                        <div class="line"></div>
+                                    </div>
                                 </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                             </div>
+                            <?php
+                        }
+                    }else{
+                        ?>
+                    <div class="clients-logo">
+                        <div class="item">
+                            <div class="position-re o-hidden"> 
+                                <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> 
+                            </div> 
+                            <span class="category">
+                                <!-- <a href="rooms2.html">Book</a> -->
+                                <a href="#" class="btn-effect"><span>Available</span></a>
+                            </span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="clients-logo">
-                    <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
-                        <div class="con">
-                            <h6><a href="room-details.html">150$ / Night</a></h6>
-                            <h5><a href="room-details.html">Junior Suite</a> </h5>
-                            <div class="line"></div>
-                            <div class="row facilities">
-                                <div class="col col-md-7">
-                                    <ul>
-                                        <li><i class="flaticon-bed"></i></li>
-                                        <li><i class="flaticon-bath"></i></li>
-                                        <li><i class="flaticon-breakfast"></i></li>
-                                        <li><i class="flaticon-towel"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="col col-md-5 text-end">
-                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                        <div class="item">
+                            <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                            <div class="con">
+                                <h6><a href="room-details.html">150$ / Night</a></h6>
+                                <h5><a href="room-details.html">Junior Suite</a> </h5>
+                                <div class="line"></div>
+                                <div class="row facilities">
+                                    <div class="col col-md-7">
+                                        <ul>
+                                            <li><i class="flaticon-bed"></i></li>
+                                            <li><i class="flaticon-bath"></i></li>
+                                            <li><i class="flaticon-breakfast"></i></li>
+                                            <li><i class="flaticon-towel"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-md-5 text-end">
+                                        <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
+                   
                 </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="rooms1 section-padding bg-cream" data-scroll-index="1">
+    <section class="rooms1 section-padding" data-scroll-index="1">
         <div class="container">
             <div class="row">
+                <div class="col-md-12 text-center my-5">
+                    <div class="section-subtitle"><span style="color:#ff5031"><?= $basic_info[0]['hotel_name'] ?></span></div>
+                    <div class="section-title"><span class="text-dark">Ac Rooms</span></div>
+                    <div style="margin:0 auto;height:2px;width:50%;background:black;border-radius:50%;"></div>
+                </div>
+                <?php
+                if(count($ac_rooms)>0){
+                    foreach($ac_rooms as $key=>$row){
+                        ?>
+                         <div class="col-md-4">
+                            <div class="item">
+                                <div class="position-re o-hidden"> 
+                                    <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:400px;width:100%;object-fit:cover;"> 
+                                </div> 
+                                    <span class="category" style="border:none !important;">
+                                        <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>" class="btn-effect" style="padding:15px 9px !important"><span>Details</span></a>
+                                    </span>
+                                <div class="con">
+                                    <h6><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= number_format($row['room_price']) ?> &#8377; / Night</a></h6>
+                                    <h5><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= $row['room_name'] ?></a> </h5>
+                                    <div class="line"></div>
+                                    <div class="row facilities">
+                                        <div class="col col-md-7">
+                                            <ul>
+                                                <li><i class="flaticon-bed"></i></li>
+                                                <li><i class="flaticon-bath"></i></li>
+                                                <?php
+                                                if($row['room_breakfast']=='Available'){
+                                                    ?>
+                                                     <li><i class="flaticon-breakfast"></i></li>
+                                                    <?php
+                                                }
+                                                ?>
+                                               
+                                                <li><i class="flaticon-towel"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col col-md-5 text-end">
+                                            <div class="permalink">
+                                                <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>">Details <i class="ti-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
                 <div class="col-md-4">
                     <div class="item">
                         <div class="position-re o-hidden"> 
@@ -293,29 +370,445 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </div>
                 </div>
+                    <?php
+                }
+                ?>
+               
+            </div>
+        </div>
+    </section>
+    <section class="rooms1 section-padding" style="margin-top:-200px" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-subtitle"><span style="color:#ff5031"><?= $basic_info[0]['hotel_name'] ?></span></div>
+                    <div class="section-title"><span class="text-dark">Non Ac Rooms</span></div>
+                    <div style="margin:20px auto;height:2px;width:50%;background:black;border-radius:50%;"></div>
+                </div>
+                <?php
+                if(count($non_ac_rooms)>0){
+                    foreach($non_ac_rooms as $key=>$row){
+                        ?>
+                         <div class="col-md-4">
+                            <div class="item">
+                                <div class="position-re o-hidden"> 
+                                    <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:400px;width:100%;object-fit:cover;"> 
+                                </div> 
+                                    <span class="category" style="border:none !important;">
+                                        <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>" class="btn-effect" style="padding:15px 9px !important"><span>Details</span></a>
+                                    </span>
+                                <div class="con">
+                                    <h6><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= number_format($row['room_price']) ?> &#8377; / Night</a></h6>
+                                    <h5><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= $row['room_name'] ?></a> </h5>
+                                    <div class="line"></div>
+                                    <div class="row facilities">
+                                        <div class="col col-md-7">
+                                            <ul>
+                                                <li><i class="flaticon-bed"></i></li>
+                                                <li><i class="flaticon-bath"></i></li>
+                                                <?php
+                                                if($row['room_breakfast']=='Available'){
+                                                    ?>
+                                                     <li><i class="flaticon-breakfast"></i></li>
+                                                    <?php
+                                                }
+                                                ?>
+                                               
+                                                <li><i class="flaticon-towel"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col col-md-5 text-end">
+                                            <div class="permalink">
+                                                <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>">Details <i class="ti-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> 
+                            <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> 
+                        </div> 
+                        <span class="category" ><a href="rooms2.html" >Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">150$ / Night</a></h6>
+                            <h5><a href="room-details.html">Junior Suite</a> </h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink">
+                                        <a href="room-details.html">Details <i class="ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/2.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">200$ / Night</a></h6>
+                            <h5><a href="room-details.html">Family Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/3.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">250$ / Night</a></h6>
+                            <h5><a href="room-details.html">Double Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/4.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">300$ / Night</a></h6>
+                            <h5><a href="room-details.html">Deluxe Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/7.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">150$ / Night</a></h6>
+                            <h5><a href="room-details.html">Superior Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <?php
+                }
+                ?>
+               
+            </div>
+        </div>
+    </section>
+    <section class="rooms1 section-padding" style="margin-top:-200px" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-subtitle"><span style="color:#ff5031"><?= $basic_info[0]['hotel_name'] ?></span></div>
+                    <div class="section-title"><span class="text-dark">Other Rooms</span></div>
+                    <div style="margin:20px auto;height:2px;width:50%;background:black;border-radius:50%;"></div>
+                </div>
+                <?php
+                if(count($other_room)>0){
+                    foreach($other_room as $key=>$row){
+                        ?>
+                         <div class="col-md-4">
+                            <div class="item">
+                                <div class="position-re o-hidden"> 
+                                    <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:400px;width:100%;object-fit:cover;"> 
+                                </div> 
+                                    <span class="category" style="border:none !important;">
+                                        <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>" class="btn-effect" style="padding:15px 9px !important"><span>Details</span></a>
+                                    </span>
+                                <div class="con">
+                                    <h6><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= number_format($row['room_price']) ?> &#8377; / Night</a></h6>
+                                    <h5><a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>"><?= $row['room_name'] ?></a> </h5>
+                                    <div class="line"></div>
+                                    <div class="row facilities">
+                                        <div class="col col-md-7">
+                                            <ul>
+                                                <li><i class="flaticon-bed"></i></li>
+                                                <li><i class="flaticon-bath"></i></li>
+                                                <?php
+                                                if($row['room_breakfast']=='Available'){
+                                                    ?>
+                                                     <li><i class="flaticon-breakfast"></i></li>
+                                                    <?php
+                                                }
+                                                ?>
+                                               
+                                                <li><i class="flaticon-towel"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col col-md-5 text-end">
+                                            <div class="permalink">
+                                                <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>">Details <i class="ti-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> 
+                            <img src="<?= base_url() ?>public/user_assets/img/rooms/1.jpg" alt=""> 
+                        </div> 
+                        <span class="category" ><a href="rooms2.html" >Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">150$ / Night</a></h6>
+                            <h5><a href="room-details.html">Junior Suite</a> </h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink">
+                                        <a href="room-details.html">Details <i class="ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/2.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">200$ / Night</a></h6>
+                            <h5><a href="room-details.html">Family Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/3.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">250$ / Night</a></h6>
+                            <h5><a href="room-details.html">Double Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/4.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">300$ / Night</a></h6>
+                            <h5><a href="room-details.html">Deluxe Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item">
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/user_assets/img/rooms/7.jpg" alt=""> </div> <span class="category"><a href="rooms2.html">Book</a></span>
+                        <div class="con">
+                            <h6><a href="room-details.html">150$ / Night</a></h6>
+                            <h5><a href="room-details.html">Superior Room</a></h5>
+                            <div class="line"></div>
+                            <div class="row facilities">
+                                <div class="col col-md-7">
+                                    <ul>
+                                        <li><i class="flaticon-bed"></i></li>
+                                        <li><i class="flaticon-bath"></i></li>
+                                        <li><i class="flaticon-breakfast"></i></li>
+                                        <li><i class="flaticon-towel"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-5 text-end">
+                                    <div class="permalink"><a href="room-details.html">Details <i class="ti-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <?php
+                }
+                ?>
+               
             </div>
         </div>
     </section>
     <!-- Pricing -->
-    <section class="pricing section-padding bg-blck">
+    <!-- Pricing -->
+    <section class="pricing section-padding bg-dark">
         <div class="container">
             <div class="row">
+                <?php
+                if(count($extra_service)>0){
+                    ?>
+                    <div class="col-md-12 text-center mb-5" style="margin-top:-90px">
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    <div class="section-subtitle" ><span style="color:#ff5031"><?= $extra_service[0]['extra_service_subtitle'] ?></span></div>
+                    <div class="section-title" ><span style="color:black"><?= $extra_service[0]['extra_service_title'] ?></span></div>
+                    <div style="width:50%;margin:10px auto;background-color:black;height:1px"></div>
+                </div>
+                    <?php
+
+                }else{
+                    ?>
+                <div class="col-md-12 text-center mb-5" style="margin-top:-90px">
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    <div class="section-subtitle" ><span style="color:#ff5031">Best Prices</span></div>
+                    <div class="section-title" ><span style="color:black">Extra Services</span></div>
+                    <div style="width:50%;margin:10px auto;background-color:black;height:1px"></div>
+                </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
-                    <div class="section-subtitle"><span style=" color: #e02870;"><?= $basic_info[0]['hotel_name'] ?></span></div>
-                    <div class="section-title"><span>Extra Services</span></div>
-                    <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
+                    <?php
+                    if(count($extra_service)>0){
+                        ?>
+                        <p class="color-2"><?= nl2br($extra_service[0]['extra_service_desc']) ?></p>
+                        <?php
+
+                    }else{
+                        ?>
+                        <p class="color-2">The best prices for your relaxing vacation. The utanislen quam nestibulum ac quame odion elementum sceisue the aucan.</p>
                     <p class="color-2">Orci varius natoque penatibus et magnis disney parturient monte nascete ridiculus mus nellen etesque habitant morbine.</p>
+                        <?php
+                    }
+                    ?>
                     <div class="reservations mb-30">
-                        <div class="icon"><span class="flaticon-call"></span></div>
+                    <div class="icon"><i class="ri-phone-line lead" style="font-size:40px;color:#ff5031"></i></div>
                         <div class="text">
-                            <p class="color-2">For information</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
+                            <p class="color-2">For information</p> <a href="tel:<?= $basic_info[0]['hotel_mobile'] ?>">+91 <?= $basic_info[0]['hotel_mobile'] ?></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="owl-carousel owl-theme">
+                        <?php
+                        if(count($extra_service_slider)>0){
+                            foreach($extra_service_slider as $key=>$row){
+                        ?>
                         <div class="pricing-card">
-                            <img src="<?= base_url() ?>public/user_assets/img/pricing/1.jpg" alt="">
+                            <img src="<?= base_url() ?>public/upload/extra_service_slider_image/<?= $row['extra_service_image'] ?>" style='height:35vh;width:100%;object-fit:cover' alt="">
+                            <div class="desc">
+                                <div class="name"><?= $row['extra_service_title'] ?></div>
+                                <div class="amount"><?= number_format($row['extra_service_Price']) ?> &#8377;<span> &nbsp; <?= $row['extra_service_avilable'] ?></span></div>
+                                <div style='width:100%;height:10vh' class="text-truncate">
+                                <?= $row['extra_service_desc'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        }else{
+                        ?>
+                        <div class="pricing-card">
+                            <img src="<?= base_url() ?>/public/user_assets/img/pricing/1.jpg" alt="">
                             <div class="desc">
                                 <div class="name">Room cleaning</div>
                                 <div class="amount">$50<span>/ month</span></div>
@@ -327,7 +820,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                         </div>
                         <div class="pricing-card">
-                            <img src="<?= base_url() ?>public/user_assets/img/pricing/2.jpg" alt="">
+                            <img src="<?= base_url() ?>/public/user_assets/img/pricing/2.jpg" alt="">
                             <div class="desc">
                                 <div class="name">Drinks included</div>
                                 <div class="amount">$30<span>/ daily</span></div>
@@ -339,7 +832,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                         </div>
                         <div class="pricing-card">
-                            <img src="<?= base_url() ?>public/user_assets/img/pricing/3.jpg" alt="">
+                            <img src="<?= base_url() ?>/public/user_assets/img/pricing/3.jpg" alt="">
                             <div class="desc">
                                 <div class="name">Room Breakfast</div>
                                 <div class="amount">$30<span>/ daily</span></div>
@@ -351,7 +844,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                         </div>
                         <div class="pricing-card">
-                            <img src="<?= base_url() ?>public/user_assets/img/pricing/4.jpg" alt="">
+                            <img src="<?= base_url() ?>/public/user_assets/img/pricing/4.jpg" alt="">
                             <div class="desc">
                                 <div class="name">Safe & Secure</div>
                                 <div class="amount">$15<span>/ daily</span></div>
@@ -362,120 +855,13 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 </ul>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Reservation & Booking Form -->
-    <section class="testimonials" data-scroll-index="1">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<?= base_url() ?>public/user_assets/img/slider/2.jpg" data-overlay-dark="2">
-            <div class="container">
-                <div class="row">
-                    <!-- Reservation -->
-                    <div class="col-md-5 mb-30 mt-30">
-                        <p><img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt=""></p>
-                        <h5>Each of our guest rooms feature a private bath, wi-fi, cable television and include full breakfast.</h5>
-                        <div class="reservations mb-30">
-                            <div class="icon color-1"><span class="flaticon-call"></span></div>
-                            <div class="text">
-                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
-                            </div>
-                        </div> 
-                        <p><i class="ti-check"></i><small>Call us, it's toll-free.</small></p>
-                    </div>
-                    <!-- Booking From -->
-                    <div class="col-md-5 offset-md-2">
-                        <div class="booking-box">
-                            <div class="head-box">
-                                <h6>Rooms & Suites</h6>
-                                <h4>Hotel Booking Form</h4>
-                            </div>
-                            <div class="booking-inner clearfix">
-                                <form action="https://duruthemes.com/demo/html/cappa/demo1-light/rooms2.html" class="form1 clearfix">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check in</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check in">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check out</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check out">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Adults</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Adults</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Children</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Children</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn-form1-submit mt-15">Check Availability</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Clients -->
-    <section class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/1.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/2.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/3.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/4.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/5.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/6.png" alt=""></a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
