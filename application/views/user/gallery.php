@@ -64,24 +64,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="section-title">Image Gallery</div>
                 </div>
                 <!-- 3 columns -->
-                <div class="col-md-4 gallery-item shadow p-5 " style="border-radius:4%">
-                    <a href="img/slider/7.jpg" title="" class="img-zoom">
-                        <div class="gallery-box">
-                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/7.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
-                        </div>
-                        <div class="col-md-12 my-3">
-                            <small class="lead">6/7/2009</small>
-                            <p class="">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id praesentium fugit facilis dignissimos quis sunt quod dolor at eaque iusto!
-                            </p>
-                        </div>
-                        <div class="col col-md-12 text-center">
-                            <a href="">
-                            <button class="btn-hover color-2">BUTTON</button>
-                            </a>
-                        </div>
-                    </a>
-                </div>
+               
                 <div class="col-md-4 gallery-item">
                     <a href="<?= base_url() ?>public/user_assets/img/slider/5.jpg" title="" class="img-zoom">
                         <div class="gallery-box">

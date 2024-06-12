@@ -16,7 +16,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <form action="<?= base_url() ?>admincontroller/save_gallery_info" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url() ?>admincontroller/save_gallery_video_info" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -24,7 +24,17 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                         <div class="input-group-prepend">
                                         <span class="input-group-text text-white">Gallery Image</span>
                                         </div>
-                                        <input type="file" class="form-control text-white" aria-label="Username" name="gallery_image" aria-describedby="basic-addon1" required>
+                                        <input type="file" class="form-control text-white" aria-label="Username" name="gar_image" aria-describedby="basic-addon1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <span class="input-group-text text-white">Gallery Video Link</span>
+                                        </div>
+                                        <input type="text" class="form-control text-white" aria-label="Username" placeholder="Enter Video Link" name="gar_video_link" aria-describedby="basic-addon1" required>
                                     </div>
                                 </div>
                             </div>

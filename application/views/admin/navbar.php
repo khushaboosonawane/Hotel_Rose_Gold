@@ -179,7 +179,8 @@
             </a>
             <div class="collapse" id="gallery">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/gallery">1 . Image Video</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/gallery">1 . Gallery Images</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/gallery_video">1 . Gallery Images & Video</a></li>
                 
               </ul>
             </div>

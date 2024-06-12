@@ -862,6 +862,92 @@ class AdminController extends CI_Controller{
         $this->load->view("admin/gallery");
         $this->footer();
     }
+    public function save_gallery_info(){
+        $gallery_image=time().rand(1111,9999).$_FILES['gallery_image']['name'];
+        move_uploaded_file($_FILES['gallery_image']['tmp_name'],"public/upload/gallery_image/$gallery_image");
+        $_POST['gallery_image']=$gallery_image;
+        $this->My_model->insert("gallery",$_POST);
+        $_SESSION['data_save']="Data Save Successfully !...";
+        redirect(base_url()."admincontroller/view_gallery_data");
+    }
+    public function view_gallery_data(){
+        $this->navbar();
+        $data['gallery_data']=$this->My_model->select("gallery");
+        $this->load->view("admin/view_gallery_data",$data);
+        $this->footer();
+    }
+    public function delete_gallery_data($gar_id){
+        $image=($this->My_model->select_image("gallery",['gar_id'=>$gar_id],"gallery_image"))[0]['gallery_image'];
+       unlink("public/upload/gallery_image/$image");
+       $this->My_model->delete("gallery",['gar_id'=>$gar_id]);
+       $_SESSION['delete_data']="Data deleted successfully!..";
+       redirect(base_url()."admincontroller/view_gallery_data");
+    }
+    public function edit_gallery_data($gar_id){
+        $data['gallery_data']=$this->My_model->select("gallery",['gar_id'=>$gar_id]);
+        $this->navbar();
+        $this->load->view("admin/edit_gallery_data",$data);
+        $this->footer();
+    }
+    public function update_gallery_info(){
+        $image=($this->My_model->select_image("gallery",['gar_id'=>$_POST['gar_id']],"gallery_image"))[0]['gallery_image'];
+        unlink("public/upload/gallery_image/$image");
+        $gallery_image=time().rand(1111,9999).$_FILES['gallery_image']['name'];
+        move_uploaded_file($_FILES['gallery_image']['tmp_name'],"public/upload/gallery_image/$gallery_image");
+        $_POST['gallery_image']=$gallery_image;
+        $this->My_model->update_cond("gallery",$_POST,['gar_id'=>$_POST['gar_id']]);
+        $_SESSION['update_data']="Data updated successfully!...";
+        redirect(base_url()."admincontroller/view_gallery_data");
+    }
+    public function gallery_video(){
+        $this->navbar();
+        $this->load->view("admin/gallery_video");
+        $this->footer();
+    }
+    public function save_gallery_video_info(){
+        $gar_image=time().rand(1111,9999).$_FILES['gar_image']['name'];
+        move_uploaded_file($_FILES['gar_image']['tmp_name'],"public/upload/gallery_image/$gar_image");
+        $_POST['gar_image']=$gar_image;
+        $this->My_model->insert("gallery_video",$_POST);
+        $_SESSION['save_data']="Data Save Successfully !..";
+        redirect(base_url()."admincontroller/view_gallery_video");
+    }
+    public function view_gallery_video(){
+        $this->navbar();
+        $data['gallery_video']=$this->My_model->select("gallery_video");
+        $this->load->view("admin/view_gallery_video",$data);
+        $this->footer();
+    }
+    public function delete_video_gallery_data($gar_id){
+        $image=($this->My_model->select_image("gallery_video",['gar_id'=>$gar_id],"gar_image"))[0]['gar_image'];
+       unlink("public/upload/gallery_image/$image");
+       $this->My_model->delete("gallery_video",['gar_id'=>$gar_id]);
+       $_SESSION['delete_data']="Data deleted successfully!..";
+       redirect(base_url()."admincontroller/view_gallery_video");
+    }
+    public function edit_video_gallery_data($gar_id){
+        $this->navbar();
+        $data['gallery_data']=$this->My_model->select("gallery_video",['gar_id'=>$gar_id]);
+        $this->load->view("admin/edit_video_gallery_data",$data);
+        $this->footer();
+    }
+    public function update_gallery_video_info(){
+        if($_FILES['gar_image']['name']!=""){
+            $image=($this->My_model->select_image("gallery_video",['gar_id'=>$_POST['gar_id']],"gar_image"))[0]['gar_image'];
+            unlink("public/upload/gallery_image/$image");
+            $gar_image=time().rand(1111,9999).$_FILES['gar_image']['name'];
+            move_uploaded_file($_FILES['gar_image']['tmp_name'],"public/upload/gallery_image/$gar_image");
+            $_POST['gar_image']=$gar_image;
+            $this->My_model->update_cond("gallery_video",$_POST,['gar_id'=>$_POST['gar_id']]);
+           $_SESSION['update_data']="Data updated successfully !..";
+           redirect(base_url()."admincontroller/view_gallery_video");
+        }else{
+            $this->My_model->update_cond("gallery_video",$_POST,['gar_id'=>$_POST['gar_id']]);
+            $_SESSION['update_data']="Data updated successfully !..";
+            redirect(base_url()."admincontroller/view_gallery_video");
+         
+        }
+    }
 }
 ?>
 
