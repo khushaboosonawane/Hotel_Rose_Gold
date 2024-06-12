@@ -18,6 +18,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
     rel="stylesheet"
 />
 
+
 </head>
 <body>
     <!-- Preloader -->
@@ -39,9 +40,11 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <!-- Logo -->
             <div class="logo-wrapper">
                 <!-- <a class="logo" href="index.html"> <img src="<?= base_url() ?>/public/user_assets/img/logo.png" class="logo-img" alt=""> </a> -->
-                <a class="logo" href="index.html">
-                     <h5 class="text-white my-3"><?= nl2br($basic_info[0]['hotel_name']) ?></h5>
-                     <!-- <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt=""> -->
+                <a class="logo" href="<?= base_url() ?>usercontroller/">
+                     <h5 class="text-white my-3" style="width:87%;text-align:center">
+                     <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt="" style="height:100px;width:100px;object-fit:cover">
+                    </h5>
+                    
                 </a>
             </div>
             <!-- Button -->
@@ -49,22 +52,22 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <!-- Menu -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown"> <a class="nav-link active " href="<?= base_url() ?>/usercontroller/" >Home </a> 
+                    <li class="nav-item dropdown"> <a class="nav-link active " href="<?= base_url() ?>usercontroller/" >Home </a> 
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>/usercontroller/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/about">About</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="<?= base_url() ?>/usercontroller/rooms_suits" >
+                        <a class="nav-link dropdown-toggle" href="<?= base_url() ?>usercontroller/rooms_suits" >
                             Rooms & Suites
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>/usercontroller/foods">Foods</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/foods">Foods</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/gallery">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/team">Team</a></li>
                    
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/contact">Contact</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>usercontroller/search_section"><i class="ri-search-2-line lead"></i></a></li>
+
                     
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url() ?>usercontroller/cart_page">
@@ -112,7 +115,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             if($user_data[0]['user_image']){
                         ?>
                         <a href="<?= base_url() ?>usercontroller/view_profile/<?= $_SESSION['user_id'] ?>" title="View Profile">
-                            <img src="<?= base_url() ?>public/upload/user_image/<?= $user_data[0]['user_image'] ?>" alt="" style="height:50px;width:50px;border-radius:50%">
+                            <img src="<?= base_url() ?>public/upload/user_image/<?= $user_data[0]['user_image'] ?>" alt="" style="height:50px;width:50px;object-fit:cover;border-radius:50%">
                         </a>
                         <?php
                         }else{

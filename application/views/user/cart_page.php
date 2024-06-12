@@ -2,11 +2,11 @@
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
 <!-- Header Banner -->
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/1.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="6" data-background="<?= base_url() ?>public/upload/banner_image/cart.jpeg" style="background-position:center center">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 caption mt-90">
-                <!-- <h5><?= $basic_info[0]['hotel_name'] ?></h5> -->
+            <div class="col-md-12 caption text-center mt-90">
+                <h5><?= $basic_info[0]['hotel_name'] ?></h5>
                 <h1>Cart Page</h1>
             </div>
         </div>

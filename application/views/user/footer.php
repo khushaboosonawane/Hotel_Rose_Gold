@@ -184,9 +184,50 @@ unset($_SESSION['login_fail']);
 
 <!-- ppopup design  -->
 
-
+<style>
+    .goog-te-gadget .goog-te-combo{
+        margin: 10px 0;
+    /* border: 1px solid black; */
+    /* text-align: center;
+    width: 51%;
+    height: 30px; */
+    width: 100% !important;
+    position: relative;
+    text-align: left !important;
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    background: #ffff;
+    box-shadow: none;
+    font-size: 15px;
+    height: 44px;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .VIpgJd-ZVi9od-l4eHX-hSRGPd{
+        display:none;
+    }
+    .goog-te-gadget .goog-te-combo:after{
+        content: "\f107";
+        font-family: "FontAwesome";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+    }
+    .goog-te-gadget .goog-te-combo:focus{
+        border-color:#ff7f27;
+    }
+   
+</style>
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer" style="background:white !important">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -194,13 +235,23 @@ unset($_SESSION['login_fail']);
                         <div class="footer-column footer-about">
                             <h3 class="footer-title">About Hotel</h3>
                             <p class="footer-about-text"><?= $basic_info[0]['hotel_information'] ?></p>
-
-                            <div class="footer-language"> <i class="lni ti-world"></i>
+                            <div id="google_translate_element" ></div>
+                            <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                            <script>
+                                function googleTranslateElementInit(){
+                                    new google.translate.TranslateElement(
+                                        {pageLanguage : 'en'},
+                                        'google_translate_element'
+                                    );
+                                }
+                            </script>
+                            
+                                <!-- <div class="footer-language"> <i class="lni ti-world"></i>
                                     <select onchange="location = this.value;">
-                                        <option value="#0">English</option>
+                                        <option value="marathi">English</option>
                                         <option value="#0">German</option>
                                     </select>
-                                </div>
+                                </div> -->
                         </div>
                     </div>
                     <div class="col-md-3 offset-md-1">

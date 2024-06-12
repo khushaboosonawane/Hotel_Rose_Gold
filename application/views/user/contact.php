@@ -22,13 +22,13 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-call"></span></div>
                         <div class="text">
-                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
+                            <p>Reservation</p> <a href="tel:<?= $basic_info[0]['hotel_reservation_number'] ?>" class="text-dark" style="font-size:18px;letter-spacing:1px">+91 <?= $basic_info[0]['hotel_reservation_number'] ?></a>
                         </div>
                     </div>
                     <div class="reservations mb-30">
                         <div class="icon"><span class="flaticon-envelope"></span></div>
                         <div class="text">
-                            <p>Email Info</p> <a href="mailto:info@luxuryhotel.com"><?= $basic_info[0]['hotel_email'] ?></a>
+                            <p>Email Info</p> <a href="mailto:info@luxuryhotel.com" class="text-dark" style="font-size:18px;letter-spacing:1px"><?= $basic_info[0]['hotel_email'] ?></a>
                         </div>
                     </div>
                     <div class="reservations">
