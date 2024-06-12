@@ -113,7 +113,10 @@ class UserController extends CI_Controller{
     }
     public function gallery(){
         $this->navbar();
-        $this->load->view("user/gallery");
+        $data['gallery']=$this->My_model->select("gallery");
+        $data["two_image"]=$this->db->query("select * from gallery order by gar_id desc limit 2")->result_array();
+        $data['gallery_video']=$this->My_model->select("gallery_video");
+        $this->load->view("user/gallery",$data);
         $this->footer();
     }
     public function team(){
@@ -121,6 +124,7 @@ class UserController extends CI_Controller{
         $data['test_data']=$this->My_model->select("testimonial");
         $data['test_back_image']=$this->My_model->select("test_back_image");
         $data['team']=$this->My_model->select("team");
+       
         $this->load->view("user/team",$data);
         $this->footer();
     }
@@ -154,12 +158,14 @@ class UserController extends CI_Controller{
             $imagename=time().rand(1111,9999).$_FILES['user_image']['name'];
             move_uploaded_file($_FILES['user_image']['tmp_name'],"public/upload/user_image/$imagename");
             $_POST['user_image']=$imagename;
+            $_POST['login_date']=date('Y-m-d H:iA');
             $this->My_model->insert("user_data",$_POST);
-            $_SESSION['save_user_data']="Account Created Successfully";
+            $_SESSION['login_success']="Account Created Successfully";
             redirect(base_url()."usercontroller/userprofile");
         }else{
+            $_POST['login_date']=date('Y-m-d H:iA');
             $this->My_model->insert("user_data",$_POST);
-            $_SESSION['save_user_data']="Account Created Successfully";
+            $_SESSION['login_success']="Account Created Successfully";
             redirect(base_url()."usercontroller/userprofile");
 
         }
@@ -167,7 +173,9 @@ class UserController extends CI_Controller{
     public function view_profile($user_id){
         $this->navbar();
         if(isset($_SESSION['user_id'])){
+            $user_id=$_SESSION['user_id'];
             $data['user_info']=$this->My_model->select("user_data",['user_id'=>$_SESSION['user_id']]);
+            $data['order_food']=$this->db->query("select * from order_food,food where order_food.food_id=food.food_id and order_food.user_id='$user_id'")->result_array();
             $this->load->view("user/view_profile",$data);
         }
         $this->footer();
@@ -221,6 +229,7 @@ class UserController extends CI_Controller{
         $this->navbar();
         $data['hall_details']=$this->My_model->select("metting_halls",['mt_id'=>$mt_id]);
         $data['metting_hall']=$this->My_model->select("metting_halls");
+        $data['hall_book_status']=$this->db->query("select * from book_hall,metting_halls where book_hall.mt_id=metting_halls.mt_id and book_hall.mt_id='$mt_id'")->result_array();
         $this->load->view("user/metting_hall_details",$data);
         $this->footer();
 
@@ -232,28 +241,15 @@ class UserController extends CI_Controller{
         $this->footer();
     }
     public function book_hall_data(){
-        $config=[
-            'protocol'=>'smtp',
-            'smtp_host'=>'ssl://smtp.gmail.com',
-            'smtp_timeout'=>30,
-            'smpt_port'=>465,
-            'smtp_user'=>'khushaboosonawane202@gmail.com',
-            'smtp_pass'=>"8446054113",
-            'charset'=>'utf-8',
-            'mailtype'=>'html',
-            'newline'=>'\r\n'
-        ];
-        $this->email->initialize($config);
-        $this->email->from('khushaboosonawane202@gmail.com', 'Khushaboo Sonawane');
-        $this->email->to('v.sonawane8975@gmail.com');
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-
-        if($this->email->send()){
-            echo "mai send";
-        }else{
-            print_r($this->email->print_debugger());
+        if(isset($_SESSION['user_id'])){
+            $_POST['user_id']=$_SESSION['user_id'];
         }
+        $_POST['status']="Active";
+        $_POST['order_status']="Active";
+        $_POST['order_date']=date('Y-m-d H:iA');
+        $this->My_model->insert("book_hall",$_POST);
+        $_SESSION['login_success']="Hall Book Successfully";
+        redirect(base_url()."usercontroller/");
     }
     public function view_food_details($food_id){
         $this->navbar();
@@ -272,7 +268,7 @@ class UserController extends CI_Controller{
         if(isset($_SESSION['user_id'])){
             $user_id=$_SESSION['user_id'];
             $data['room_cart_data']=$this->db->query("select * from rooms,add_to_cart where rooms.room_id=add_to_cart.product_id and add_to_cart.product_name='special_room' and user_id='$user_id'")->result_array();
-            $data['food_cart_data']=$this->db->query("select * from food,add_to_cart where food.food_id=add_to_cart.product_id and product_name='food' and user_id='$user_id'")->result_array();
+            $data['food_cart_data']=$this->db->query("select * from food,add_to_cart where food.food_id=add_to_cart.product_id and add_to_cart.product_name='food' and add_to_cart.user_id='$user_id'")->result_array();
              $this->load->view("user/cart_page",$data);
             }else{
             $this->load->view("user/cart_page");
@@ -395,7 +391,24 @@ class UserController extends CI_Controller{
         $_SESSION['login_success']="Order Cancel Successfully!..";
         redirect(base_url()."usercontroller/order_page");
     }
-    
+    public function save_user_contact_info(){
+        $this->My_model->insert("contact_info",$_POST);
+        $_SESSION['login_success']="Your Information Save Successfully !...";
+        redirect(base_url()."usercontroller/contact");
+    }
+    public function blog(){
+        $this->navbar();
+        $data['blog_data']=$this->My_model->select("blog");
+        $this->load->view("user/blog",$data);
+        $this->footer();
+    }
+    public function metting_events(){
+        $this->navbar();
+        $data['hall_book_status']=$this->db->query("select * from book_hall,metting_halls where book_hall.mt_id=metting_halls.mt_id")->result_array();
+        $data['metting_hall']=$this->My_model->select("metting_halls");
+        $this->load->view("user/metting_events",$data);
+        $this->footer();
+    }
     
 }
 ?>

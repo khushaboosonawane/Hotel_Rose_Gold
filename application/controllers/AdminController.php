@@ -726,7 +726,7 @@ class AdminController extends CI_Controller{
     }
     public function order_food(){
         $this->navbar();
-        $data['order_food']=$this->db->query("select * from food,order_food where order_food.food_id=food.food_id")->result_array();
+        $data['order_food']=$this->db->query("select * from food,order_food where order_food.food_id=food.food_id order by order_food.order_id desc")->result_array();
         $this->load->view("admin/order_food",$data);
         $this->footer();
     }
@@ -872,7 +872,33 @@ class AdminController extends CI_Controller{
     }
     public function view_gallery_data(){
         $this->navbar();
-        $data['gallery_data']=$this->My_model->select("gallery");
+        $num_records=($this->My_model->num_rows("gallery"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_gallery_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['gallery_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"gallery",'gar_id');
         $this->load->view("admin/view_gallery_data",$data);
         $this->footer();
     }
@@ -914,7 +940,33 @@ class AdminController extends CI_Controller{
     }
     public function view_gallery_video(){
         $this->navbar();
-        $data['gallery_video']=$this->My_model->select("gallery_video");
+        $num_records=($this->My_model->num_rows("gallery_video"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_gallery_video"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['gallery_video']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"gallery_video",'gar_id');
         $this->load->view("admin/view_gallery_video",$data);
         $this->footer();
     }
@@ -947,6 +999,70 @@ class AdminController extends CI_Controller{
             redirect(base_url()."admincontroller/view_gallery_video");
          
         }
+    }
+    public function users(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("user_data"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/users"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['users_info']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"user_data",'user_id');
+        $this->load->view("admin/users",$data);
+        $this->footer();
+    }
+    public function visitor_info(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("contact_info"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/visitor_info"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['contact_info']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"contact_info",'cont_id');
+        $this->load->view("admin/visitor_info",$data);
+        $this->footer();
     }
 }
 ?>

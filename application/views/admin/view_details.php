@@ -9,7 +9,10 @@
                 </ol>
               </nav>
             </div>
-            <div class="row">
+            <?php
+            if(count($order_detail)>0){
+              ?>
+                 <div class="row">
               <div class="col-lg-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
@@ -59,5 +62,19 @@
               </div>
               
             </div>
+              <?php
+            }else{
+              ?>
+              <div class="row">
+                <div class="col-md-12">
+                  <h2 class="text-center">
+                    User LogOut From His Account
+                  </h2>
+                </div>
+              </div>
+              <?php
+            }
+            ?>
+         
           </div>
           

@@ -7,7 +7,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/view_gallery_data">View Data</a></li>
+                  <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/view_gallery_video">View Data</a></li>
                   <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Gallery Information</li>
                 </ol>
               </nav>

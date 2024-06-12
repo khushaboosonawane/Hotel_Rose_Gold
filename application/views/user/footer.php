@@ -207,12 +207,11 @@ unset($_SESSION['login_fail']);
                         <div class="footer-column footer-explore clearfix">
                             <h3 class="footer-title">Explore</h3>
                             <ul class="footer-explore-list list-unstyled">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="rooms.html">Rooms & Suites</a></li>
-                                <li><a href="restaurant.html">Restaurant</a></li>
-                                <li><a href="spa-wellness.html">Spa & Wellness</a></li>
-                                <li><a href="about.html">About Hotel</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="<?= base_url() ?>usercontroller/rooms_suits">Rooms & Suites</a></li>
+                                <li><a href="<?= base_url() ?>usercontroller/blog">Blog</a></li>
+                                <li><a href="<?= base_url() ?>usercontroller/metting_events">Metting & Events</a></li>
+                                <li><a href="<?= base_url() ?>usercontroller/about">About Hotel</a></li>
+                                <li><a href="<?= base_url() ?>usercontroller/contact">Contact</a></li>
                             </ul>
                         </div>
                     </div>

@@ -45,7 +45,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
 
 </style>
 <!-- Header Banner -->
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/3.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="6" data-background="<?= base_url() ?>public/upload/banner_image/gallery.jpeg" style="background-position:center center">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center caption mt-90">
@@ -60,11 +60,28 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="container">
             <div class="row">
                 <div class="col-md-12 my-5">
-                    <div class="section-subtitle">Images</div>
+                    <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:90px;width:90px" alt="">
+                    <div class="section-subtitle"><?= $basic_info[0]['hotel_name'] ?></div>
                     <div class="section-title">Image Gallery</div>
                 </div>
                 <!-- 3 columns -->
-               
+               <?php
+               if(count($gallery)>0){
+                foreach($gallery as $key=>$row){
+                    ?>
+                     <div class="col-md-4 gallery-item">
+                        <a href="<?= base_url() ?>public/upload/gallery_image/<?= $row['gallery_image'] ?>" title="" class="img-zoom">
+                            <div class="gallery-box">
+                                <div class="gallery-img">
+                                     <img src="<?= base_url() ?>public/upload/gallery_image/<?= $row['gallery_image'] ?>" class="img-fluid mx-auto d-block" alt="work-img" style="height:400px;width:400px;object-fit:cover"> 
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php
+                }
+               }else{
+                ?>
                 <div class="col-md-4 gallery-item">
                     <a href="<?= base_url() ?>public/user_assets/img/slider/5.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
@@ -79,11 +96,34 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </a>
                 </div>
-                <!-- 2 columns -->
+                <?php
+               }
+               ?>
+               <div class="row">
+               <?php
+                if(count($two_image)>0){
+                    foreach($two_image as $key=>$row){
+                        ?>
+                        <div class="col-md-6 gallery-item">
+                            <a href="<?= base_url() ?>public/upload/gallery_image/<?= $row['gallery_image'] ?>" title="" class="img-zoom">
+                                <div class="gallery-box">
+                                    <div class="gallery-img"> 
+                                        <img src="<?= base_url() ?>public/upload/gallery_image/<?= $row['gallery_image'] ?>" class="img-fluid mx-auto d-block" alt="work-img" style="height:400px;width:1000px;object-fit:cover"> 
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
+                    <!-- 2 columns -->
                 <div class="col-md-6 gallery-item">
                     <a href="<?= base_url() ?>public/user_assets/img/slider/2.jpg" title="" class="img-zoom">
                         <div class="gallery-box">
-                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/slider/2.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
+                            <div class="gallery-img"> 
+                                <img src="<?= base_url() ?>public/user_assets/img/slider/2.jpg" class="img-fluid mx-auto d-block" alt="work-img" style="height:400px;width:100%">
+                             </div>
                         </div>
                     </a>
                 </div>
@@ -94,28 +134,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </a>
                 </div>
-                <!-- 3 columns -->
-                <div class="col-md-4 gallery-item">
-                    <a href="<?= base_url() ?>public/user_assets/img/rooms/8.jpg" title="" class="img-zoom">
-                        <div class="gallery-box">
-                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/8.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 gallery-item">
-                    <a href="<?= base_url() ?>public/user_assets/img/rooms/5.jpg" title="" class="img-zoom">
-                        <div class="gallery-box">
-                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/5.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 gallery-item">
-                    <a href="<?= base_url() ?>public/user_assets/img/rooms/10.jpg" title="" class="img-zoom">
-                        <div class="gallery-box">
-                            <div class="gallery-img"> <img src="<?= base_url() ?>public/user_assets/img/rooms/10.jpg" class="img-fluid mx-auto d-block" alt="work-img"> </div>
-                        </div>
-                    </a>
-                </div>
+                    <?php
+                }
+                ?>
+               </div>
             </div>
         </div>
     </section>
@@ -127,7 +149,25 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <div class="section-subtitle">Videos</div>
                     <div class="section-title">Video Gallery</div>
                 </div>
-                <!-- 2 columns -->
+                <?php
+                if(count($gallery_video)>0){
+                    foreach($gallery_video as $key=>$row){
+                        ?>
+                         <div class="col-md-6">
+                            <div class="vid-area mb-30">
+                                <div class="vid-icon">
+                                    <img src="<?= base_url() ?>public/upload/gallery_image/<?= $row['gar_image'] ?>" alt="YouTube" style="height:350px;width:100%;object-fit:cover">
+                                    <a class="video-gallery-button vid" href="<?= $row['gar_video_link'] ?>"> <span class="video-gallery-polygon">
+                                            <i class="ti-control-play"></i>
+                                        </span> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }else{
+                    ?>
+                     <!-- 2 columns -->
                 <div class="col-md-6">
                     <div class="vid-area mb-30">
                         <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/2.jpg" alt="YouTube">
@@ -146,146 +186,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </div>
                 </div>
-                <!-- 3 columns -->
-                <div class="col-md-4">
-                    <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/4.jpg" alt="YouTube">
-                            <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
-                                    <i class="ti-control-play"></i>
-                                </span> </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/7.jpg" alt="YouTube">
-                            <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
-                                    <i class="ti-control-play"></i>
-                                </span> </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="vid-area mb-30">
-                        <div class="vid-icon"> <img src="<?= base_url() ?>public/user_assets/img/slider/1.jpg" alt="YouTube">
-                            <a class="video-gallery-button vid" href="https://youtu.be/xh4GnTKFQso"> <span class="video-gallery-polygon">
-                                    <i class="ti-control-play"></i>
-                                </span> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Reservation & Booking Form -->
-    <section class="testimonials">
-        <div class="background bg-img bg-fixed section-padding pb-0" data-background="img/slider/2.jpg" data-overlay-dark="2">
-            <div class="container">
-                <div class="row">
-                    <!-- Reservation -->
-                    <div class="col-md-5 mb-30 mt-30">
-                        <p><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i><i class="star-rating"></i></p>
-                        <h5>Each of our guest rooms feature a private bath, wi-fi, cable television and include full breakfast.</h5>
-                        <div class="reservations mb-30">
-                            <div class="icon color-1"><span class="flaticon-call"></span></div>
-                            <div class="text">
-                                <p class="color-1">Reservation</p> <a class="color-1" href="tel:855-100-4444">855 100 4444</a>
-                            </div>
-                        </div>
-                        <p><i class="ti-check"></i><small>Call us, it's toll-free.</small></p>
-                    </div>
-                    <!-- Booking From -->
-                    <div class="col-md-5 offset-md-2">
-                        <div class="booking-box">
-                            <div class="head-box">
-                                <h6>Rooms & Suites</h6>
-                                <h4>Hotel Booking Form</h4>
-                            </div>
-                            <div class="booking-inner clearfix">
-                                <form action="https://duruthemes.com/demo/html/cappa/demo1-light/rooms2.html" class="form1 clearfix">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check in</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check in">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="input1_wrapper">
-                                                <label>Check out</label>
-                                                <div class="input1_inner">
-                                                    <input type="text" class="form-control input datepicker" placeholder="Check out">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Adults</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Adults</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="select1_wrapper">
-                                                <label>Children</label>
-                                                <div class="select1_inner">
-                                                    <select class="select2 select" style="width: 100%">
-                                                        <option value="0">Children</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn-form1-submit mt-15">Check Availability</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Clients -->
-    <section class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                <div class="owl-carousel owl-theme">
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/1.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/2.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/3.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/4.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/5.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>public/user_assets/img/clients/6.png" alt=""></a>
-                    </div>
-                </div>
-                </div>
+                    <?php
+                }
+                ?>
+              
             </div>
         </div>
     </section>

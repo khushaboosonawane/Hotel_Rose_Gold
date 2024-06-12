@@ -109,6 +109,22 @@
             </a>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" data-target="#visitor" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Website visitor <br> & User Information </span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="visitor">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/users">1 . Users</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= base_url() ?>admincontroller/visitor_info">2 . Website Visitor <br> Information</a></li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
             <a class="nav-link" href="<?= base_url() ?>admincontroller/basic_info">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>

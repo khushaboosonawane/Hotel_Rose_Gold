@@ -21,7 +21,9 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <?php
                     if(isset($_SESSION['user_id'])){
                         if(count($room_cart_data)>0){
+                           
                           foreach($room_cart_data as $key=>$row){
+                            
                             ?>
                             <tr>
                                 <td><?= $key+1 ?></td>
@@ -39,7 +41,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         }else{
                             ?>
                             <tr>
-                                <h2 class="text-center">No Room Added Into Cart</h2>
+                                <h2 class="text-center">No Product Added Into Cart</h2>
                                 <h4 class="text-center">
                                     <a href="<?= base_url() ?>usercontroller/">
                                         <button class="btn btn-primary">Order Product </button>

@@ -86,12 +86,30 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <?php
                             if(isset($_SESSION['user_id'])){
                                 ?>
-                                <div class="butn-dark mt-15 mb-30">
+                                <?php
+                                if(count($hall_book_status)>0){
+                                    if($hall_book_status[0]['mt_id']==$hall_details[0]['mt_id']){
+                                        ?>
+                                        <button class="btn btn-primary">Alerady Book</button>
+                                        <?php
+                                    }else{
+                                        ?>
+                                    <div class="butn-dark mt-15 mb-30">
+                                        <a href="<?= base_url() ?>usercontroller/book_now/<?= $hall_details[0]['mt_id'] ?>"><span>Check Now</span></a>
+                                    </div>
+                                        <?php
+                                    }
+                                }else{
+                                    ?>
+                                     <div class="butn-dark mt-15 mb-30">
                                     <a href="<?= base_url() ?>usercontroller/book_now/<?= $hall_details[0]['mt_id'] ?>"><span>Check Now</span></a>
                                 </div>
+                                    <?php
+                                }
+                                ?>
+                               
                                 <?php
                             }else{
-                                $_SESSION['login_fail']="Create Account"
                                 ?>
                                 <div class="butn-dark mt-15 mb-30">
                                     <a href="<?= base_url() ?>usercontroller/registration"><span>Check Now</span></a>

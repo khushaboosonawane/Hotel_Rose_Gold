@@ -33,6 +33,13 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <?php
                     if(isset($_SESSION['user_id'])){
                         if(count($order_room)>0){
+                            ?>
+                             <h2 class='text-center my-3'>
+                            <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:90px;width:90px;text-align:center" alt=""> <br>    
+                            Room Order Details <br>
+                        
+                            </h2>
+                            <?php
                             foreach($order_room as $key=>$row){
                                 ?>
                                 <tr>
@@ -83,11 +90,19 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     ?>
                 </table>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 my-5">
                 <table class="text-center">
                     <?php
                     if(isset($_SESSION['user_id'])){
+                        
                         if(count($food_order)>0){
+                            ?>
+                             <h2 class='text-center my-3'>
+                            <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:90px;width:90px;text-align:center" alt=""> <br>    
+                            Food Order Details <br>
+                        
+                            </h2>
+                            <?php
                             ?>
                             <tr>
                                 <th>Srno</th>
