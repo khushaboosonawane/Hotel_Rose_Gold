@@ -10,5 +10,5 @@ Welcome to the Hotel Project! This project is a comprehensive solution for manag
  5. Reporting: Access insightful reports for occupancy rates, revenue, and more.
     
 <b> Technologies Used </b>:
-Frontend: HTML, CSS, Bootstrap, JavaScript, Jquery
+Frontend: HTML, CSS, Bootstrap, JavaScript, Jquery <be>
 Backend: PHP, CodeIgniter, MYSQL
