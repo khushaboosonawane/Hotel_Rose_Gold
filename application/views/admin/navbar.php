@@ -109,6 +109,22 @@
             </a>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" href="<?= base_url() ?>admincontroller/book_hall">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Book Hall Details</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="<?= base_url() ?>admincontroller/room_book_details">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Booked <br> Room Details</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
             <a class="nav-link" data-toggle="collapse" data-target="#visitor" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>

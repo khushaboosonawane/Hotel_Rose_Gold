@@ -3,12 +3,12 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
 
 <!-- Header Banner -->
-<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="4" data-background="<?= base_url() ?>public/user_assets/img/slider/5.jpg">
+<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="6" data-background="<?= base_url() ?>public/upload/banner_image/login_banner.jpeg" style="background-position:center center">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left caption mt-90">
-                    <h5>Professionals</h5>
-                    <h1>Meet The Team</h1>
+                    <h5>Hello User !...</h5>
+                    <h1>Login To Your Account</h1>
                 </div>
             </div>
         </div>

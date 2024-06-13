@@ -256,9 +256,6 @@ class UserController extends CI_Controller{
         $data['food_data']=$this->My_model->select_food_data_id($food_id);
         if(isset($_SESSION['user_id'])){
             $data['cart_data']=$this->My_model->select("add_to_cart",['product_id'=>$food_id]);
-            // echo "<pre>";
-            // print_r($data['cart_data']);
-            // exit();
         }
         $this->load->view("user/view_food_details",$data);
         $this->footer();
@@ -347,13 +344,15 @@ class UserController extends CI_Controller{
             $user_id=$_SESSION['user_id'];
             $data=$this->db->query("select sum(qty*food_price) as total from food,add_to_cart where food.food_id=add_to_cart.product_id  and add_to_cart.product_name='food' and add_to_cart.user_id='$user_id'")->result_array();
             $result['total']=$data[0]['total'];
+            $result['basic_info']=$this->My_model->select("basic_info");
             // echo "<pre>";
             // print_r($result['total']);
             // exit();
             $this->load->view("user/confirm_address",$result);
 
         }else{
-            $this->load->view("user/confirm_address");
+            $data['basic_info']=$this->My_model->select("basic_info");
+            $this->load->view("user/confirm_address",$data);
         }
     }
     public function save_address(){

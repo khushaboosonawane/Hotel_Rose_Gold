@@ -6218,6 +6218,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                     <div class="caption">
                                     <?php
                                         if(count($hall_book_status)>0){
+
                                             foreach($hall_book_status as $key=>$row1){
                                                 if($row1['mt_id']==$row['mt_id']){
                                                     ?>

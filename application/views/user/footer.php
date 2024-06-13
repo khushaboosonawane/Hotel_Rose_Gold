@@ -290,7 +290,7 @@ unset($_SESSION['login_fail']);
                 <div class="row">
                     <div class="col-md-12">
                         <div class="footer-bottom-inner">
-                            <p class="footer-bottom-copy-right">© Copyright 2024 by <a href="#">DuruThemes.com</a></p>
+                            <p class="footer-bottom-copy-right">Made by Khushabu Sonawane <a href="mailto:sokhushaboo202@gmail.com">sokhushaboo202@gmail.com</a></p>
                         </div>
                     </div>
                 </div>

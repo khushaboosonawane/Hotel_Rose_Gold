@@ -102,8 +102,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 }else{
                                     ?>
                                      <div class="butn-dark mt-15 mb-30">
-                                    <a href="<?= base_url() ?>usercontroller/book_now/<?= $hall_details[0]['mt_id'] ?>"><span>Check Now</span></a>
-                                </div>
+                                        <a href="<?= base_url() ?>usercontroller/book_now/<?= $hall_details[0]['mt_id'] ?>"><span>Check Now</span></a>
+                                    </div>
                                     <?php
                                 }
                                 ?>
@@ -111,9 +111,22 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 <?php
                             }else{
                                 ?>
-                                <div class="butn-dark mt-15 mb-30">
-                                    <a href="<?= base_url() ?>usercontroller/registration"><span>Check Now</span></a>
-                                </div>
+                                <?php
+                                if(count($hall_book_status)>0){
+                                   if($hall_book_status[0]['mt_id']==$hall_details[0]['mt_id']){
+                                    ?>
+                                    <button class="btn btn-primary">Already Booked</button>
+                                    <?php
+                                   }
+                                }else{
+                                    ?>
+                                     <div class="butn-dark mt-15 mb-30">
+                                        <a href="<?= base_url() ?>usercontroller/registration"><span>Check Now</span></a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                               
                                 <?php
                             }
                             ?>

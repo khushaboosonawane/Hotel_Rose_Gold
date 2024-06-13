@@ -609,7 +609,7 @@
         </div>
     </section>
     <!-- Promo Video -->
-    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="3" data-background="<?= base_url() ?>/public/user_assets/img/slider/2.jpg">
+    <section class="video-wrapper video section-padding bg-img bg-fixed" data-overlay-dark="6" data-background="<?= base_url() ?>public/upload/banner_image/promotion.jpeg">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">

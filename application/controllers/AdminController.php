@@ -555,7 +555,6 @@ class AdminController extends CI_Controller{
         $_POST['hall_image']=$hall_image;
         $_POST['book_status']="disabled";
         $_POST['user_id']=0;
-        $_POST['order_status']='disabled';
         $this->My_model->insert("metting_halls",$_POST);
         $_SESSION['save_data']="Data Save successfully!..";
         redirect(base_url()."admincontroller/view_hall_data");
@@ -615,11 +614,12 @@ class AdminController extends CI_Controller{
             $_POST['hall_image']=$hall_image;
             $_POST['book_status']="disabled";
             $_POST['user_id']=0;
-            $_POST['order_status']='disabled';
             $this->My_model->update_cond("metting_halls",$_POST,['mt_id'=>$_POST['mt_id']]);
             $_SESSION['update_data']="Hall Data Updated Successfully";
             redirect(base_url()."admincontroller/view_hall_data");
         }else{
+            $_POST['book_status']="disabled";
+            $_POST['user_id']=0;
             $this->My_model->update_cond("metting_halls",$_POST,['mt_id'=>$_POST['mt_id']]);
             $_SESSION['update_data']="Hall data updated successfully";
             redirect(base_url()."admincontroller/view_hall_data");
@@ -1063,6 +1063,54 @@ class AdminController extends CI_Controller{
         $data['contact_info']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"contact_info",'cont_id');
         $this->load->view("admin/visitor_info",$data);
         $this->footer();
+    }
+    public function room_book_details(){
+        $this->navbar();
+        $data['room_book']=$this->db->query("select * from rooms,room_book where rooms.room_id=room_book.room_id")->result_array();
+        $this->load->view("admin/room_book_details",$data);
+        $this->footer();
+    }
+    public function view_room_order_details($room_id){
+        $this->navbar();
+        $data['order_details']=$this->db->query("select * from rooms,room_book,user_data where rooms.room_id=room_book.room_id and room_book.user_id=user_data.user_id")->result_array();
+       
+        $this->load->view("admin/view_room_order_details",$data);
+        $this->footer();
+    }
+    public function update_booking_status($order_id){
+        $this->My_model->update_cond("room_book",['order_status'=>"Confirm"],['book_id'=>$order_id]);
+        $_SESSION['update_data']="Booking Confirm Successfully !..";
+        redirect(base_url()."admincontroller/room_book_details");
+    }
+    public function cancel_booking($order_id){
+        $this->My_model->update_cond("room_book",['order_status'=>"Cancel"],['book_id'=>$order_id]);
+        $_SESSION['update_data']="Booking Cancel Successfully !..";
+        redirect(base_url()."admincontroller/room_book_details");
+    }
+    public function book_hall(){
+        $this->navbar();
+        $data['hall_details']=$this->db->query("select * from metting_halls,book_hall where book_hall.mt_id=metting_halls.mt_id")->result_array();
+        $this->load->view("admin/book_hall",$data);
+        $this->footer();
+    }
+    public function confirm_hall($book_id){
+        $data['book_det']=$this->db->query("select * from book_hall")->result_array();
+        $this->My_model->update_cond("book_hall",['order_status'=>"Confirm"],['book_id'=>$book_id]);
+        $_SESSION['update_data']="Booking Confirm Successfully !..";
+        redirect(base_url()."admincontroller/book_hall");
+    }
+    public function cancel_hall($book_id){
+        $data['book_det']=$this->db->query("select * from book_hall")->result_array();
+        $this->My_model->update_cond("book_hall",['order_status'=>"Cancel"],['book_id'=>$book_id]);
+        $_SESSION['update_data']="Booking Cancel Successfully !..";
+        redirect(base_url()."admincontroller/book_hall");
+    }
+    public function view_hall_order_details($mt_id){
+        $data['hall_details']=$this->db->query("select * from book_hall,metting_halls where book_hall.mt_id=metting_halls.mt_id and book_hall.mt_id=$mt_id")->result_array();
+        $this->navbar();
+        $this->load->view("admin/view_hall_order_details",$data);
+        $this->footer();
+
     }
 }
 ?>
