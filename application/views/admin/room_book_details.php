@@ -16,7 +16,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Order Information</h4>
+                        <h4 class="card-title">Booking Information</h4>
                         </p>
                         <div class="col-md-12 d-flex justify-content-end">
                         <?php echo $this->pagination->create_links(); ?>
@@ -51,12 +51,12 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                                 <?php
                                                 if($row['order_status']=='Confirm'){
                                                     ?>
-                                                    <button class='btn btn-outline-success btn-sm'><i class="ri-check-double-line"></i></button>
+                                                    <button class='btn btn-outline-success btn-sm my-2'><i class="ri-check-double-line"></i></button>
                                                     <?php
                                                 }else{
                                                     ?>
                                                     <a href="<?= base_url() ?>admincontroller/update_booking_status/<?= $row['book_id'] ?>">
-                                                    <button class="btn btn-primary btn-sm" onclick="confirm('Are You Sure To Confirm Order')">
+                                                    <button class="btn btn-primary btn-sm my-2" onclick="confirm('Are You Sure To Confirm Order')">
                                                         Confirm
                                                     </button>
                                                 </a>
@@ -66,14 +66,14 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                                   <?php
                                                 if($row['order_status']=='Cancel'){
                                                     ?>
-                                                    <button class='btn btn-outline-danger btn-sm'>
+                                                    <button class='btn btn-outline-danger btn-sm my-2'>
                                                     <i class="ri-close-large-line"></i>
                                                     </button>
                                                     <?php
                                                 }else{
                                                     ?>
                                                    <a href="<?= base_url() ?>admincontroller/cancel_booking/<?= $row['book_id'] ?>">
-                                                        <button class="btn btn-danger btn-sm">
+                                                        <button class="btn btn-danger btn-sm my-2">
                                                             Cancel Booking
                                                         </button>
                                                     </a>

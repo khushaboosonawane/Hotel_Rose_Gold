@@ -41,8 +41,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
             <div class="logo-wrapper">
                 <!-- <a class="logo" href="index.html"> <img src="<?= base_url() ?>/public/user_assets/img/logo.png" class="logo-img" alt=""> </a> -->
                 <a class="logo" href="<?= base_url() ?>usercontroller/">
-                     <h5 class="text-white my-3" style="width:87%;text-align:center">
-                     <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt="" style="height:100px;width:100px;object-fit:cover">
+                     <h5 class="text-white my-1" style="width:87%;text-align:center">
+                     <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" alt="" style="height:60px;width:60px;object-fit:cover">
                     </h5>
                     
                 </a>

@@ -75,6 +75,7 @@ class UserController extends CI_Controller{
         $data['test_back_image']=$this->My_model->select("test_back_image");
         $data['food_data']=$this->My_model->select_food();
         $data['team']=$this->My_model->select("team");
+        $data['food_spe']=$this->db->query("select * from category,sub_category,food where category.cat_id=food.cat_id and sub_category.sub_cat_id=food.sub_cat_id and sub_category.sub_cat_name='Maharashtrian'")->result_array();
         $this->load->view("user/about",$data);
         $this->footer();
     }

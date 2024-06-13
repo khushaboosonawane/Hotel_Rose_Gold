@@ -3,11 +3,11 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
  <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Slider Information </h3>
+              <h3 class="page-title"> Promotional Video Information </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">slider</li>
+                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Promotional Video Information</li>
                 </ol>
               </nav>
             </div>

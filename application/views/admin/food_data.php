@@ -56,7 +56,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                     <td><?= $row['sub_cat_name'] ?></td>
                                     <td><?= $row['food_name'] ?></td>
                                     <td><?= number_format($row['food_price']) ?> &#8377;</td>
-                                    <td><?= $row['food_rating'] ?></td>
+                                    <td><?= $row['food_rating'] ?>
+                                    <i class="ri-star-fill lead" style="color:#FFD700"></i>
+                                    </td>
+
                                     <td><?= $row['food_desc'] ?></td>
                                     <td>
                                         <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" alt="">

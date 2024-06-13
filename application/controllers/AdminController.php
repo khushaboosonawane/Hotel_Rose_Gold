@@ -1,6 +1,17 @@
 <?php
 class AdminController extends CI_Controller{
+    function __construct(){
+        parent::__construct();
+        date_default_timezone_set('Asia/Kolkata');
+        if(!isset($_SESSION['admin_id'])){
+            redirect(base_url()."adminlogincontroller/");
+            exit();
+        }
+    }
     private function navbar(){
+        if(isset($_SESSION['admin_id'])){
+            $data['admin_data']=$this->My_model->select("admin_data",['admin_id'=>$_SESSION['admin_id']]);
+        }
         $data['basic_info']=$this->My_model->select("basic_info");
         $this->load->view("admin/navbar",$data);
     }
@@ -690,6 +701,7 @@ class AdminController extends CI_Controller{
     }
     public function food_data(){
         $this->navbar();
+        
         $data['food_data']=$this->My_model->select_food();
         $this->load->view("admin/food_data",$data);
         $this->footer();
@@ -766,7 +778,34 @@ class AdminController extends CI_Controller{
     }
     public function view_team_data(){
         $this->navbar();
-        $data['team_data']=$this->My_model->select("team");
+        $num_records=($this->My_model->num_rows("team"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_team_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['team_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"team",'team_id');
+        // $data['team_data']=$this->My_model->select("team");
         $this->load->view("admin/view_team_data",$data);
         $this->footer();
     }
@@ -1111,6 +1150,99 @@ class AdminController extends CI_Controller{
         $this->load->view("admin/view_hall_order_details",$data);
         $this->footer();
 
+    }
+    public function admin_data(){
+        $this->navbar();
+        $this->load->view("admin/admin_data");
+        $this->footer();
+    }
+    public function save_admin_info(){
+        $admin_image=time().rand(1111,9999).$_FILES['admin_image']['name'];
+        move_uploaded_file($_FILES['admin_image']['tmp_name'],"public/upload/admin_image/$admin_image");
+        $_POST['admin_image']=$admin_image;
+        $admin_password=hash('sha256',$_POST['admin_pass']);
+        $_POST['admin_pass']=$admin_password;
+        $this->My_model->insert("admin_data",$_POST);
+        $_SESSION['save_data']="Data Save Successfully !...";
+        redirect(base_url()."admincontroller/view_admin_data");
+        
+    }
+    public function view_admin_data(){
+        $this->navbar();
+        $num_records=($this->My_model->num_rows("admin_data"))[0]['total_rows'];
+        $config=[
+            'base_url'=>base_url("admincontroller/view_admin_data"),
+            'per_page'=>2,
+            'total_rows'=>$num_records
+        ];
+        $config['full_tag_open']='<ul class="pagination">';
+        $config['full_tag_close']='</ul>';
+        $config['attributes']=['class'=>'page-link'];
+        $config['first_link']=false; 
+        $config['last_link']=false; 
+        $config['first_tag_open']='<li class="page-item">';
+        $config['first_tag_close']='</li>';
+        $config['prev_link']='<i class="ri-arrow-left-s-line"></i>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['next_link']='<i class="ri-arrow-right-s-line"></i>';
+        $config['next_tag_open']='<li class="page-item">';
+        $config['next_tag_close']='</li>';
+        $config['last_tag_open']='<li class="page-item">'; 
+        $config['last_tag_close']='</li>'; 
+        $config['cur_tag_open']='<li class="page-item"><a href="" class="page-link active">'; 
+        $config['cur_tag_close']='<span class="sr-only"></span></a></li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';  
+        $this->pagination->initialize($config);
+        $data['admin_data']=$this->My_model->all($config['per_page'],$this->uri->segment(3),"admin_data",'admin_id');
+        // $data['admin_data']=$this->My_model->select("admin_data");
+        $this->load->view("admin/view_admin_data",$data);
+        $this->footer();
+    }
+    public function delete_admin_data($admin_id){
+        $image=($this->My_model->select("admin_data",['admin_id'=>$admin_id],"admin_image"))[0]['admin_image'];
+        unlink("public/upload/admin_image/$image");
+        $this->My_model->delete("admin_data",['admin_id'=>$admin_id]);
+        $_SESSION['delete_data']="Data Deleted Successfully !...";
+        redirect(base_url()."admincontroller/view_admin_data");
+    }
+    public function edit_admin_data($admin_id){
+        $this->navbar();
+        $data['admin_data']=$this->My_model->select("admin_data",['admin_id'=>$admin_id]);
+        $this->load->view("admin/edit_admin_data",$data);
+        $this->footer();
+    }
+    public function update_admin_info(){
+        if($_FILES['admin_image']['name']!=""){
+            $image=($this->My_model->select("admin_data",['admin_id'=>$_POST['admin_id']],"admin_image"))[0]['admin_image'];
+            unlink("public/upload/admin_image/$image");
+
+            $admin_image=time().rand(1111,9999).$_FILES['admin_image']['name'];
+            move_uploaded_file($_FILES['admin_image']['tmp_name'],"public/upload/admin_image/$admin_image");
+            $_POST['admin_image']=$admin_image;
+            $this->My_model->update_cond("admin_data",$_POST,['admin_id'=>$_POST['admin_id']]);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/view_admin_data");
+        }else{
+            $this->My_model->update_cond("admin_data",$_POST,['admin_id'=>$_POST['admin_id']]);
+            $_SESSION['update_data']="Data Updated Successfully";
+            redirect(base_url()."admincontroller/view_admin_data");
+        }
+    }
+    public function view_profile(){
+        $this->navbar();
+        $this->load->view("admin/view_profile");
+        $this->footer();
+    }
+    public function logout_user(){
+       if(isset($_SESSION['admin_id'])){
+        $image=($this->My_model->select_image("admin_data",['admin_id'=>$_SESSION['admin_id']],"admin_image"))[0]['admin_image'];
+        unlink("public/upload/admin_image/$image");
+        $this->My_model->delete("admin_data",['admin_id'=>$_SESSION['admin_id']]);
+        unset($_SESSION['admin_id']);
+        redirect(base_url()."adminlogincontroller/");
+       }
     }
 }
 ?>

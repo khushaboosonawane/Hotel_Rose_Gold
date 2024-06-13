@@ -3,11 +3,11 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
  <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Room Book Information </h3>
+              <h3 class="page-title"> Booked Hall Information </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Room Booking Status</li>
+                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Hall Booking Status</li>
                 </ol>
               </nav>
             </div>
@@ -16,7 +16,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Order Information</h4>
+                        <h4 class="card-title">Booking Information</h4>
                         </p>
                         <div class="col-md-12 d-flex justify-content-end">
                         <?php echo $this->pagination->create_links(); ?>
@@ -42,7 +42,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                         <tr>
                                             <td>
                                                 <a href="<?= base_url() ?>admincontroller/view_hall_order_details/<?= $row['mt_id'] ?>">
-                                                    <button class="btn btn-success btn-sm">
+                                                    <button class="btn btn-success btn-sm my-2">
                                                         View
                                                     </button>
                                                 </a>
@@ -51,7 +51,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                                 <?php
                                                 if($row['order_status']=='Confirm'){
                                                     ?>
-                                                    <button class="btn btn-outline-success">
+                                                    <button class="btn btn-outline-success my-2">
                                                     <i class="ri-check-double-line"></i>
                                                     </button>
                                                     <?php
@@ -66,14 +66,14 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                                 <?php
                                                 if($row['order_status']=="Cancel"){
                                                     ?>
-                                                    <button class="btn btn-outline-danger">
+                                                    <button class="btn btn-outline-danger my-2">
                                                     <i class="ri-close-line"></i>
                                                     </button>
                                                     <?php
                                                 }else{
                                                     ?>
                                                      <a href="<?= base_url() ?>admincontroller/cancel_hall/<?= $row['book_id'] ?>">
-                                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure To Cancel Order')">Cancel</button>
+                                                    <button class="btn btn-danger btn-sm my-2" onclick="return confirm('Are You Sure To Cancel Order')">Cancel</button>
                                                 </a>
                                                     <?php
                                                 }

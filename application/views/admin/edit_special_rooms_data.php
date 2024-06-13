@@ -3,7 +3,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
  <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Special Offer Room </h3>
+              <h3 class="page-title">Edit Special Offer Room </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>

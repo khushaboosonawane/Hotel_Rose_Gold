@@ -3,11 +3,11 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
  <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Users Information </h3>
+              <h3 class="page-title"> Visitor Information </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Users Information</li>
+                  <li class="breadcrumb-item active" aria-current="page" style="color:#f18444">Website Information</li>
                 </ol>
               </nav>
             </div>
@@ -17,7 +17,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users Information</h4>
+                        <h4 class="card-title">Visitor Information</h4>
                         <p class="card-description"> 2 Record Display At Time
                         </p>
                         <div class="col-md-12 d-flex justify-content-end">

@@ -183,116 +183,165 @@ defined("BASEPATH") or exit("no direct script is allowed");
         </div>
     </section>
 
-    <!-- order food  -->
-   <!-- Clients -->
-   <section class="clients my-5">
+    <!-- Team -->
+    <section class="team section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="section-subtitle"><span style="color:#ff5031">Hotel Blog</span></div>
-                    <div class="section-title"><span class="text-dark">Foods & Wines</span></div>
-                    <div style="margin:0 auto;height:2px;width:50%;background:black;border-radius:50%;"></div>
+                <div class="col-md-12 text-center" style="margin-top:-90px">
+                <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px" alt="">
+                    <div class="section-subtitle" style="color:#ff512f"><?= $basic_info[0]['hotel_name'] ?></div>
+                    <div class="section-title">Special Maharashtrian Food</div>
+                    <div style="height:1px;width:70%;margin:30px auto;background:linear-gradient(66deg, rgba(220, 52, 85), rgb(252, 175, 59))"></div>
                 </div>
-                <div class="col-md-12 my-5">
-                <div class="owl-carousel owl-theme">
+            </div>
+            <div class="row">
+                <div class="col-md-12 owl-carousel owl-theme">
                     <?php
-                    if(count($food_data)>0){
-                        foreach($food_data as $key=>$row){
-                        ?>
-                        <div class="clients-logo shadow p-4">
-                        <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>" class="d-flex justify-content-center my-3">
-                            <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" style="height:280px;width:100%;object-fit:cover;border-radius:20%" alt="">
-                        </a>
-                        <span class="my-3" style="font-weight:bold;font-size:18px;color:black">
-                            <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>">
-                            <?= $row['food_name'] ?> &nbsp;&nbsp;(<?= $row['sub_cat_name'] ?>)
-                            </a>
-                        </span>
-                        <div class="my-4 d-flex justify-content-between">
-                        <span style="font-weight:bold;color:black"><?= number_format($row['food_price']) ?> &#8377;</span>
-                        <span>
+                    if(count($food_spe)>0){
+                        foreach($food_spe as $key=>$row){
+                            ?>
+                    <div class="item shadow">
+                        <div class="img">
+                             <img src="<?= base_url() ?>public/upload/food_image/<?= $row['food_image'] ?>" alt="" style='height:200px;width:100%;object-fit:cover'> 
+                        </div>
+                        <div class="info" style=''>
+                            <small><b style="text-align:right !important"><?= $row['off_price'] ?></b></small>
+                            <h6><?= $row['food_name'] ?>
                             <?php
-                            if($row['food_rating']<=0){
-                                for($i=0;$i<$row['food_rating'];$i++){
-                                    ?>
-                                    <i class="ri-star-fill">
-                                    <?php
+                            if(isset($_SESSION['user_id'])){
+                                if(count($add_to_cart)>0){
+                                    for($i=0;$i<count($add_to_cart);$i++){
+                                        if($add_to_cart[$i]['product_id']==$row['food_id']){
+                                            ?>
+                                            <i class="ri-heart-fill lead text-danger"></i>
+                                            <?php
+                                        }
+                                    }
                                 }
-
-                            }else{
-                                ?>
-                                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
-                                <?php
                             }
                             ?>
-                        </span>
-                        </div>
-                        <span class="my-3">
-                            <b style="color:#ff512f !important;font-weight:bold"><?= $row['off_price'] ?></b>
-                        </span>
-                        <div style="height:100px">
-                        <p class="text-truncate">
-                            <?= $row['food_desc'] ?>
-                        </p>
-                        </div>
-                        <div class=" d-flex justify-content-end text-right">
+                            </h6>
+                            <p><?= number_format($row['food_price']) ?> &#8377;</p>
                             <a href="<?= base_url() ?>usercontroller/view_food_details/<?= $row['food_id'] ?>">
-                                <button class="btn" style="background-color:#f18444;color:white">View Details</button>
+                            <button class="btn-hover color-2">Details</button>
                             </a>
+                           
+                        </div>
+                    </div>
+                            <?php
+                        }
+                    }else{
+                        ?>
+                          <div class="item">
+                        <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/4.jpg" alt=""> </div>
+                        <div class="info" style=''>
+                            <h6>Valentina Karla</h6>
+                            <p>General Manager</p>
+                            <div class="social valign">
+                                <div class="full-width"> 
+                                   <a href="#"><i class="ti-instagram"></i></a> 
+                                   <a href="#"><i class="ti-twitter"></i></a> 
+                                   <a href="#"><i class="ti-facebook"></i></a> 
+                                   <a href="#"><i class="ti-pinterest"></i></a>
+                                   <p>valentina@hotel.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img"> 
+                        <img src="<?= base_url() ?>/public/user_assets/img/team/1.jpg" alt=""> </div>
+                        <div class="info">
+                            <h6>Micheal White</h6>
+                            <p>Guest Service Department</p>
+                            <div class="social valign">
+                                <div class="full-width"> 
+                                    <a href="#"><i class="ti-instagram"></i></a>
+                                    <a href="#"><i class="ti-twitter"></i></a> 
+                                    <a href="#"><i class="ti-facebook"></i></a> 
+                                    <a href="#"><i class="ti-pinterest"></i></a>
+                                    <p>micheal@hotel.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/2.jpg" alt=""> </div>
+                        <div class="info">
+                            <h6>Olivia Martin</h6>
+                            <p>Reservations Manager</p>
+                            <div class="social valign">
+                                <div class="social valign">
+                                    <div class="full-width"> 
+                                       <a href="#"><i class="ti-instagram"></i></a> 
+                                       <a href="#"><i class="ti-twitter"></i></a> 
+                                       <a href="#"><i class="ti-facebook"></i></a> 
+                                       <a href="#"><i class="ti-pinterest"></i></a>
+                                       <p>olivia@hotel.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/5.jpg" alt=""> </div>
+                        <div class="info">
+                            <h6>Mariana Dana</h6>
+                            <p>F&B Manager</p>
+                            <div class="social valign">
+                                <div class="full-width"> 
+                                   <a href="#"><i class="ti-instagram"></i></a> 
+                                   <a href="#"><i class="ti-twitter"></i></a> 
+                                   <a href="#"><i class="ti-facebook"></i></a> 
+                                   <a href="#"><i class="ti-pinterest"></i></a>
+                                   <p>mariana@hotel.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/3.jpg" alt=""> </div>
+                        <div class="info">
+                            <h6>Enrico Brown</h6>
+                            <p>Head Chef</p>
+                            <div class="social valign">
+                                <div class="full-width"> 
+                                   <a href="#"><i class="ti-instagram"></i></a> 
+                                   <a href="#"><i class="ti-twitter"></i></a> 
+                                   <a href="#"><i class="ti-facebook"></i></a> 
+                                   <a href="#"><i class="ti-pinterest"></i></a>
+                                   <p>enrico@hotel.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="img"> <img src="<?= base_url() ?>/public/user_assets/img/team/6.jpg" alt=""> </div>
+                        <div class="info">
+                            <h6>Victoria Dan</h6>
+                            <p>Meetings and Events Manager</p>
+                            <div class="social valign">
+                                <div class="full-width"> 
+                                   <a href="#"><i class="ti-instagram"></i></a> 
+                                   <a href="#"><i class="ti-twitter"></i></a> 
+                                   <a href="#"><i class="ti-facebook"></i></a> 
+                                   <a href="#"><i class="ti-pinterest"></i></a>
+                                   <p>victoria@hotel.com</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                         <?php
-                        }
-                    }else{
-                    ?>
-                     <div class="clients-logo">
-                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" alt=""></a>
-                    </div>
-                    <div class="clients-logo shadow p-4">
-                        <a href="#0" class="d-flex justify-content-center">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRr_EkLtsAlglX6_AeUt9YJ_VRoTBusvtIw&s" style="height:200px;width:200px;object-fit:cover" alt="">
-                        </a>
-                        <div class="my-4 d-flex justify-content-between">
-                        <span>345 rs</span>
-                        <span>
-                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
-                        </span>
-                        </div>
-                        <span class="my-3">
-                            <b style="color:#ff512f !important;font-weight:bold">20% off 100rs</b>
-                        </span>
-                        <p class="">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci mollitia similique magnam amet aliquid dolorem esse harum distinctio repudiandae accusantium.
-                        </p>
-                        <div class=" d-flex justify-content-end text-right">
-                            <a href="">
-                                <button class="btn" style="background-color:#f18444;color:white">View Details</button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>/public/user_assets/img/clients/4.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>/public/user_assets/img/clients/5.png" alt=""></a>
-                    </div>
-                    <div class="clients-logo">
-                        <a href="#0"><img src="<?= base_url() ?>/public/user_assets/img/clients/6.png" alt=""></a>
-                    </div>
-                    <?php
                     }
                     ?>
-                    
-                </div>
+                  
+                  
                 </div>
             </div>
         </div>
     </section>
      <!-- Services -->
-     <section class="services section-padding">
+     <section class="services section-padding" style="margin-top:-200px">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
