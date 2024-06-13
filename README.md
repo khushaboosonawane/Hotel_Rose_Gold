@@ -1,6 +1,6 @@
 # Hotel_Rose_Gold
 
-Welcome to the Hotel Project! This project is a comprehensive solution for managing hotel operations efficiently. From handling reservations to managing guest check-ins and check-outs, this application offers a seamless experience for both hotel staff and guests.
+Welcome to the Hotel Rose Gold Project! This project is a comprehensive solution for managing hotel operations efficiently. From handling reservations to managing guest check-ins and check-outs, this application offers a seamless experience for both hotel staff and guests.
 
 <b> Features </b>:
  1. Reservation Management: Easily create, modify, and cancel reservations.
