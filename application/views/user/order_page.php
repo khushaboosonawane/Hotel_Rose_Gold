@@ -35,7 +35,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         if(count($order_room)>0){
                             ?>
                              <h2 class='text-center my-3'>
-                            <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:90px;width:90px;text-align:center" alt=""> <br>    
+                            <img src="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info[0]['hotel_logo'] ?>" style="height:100px;width:100px;text-align:center;object-fit:cover" alt=""> <br>    
                             Room Order Details <br>
                         
                             </h2>

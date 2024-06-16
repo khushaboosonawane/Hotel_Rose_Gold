@@ -29,7 +29,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 <td><?= $key+1 ?></td>
                                 <td><?= $row['room_name'] ?></td>
                                 <td><?= number_format($row['room_price']) ?> &#8377;</td>
-                                <td><img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:200px;width:200px"></td>
+                                <td><img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:200px;width:200px;object-fit:cover"></td>
                                 <td>
                                     <a href="<?= base_url() ?>usercontroller/book_room/<?= $row['room_id'] ?>">
                                         <button class="btn btn-primary">Book</button>

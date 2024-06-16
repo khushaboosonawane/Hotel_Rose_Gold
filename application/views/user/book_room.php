@@ -7,7 +7,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
         <div class="row">
             <div class="col-md-12 caption mt-90">
                 <h5><?= $basic_info[0]['hotel_name'] ?></h5>
-                <h1>Cart Page</h1>
+                <h1>Book  Page</h1>
             </div>
         </div>
     </div>
@@ -22,15 +22,14 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <span>
                         <?php
                         $room_cart_data[0]['rating'];
-                        // echo "<pre>";
-                        // print_r($room_cart_data);
-                        // exit();
+
                         for($i=0;$i<$room_cart_data[0]['rating'];$i++){
                             ?>
                             <i class="ri-star-fill"></i>
                             <?php
                         }
                         ?>
+                        
                     </span>
                     <ul class="list-group">
                         <li class='list-group-item'>Breakfast : <?= $room_cart_data[0]['room_breakfast'] ?></li>
@@ -41,23 +40,32 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     <img src="<?= base_url() ?>public/upload/rooms_image/<?= $room_cart_data[0]['room_image'] ?>" alt="" style="height:100%;width:100%;object-fit:cover">
                 </div>
                 <div class="col-md-12 mb-30  d-flex justify-content-center">
-                    <form method="post" action="<?= base_url() ?>usercontroller/booked">
-                        <input type="hidden" name="room_id" value="<?= $room_cart_data[0]['room_id'] ?>" id="">
+                    <form method="post" action="<?= base_url() ?>usercontroller/checkout">
+                        <input type="hidden" name="room_id" id="room_id" value="<?= $room_cart_data[0]['room_id'] ?>" id="">
+                        <input type="text" name="product_name" value="<?= $room_cart_data[0]['product_name'] ?>">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input name="room_price" value="<?= $room_cart_data[0]['room_price'] ?> &#8377;" readonly type="text" placeholder="Your Name *" required>
+                                <input name="room_price" id="room_price" value="<?= $room_cart_data[0]['room_price'] ?>" readonly type="text" placeholder="Your Name *" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <input name="user_name" type="text" placeholder="Your Name *" required>
+                                <input name="user_name" id="user_name" type="text" placeholder="Your Name *" >
                             </div>
                             <div class="col-md-6 form-group">
-                                <input name="user_mobile" type="number" placeholder="Your Number *" required>
+                                <input name="user_mobile" id="user_mobile" type="number" placeholder="Your Number *" >
                             </div>
                             <div class="col-md-6 form-group">
-                                <input name="user_email" type="email" placeholder="Your Email *" required>
+                                <input name="user_email" id="user_email" type="email" placeholder="Your Email *" >
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="" style="color:#ff5031">CheckIn Date</label>
+                                <input name="user_checkin_date" id="user_checkin_date" class="form-control" type="date" placeholder="Your checkin Date *" >
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="" style="color:#ff5031">CheckOut Date</label>
+                                <input name="user_checkout_date" id="user_checkout_date" type="date" placeholder="Your checkOUt Date *" >
                             </div>
                             <div class="col-md-12 text-center my-4">
-                                <button type="submit" class="butn-dark2"><span>Order</span></button>
+                                <button class="butn-dark2" id="PayNow" ><span>Proceed To Checkout</span></button>
                             </div>
                         </div>
                     </form>
@@ -66,3 +74,32 @@ defined("BASEPATH") or exit("no direct script is allowed");
             
         </div>
     </section>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+       $(document).ready(function(){
+        $("#PayNow").click(function(){
+            var user_name=$("#user_name").val();
+            var user_mobile=$("#user_mobile").val();
+            var user_email=$("#user_email").val();
+            var user_checkin_date=$("#user_checkin_date").val();
+            var user_checkout_date=$("#user_checkout_date").val();
+            var obj={
+                "user_name":user_name,
+                "user_mobile":user_mobile,
+                "user_email":user_email,
+                "user_checkin_date":user_checkin_date,
+                "user_checkout_date":user_checkout_date
+            }
+            $.ajax({
+                url:"<?= base_url() ?>usercontroller/paymentstatus",
+                type:"POST",
+                data:obj,
+                dataType:'json'
+            }).done(function(res){
+                console.log(res);
+            })
+        })
+       })
+    </script>

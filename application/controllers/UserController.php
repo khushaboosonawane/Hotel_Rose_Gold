@@ -1,8 +1,17 @@
 <?php
+defined("BASEPATH") or exit("no direct script is allowed");
+require APPPATH."views/razorpay/vendor/razorpay/razorpay/Razorpay.php";
+require APPPATH.'views/mail/vendor/autoload.php';
+use Razorpay\Api\Api;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class UserController extends CI_Controller{
     function __construct(){
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
+        $mail = new PHPMailer(true);
     }
     public function check_user_login(){
         $cond=['user_email'=>$_POST['user_email'],'user_password'=>$_POST['user_password']];
@@ -282,14 +291,112 @@ class UserController extends CI_Controller{
         }
         $this->footer();
     }
-    public function booked(){
-        $_POST['user_id']=$_SESSION['user_id'];
-        $_POST['order_status']='Active';
-        $_SESSION['login_success']='Room book Successfully..';
-        $_POST['book_date ']=date('Y-m-d H:iA');
-        $this->My_model->insert("room_book",$_POST);
-        $this->My_model->delete("add_to_cart",['user_id'=>$_SESSION['user_id'],'product_id'=>$_POST['room_id']]);
-        redirect(base_url()."usercontroller/order_page");
+    public function checkout(){
+        $basic_info=$this->My_model->select("basic_info");
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $price= $_POST['room_price'] * 100;
+        $api = new Api($key, $secret);
+        $order=$api->order->create(
+            array('receipt' => '123',
+             'amount' => $price,
+              'currency' => 'INR', 
+              'notes'=> array('key1'=> 'value3','key2'=> 'value2')
+            ));
+            $_SESSION['customer_data']=$_POST;
+            $this->load->view("user/razorpay_checkpayout",['customerdata'=>$_POST,"order"=>$order,"key"=>$key,"secret"=>$secret,"basic_info"=>$basic_info]);
+            
+       
+    }
+    public function paymentstatus(){
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $razorpay_payment_id=$_POST['razorpay_payment_id'];
+        $razorpay_order_id=$_POST['razorpay_order_id']; 
+        $razorpay_signature=$_POST['razorpay_signature'];
+        $data=$razorpay_order_id . "|" . $razorpay_payment_id;
+        $generated_signature = hash_hmac("sha256",$data,$secret);
+
+
+        if ($generated_signature == $razorpay_signature) {
+            $data=[
+                'user_name'=>$_SESSION['customer_data']['user_name'],
+                'user_mobile'=>$_SESSION['customer_data']['user_mobile'],
+                'user_email'=>$_SESSION['customer_data']['user_email'],
+                'room_id'=>$_SESSION['customer_data']['room_id'],
+                'user_id'=>$_SESSION['user_id'],
+                "order_status"=>"Active",
+                "book_date"=>date('Y-m-d H:iA'),
+                "room_price"=>$_SESSION['customer_data']['room_price'],
+                "user_checkin_date"=>$_SESSION['customer_data']['user_checkin_date'],
+                "user_checkout_date"=>$_SESSION['customer_data']['user_checkout_date'],
+                "order_id"=>$razorpay_order_id
+                ];
+
+                // Date insert into book room table 
+
+                $this->My_model->insert("room_book",$data);
+               
+                // data deleted from add to cart 
+                $user_id=$_SESSION['user_id'];
+                $product_id=$_SESSION['customer_data']['room_id'];
+                $product_name=$_SESSION['customer_data']['product_name'];
+                $this->db->query("delete from add_to_cart where user_id='$user_id' and product_id='$product_id' and product_name='$product_name'");
+                $room_booking_details=$this->db->query("select * from rooms,room_book where rooms.room_id=room_book.room_id and user_id='$user_id'")->result_array();
+                // send mail 
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'sokhushaboo202@gmail.com';                     //SMTP username
+                $mail->Password   = 'dhhbcaqljukamhsj';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                //Recipients
+                $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
+                $mail->addAddress($_SESSION['customer_data']['user_email'], $_SESSION['customer_data']['user_name']);
+                $room_name=$room_booking_details[0]['room_name'];
+                $room_image="../public/upload/rooms_image/".$room_booking_details[0]['room_image'];
+        
+                $room_desc=$room_booking_details[0]['room_desc'];
+                $room_price=$room_booking_details[0]['room_price'];
+                $room_order_id=$room_booking_details[0]['order_id'];
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Room Booking';
+                $mail->Body    = "
+                                <h1>$room_name<h1>
+                                <h5>Your Room Id= $room_order_id</h5>
+                                <span class='lead'>$room_desc</span>
+                                <h2>$room_price &#8377;</h2>
+                                <p>Your Payment Was Successfully done</p>
+                                <h2>Thank you For Your Booking</h2>
+                                
+                ";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $status=$mail->send();
+                if($status){
+                    unset($_SESSION['customer_data']);
+                    redirect(base_url()."usercontroller/payment_successfull");  
+                }
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            } 
+        }else{
+            redirect(base_url()."usercontroller/payment_failed");
+        }
+
+    }
+    public function payment_successfull(){
+        $this->load->view("user/payment_successfull");
+    }
+    public function payment_failed(){
+        $this->load->view("user/payment_failed");
     }
     public function order_page(){
         $this->navbar();
