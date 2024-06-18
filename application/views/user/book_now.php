@@ -23,7 +23,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 </div>
                 <div class="col-md-6 mb-30 offset-md-1">
                     <h3>Book <?= $hall_data[0]['hall_title'] ?></h3>
-                    <form method="post" action="<?= base_url() ?>usercontroller/book_hall_data">
+                    <form method="post" action="<?= base_url() ?>usercontroller/checkoutHall">
                         <input type="hidden" name="mt_id" value="<?= $hall_data[0]['mt_id'] ?>" id="">
                         <div class="row">
                             <div class="col-md-6 form-group">
@@ -41,6 +41,18 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <div class="col-md-6 form-group">
                                 <input name="user_email" type="email" placeholder="Your Email *" required>
                             </div>
+                            <div class="col-md-12 form-group">
+                                <textarea name="purpose_book" placeholder="Enter Purpose Of Booking Hotel" required id=""></textarea>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="" style="color:#ff512f">Check In Date</label>
+                                <input name="check_in_date" type="date" placeholder="Your Email *" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="" style="color:#ff512f">Check Out Date</label>
+                                <input name="check_out_date" type="date" placeholder="Your Email *" required>
+                            </div>
+                            
                             
                             <div class="col-md-12">
                                 <button type="submit" class="butn-dark2"><span>Book</span></button>

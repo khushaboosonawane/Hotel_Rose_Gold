@@ -47,11 +47,44 @@
                       <table class="table table-bordered text-center table-hover">
                         <tr>
                             <th>User Name</th>
+                            <th>Order Status</th>
+                            <th>Order Id</th>
+                            <th>CheckIn Date</th>
+                            <th>CheckOut Date</th>
                             <th>Order Date</th>
                             <th>Price</th>
                         </tr>
                         <tr>
                             <td><?= $hall_details[0]['user_name'] ?></td>
+                            <?php
+                        if($hall_details[0]['order_status']=='Confirm'){
+                          ?>
+                          
+                          <td style="height:100%;width:10%;">
+                             <button class="btn btn-outline-success btn-sm d-flex align-items-center">
+                             <span class="spinner-grow text-success" style="font-size:3px !important"></span> &nbsp;
+                             <span><?= $hall_details[0]['order_status'] ?></span>
+                             </button>
+                           </td>
+                          <?php
+
+                        }else{
+                          ?>
+                          <td style="height:100%;width:10%;">
+                             
+                             <button class="btn btn-outline-danger btn-sm d-flex align-items-center">
+                             <span class="spinner-grow text-danger" style="font-size:3px !important"></span> &nbsp;
+                             <span><?= $hall_details[0]['order_status'] ?></span>
+                             </button>
+                           </td>
+                          <?php
+                        }
+                        
+                        ?>
+                           
+                            <td><?= $hall_details[0]['razor_order_id'] ?></td>
+                            <td><?= $hall_details[0]['check_in_date'] ?></td>
+                            <td><?= $hall_details[0]['check_out_date'] ?></td>
                             <td><?= $hall_details[0]['order_date'] ?></td>
                             <td><?= number_format($hall_details[0]['hall_price']) ?> &#8377;</td>
                         </tr>

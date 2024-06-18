@@ -261,6 +261,95 @@ class UserController extends CI_Controller{
         $_SESSION['login_success']="Hall Book Successfully";
         redirect(base_url()."usercontroller/");
     }
+    public function checkoutHall(){
+        $basic_info=$this->My_model->select("basic_info");
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $price= $_POST['hall_price'] * 100;
+        $api = new Api($key, $secret);
+        $order=$api->order->create(
+            array('receipt' => '123',
+             'amount' => $price,
+              'currency' => 'INR', 
+              'notes'=> array('key1'=> 'value3','key2'=> 'value2')
+            ));
+            $_SESSION['hall_data']=$_POST;
+            
+            $this->load->view("user/razorpay_hall_checkpayout",['customerdata'=>$_POST,"order"=>$order,"key"=>$key,"secret"=>$secret,"basic_info"=>$basic_info]);
+            
+       
+    }
+    
+ public function paymenthallstatus(){
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $razorpay_payment_id=$_POST['razorpay_payment_id'];
+        $razorpay_order_id=$_POST['razorpay_order_id']; 
+        $razorpay_signature=$_POST['razorpay_signature'];
+        $data=$razorpay_order_id . "|" . $razorpay_payment_id;
+        $generated_signature = hash_hmac("sha256",$data,$secret);
+
+
+        if ($generated_signature == $razorpay_signature) {
+            
+            $mail = new PHPMailer(true);
+            if(isset($_SESSION['user_id'])){
+                $hall_data['user_id']=$_SESSION['user_id'];
+            }
+            $hall_data['status']="Active";
+            $hall_data['order_status']="Active";
+            $hall_data['order_date']=date('Y-m-d H:iA');
+            $hall_data['user_name']=$_SESSION['hall_data']['user_name'];
+            $hall_data['user_mobile']=$_SESSION['hall_data']['user_mobile'];
+            $hall_data['user_email']=$_SESSION['hall_data']['user_email'];
+            $hall_data['purpose_book']=$_SESSION['hall_data']['purpose_book'];
+            $hall_data['check_in_date']=$_SESSION['hall_data']['check_in_date'];
+            $hall_data['check_out_date']=$_SESSION['hall_data']['check_out_date'];
+            $hall_data['hall_name']=$_SESSION['hall_data']['hall_name'];
+            $hall_data['hall_price']=$_SESSION['hall_data']['hall_price'];
+            $hall_data['mt_id']=$_SESSION['hall_data']['mt_id'];
+            $hall_data['razor_order_id ']=$razorpay_order_id;
+            $this->My_model->insert("book_hall",$hall_data);
+            $_SESSION['login_success']="Hall Book Successfully";
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'sokhushaboo202@gmail.com';                     //SMTP username
+                $mail->Password   = 'dhhbcaqljukamhsj';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                //Recipients
+                $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
+                $mail->addAddress($_SESSION['hall_data']['user_email'], $_SESSION['hall_data']['user_name']);
+                
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Hall Booking';
+                $mail->Body    = "
+                                <h1>Your Booking Confirmation Will Be Inform You On Your Registered Email Within 24 Hour</h1>
+                                <h2>Thanku For Your Booking</h2>
+
+                                
+                ";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                    
+                $status=$mail->send();
+                if($status){
+                    unset($_SESSION['hall_data']);
+                    redirect(base_url()."usercontroller/payment_successfull");  
+                }
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            } 
+        }else{
+            redirect(base_url()."usercontroller/payment_failed");
+        }
+
+    }
     public function view_food_details($food_id){
         $this->navbar();
         $data['food_data']=$this->My_model->select_food_data_id($food_id);
