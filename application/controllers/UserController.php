@@ -274,13 +274,18 @@ class UserController extends CI_Controller{
         $this->navbar();
         if(isset($_SESSION['user_id'])){
             $user_id=$_SESSION['user_id'];
-            $data['room_cart_data']=$this->db->query("select * from rooms,add_to_cart where rooms.room_id=add_to_cart.product_id and add_to_cart.product_name='special_room' and user_id='$user_id'")->result_array();
+            $data['room_cart_data']=$this->db->query("select * from rooms,add_to_cart where rooms.room_id=add_to_cart.product_id and add_to_cart.product_name='special_room' and add_to_cart.user_id='$user_id'")->result_array();
             $data['food_cart_data']=$this->db->query("select * from food,add_to_cart where food.food_id=add_to_cart.product_id and add_to_cart.product_name='food' and add_to_cart.user_id='$user_id'")->result_array();
              $this->load->view("user/cart_page",$data);
             }else{
             $this->load->view("user/cart_page");
             }
         $this->footer();
+    }
+    public function remove_room_from_cart($cart_id){
+        $this->My_model->delete("add_to_cart",['cart_id'=>$cart_id]);
+        $_SESSION['login_success']="Room Is Remove From Add To Cart";
+        redirect(base_url()."usercontroller/cart_page");
     }
     public function book_room($room_id){
         $this->navbar();
@@ -342,7 +347,7 @@ class UserController extends CI_Controller{
                 $product_id=$_SESSION['customer_data']['room_id'];
                 $product_name=$_SESSION['customer_data']['product_name'];
                 $this->db->query("delete from add_to_cart where user_id='$user_id' and product_id='$product_id' and product_name='$product_name'");
-                $room_booking_details=$this->db->query("select * from rooms,room_book where rooms.room_id=room_book.room_id and user_id='$user_id'")->result_array();
+                $room_booking_details=$this->db->query("select * from rooms,room_book where rooms.room_id='$product_id' and room_book.room_id='$product_id' and user_id='$user_id'")->result_array();
                 // send mail 
             $mail = new PHPMailer(true);
 
@@ -360,25 +365,28 @@ class UserController extends CI_Controller{
                 $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
                 $mail->addAddress($_SESSION['customer_data']['user_email'], $_SESSION['customer_data']['user_name']);
                 $room_name=$room_booking_details[0]['room_name'];
-                $room_image="../public/upload/rooms_image/".$room_booking_details[0]['room_image'];
+                $room_image=$room_booking_details[0]['room_image'];
         
                 $room_desc=$room_booking_details[0]['room_desc'];
                 $room_price=$room_booking_details[0]['room_price'];
                 $room_order_id=$room_booking_details[0]['order_id'];
+                // <img src='../public/upload/rooms_image/$room_image' alt='img not found' style='height:100%;width:100%;object-fit:cover'>
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Room Booking';
                 $mail->Body    = "
-                                <h1>$room_name<h1>
-                                <h5>Your Room Id= $room_order_id</h5>
+                                
+                                <h1 style='color:blue;'>$room_name<h1>
+                                <h5>Your Room Id= <span style='color:red'>$room_order_id</span></h5>
                                 <span class='lead'>$room_desc</span>
-                                <h2>$room_price &#8377;</h2>
-                                <p>Your Payment Was Successfully done</p>
-                                <h2>Thank you For Your Booking</h2>
+                                <h2 style='color:blue'>$room_price &#8377;</h2>
+                                <p style='color:color:green'>Your Payment Was Successfully done</p>
+                                <h3 style='color:red'>We Will Send Confirmation Mail In Your Register Email Within 24 Hours</h3>
+                                <h2 style='color:blue'>Thank you For Your Booking</h2>
                                 
                 ";
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+                    
                 $status=$mail->send();
                 if($status){
                     unset($_SESSION['customer_data']);
@@ -410,10 +418,57 @@ class UserController extends CI_Controller{
         }
         $this->footer();
     }
-    public function cancel_order($room_id){
-        $this->My_model->delete("room_book",['room_id'=>$room_id,'user_id'=>$_SESSION['user_id']]);
-        $_SESSION['login_success']="Your Order Cancel Sucessfully..";
-        redirect(base_url()."usercontroller/");
+    public function cancel_order($room_id){ 
+            $mail = new PHPMailer(true);
+            $room_booking_details=$this->db->query("select * from room_book,rooms where room_book.room_id='$room_id' and rooms.room_id='$room_id'")->result_array();
+            $room_name=$room_booking_details[0]['room_name'];
+            $room_image=$room_booking_details[0]['room_image'];
+    
+            $room_desc=$room_booking_details[0]['room_desc'];
+            $room_price=$room_booking_details[0]['room_price'];
+            $room_order_id=$room_booking_details[0]['order_id'];
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'sokhushaboo202@gmail.com';                     //SMTP username
+                $mail->Password   = 'dhhbcaqljukamhsj';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                //Recipients
+                $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
+                $mail->addAddress($room_booking_details[0]['user_email'],$room_booking_details[0]['user_name']);
+               
+               
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Room Booking';
+                $mail->Body    = "
+                 <h1 style='color:blue;'>$room_name<h1>
+                                <h5>Your Room Id= <span style='color:red'>$room_order_id</span></h5>
+                                <span class='lead'>$room_desc</span>
+                                <h2 style='color:blue'>$room_price &#8377;</h2>
+                                <h3 style='color:red'>Your Booking cancel Successfully</h3>
+                                <h2 style='color:blue'>Thank you For Contact With Us</h2>
+                                
+                ";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                    
+                $status=$mail->send();
+                if($status){
+                    $this->My_model->delete("room_book",['room_id'=>$room_id,'user_id'=>$_SESSION['user_id']]);
+                    $_SESSION['login_success']="Your Order Cancel Sucessfully..";
+                    unset($_SESSION['customer_data']);
+                    redirect(base_url()."usercontroller/order_page");  
+                }
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                redirect(base_url()."usercontroller/");
+            } 
+        
+        
     }
     public function increase_cart_qty($food_id){
         if(isset($_SESSION['user_id'])){
@@ -453,9 +508,6 @@ class UserController extends CI_Controller{
             $data=$this->db->query("select sum(qty*food_price) as total from food,add_to_cart where food.food_id=add_to_cart.product_id  and add_to_cart.product_name='food' and add_to_cart.user_id='$user_id'")->result_array();
             $result['total']=$data[0]['total'];
             $result['basic_info']=$this->My_model->select("basic_info");
-            // echo "<pre>";
-            // print_r($result['total']);
-            // exit();
             $this->load->view("user/confirm_address",$result);
 
         }else{
@@ -463,33 +515,120 @@ class UserController extends CI_Controller{
             $this->load->view("user/confirm_address",$data);
         }
     }
-    public function save_address(){
-       if(isset($_SESSION['user_id'])){
-        $_POST['user_id']=$_SESSION['user_id'];
-        $this->My_model->insert("user_order_address",$_POST);
-        $data['cart_data']=$this->My_model->select("add_to_cart",['user_id'=>$_SESSION['user_id'],'product_name'=>'food']);
-        
-        if(count($data['cart_data'])>0){
-            foreach($data['cart_data'] as $key=>$row){
-                $result[$key]['food_id']=$row['product_id'];
-                $result[$key]['user_id']=$_SESSION['user_id'];
-                $result[$key]['order_date']=date('Y-m-d H:iA');
-                $result[$key]['order_status']="Active";
-                $result[$key]['order_qty']=$row['qty'];
-            }
-        }
-       }
-       foreach($result as $key=>$row){
-        $this->My_model->insert("order_food",$row);
-       }
-       if(count($data['cart_data'])>0){
-        foreach($data['cart_data'] as $key=>$row){
-            $this->My_model->delete("add_to_cart",$row);
-        }
-       }
-       redirect(base_url()."usercontroller/order_confirm");
+    public function checkFoodAddress(){
+        $basic_info=$this->My_model->select("basic_info");
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $price= $_POST['amount'] * 100;
+        $api = new Api($key, $secret);
+        $order=$api->order->create(
+            array('receipt' => '123',
+             'amount' => $price,
+              'currency' => 'INR', 
+              'notes'=> array('key1'=> 'value3','key2'=> 'value2')
+            ));
+            $_SESSION['order_food_data']=$_POST;
+            $this->load->view("user/razorpay_food_checkpayout",['customerdata'=>$_POST,"order"=>$order,"key"=>$key,"secret"=>$secret,"basic_info"=>$basic_info]);
+            
        
     }
+    public function paymentfoodstatus(){
+        $key="rzp_test_hzb65wV2pSukU2";
+        $secret="7EMFkUDHs4ppm1bfqMvqXinP";
+        $razorpay_payment_id=$_POST['razorpay_payment_id'];
+        $razorpay_order_id=$_POST['razorpay_order_id']; 
+        $razorpay_signature=$_POST['razorpay_signature'];
+        $data=$razorpay_order_id . "|" . $razorpay_payment_id;
+        $generated_signature = hash_hmac("sha256",$data,$secret);
+
+
+        if ($generated_signature == $razorpay_signature) {
+            
+            if(isset($_SESSION['user_id'])){
+                $food_data['deliver_to']=$_SESSION['order_food_data']['deliver_to'];
+                $food_data['country']=$_SESSION['order_food_data']['country'];
+                $food_data['state']=$_SESSION['order_food_data']['state'];
+                $food_data['dist']=$_SESSION['order_food_data']['dist'];
+                $food_data['tal']=$_SESSION['order_food_data']['tal'];
+                $food_data['street']=$_SESSION['order_food_data']['street'];
+                $food_data['pincode']=$_SESSION['order_food_data']['pincode'];
+                $food_data['bank_name']=$_SESSION['order_food_data']['bank_name'];
+                $food_data['bank_account_number']=$_SESSION['order_food_data']['bank_account_number'];
+                $food_data['bank_ifsc']=$_SESSION['order_food_data']['bank_ifsc'];
+                $food_data['amount']=$_SESSION['order_food_data']['amount'];
+                $food_data['user_id']=$_SESSION['user_id'];
+                $user_id=$_SESSION['user_id'];
+              
+                $this->My_model->insert("user_order_address",$food_data);
+               
+                $data=$this->db->query("select * from add_to_cart where user_id='$user_id' and product_name='food'")->result_array();
+                
+                
+                if(count($data)>0){
+                    foreach($data as $key=>$row){
+                        $result[$key]['food_id']=$row['product_id'];
+                        $result[$key]['user_id']=$_SESSION['user_id'];
+                        $result[$key]['order_date']=date('Y-m-d H:iA');
+                        $result[$key]['order_status']="Active";
+                        $result[$key]['order_qty']=$row['qty'];
+                    }
+                }
+               }
+               foreach($result as $key=>$row){
+                $this->My_model->insert("order_food",$row);
+               }
+               if(count($data)>0){
+                foreach($data as $key=>$row){
+                    $this->My_model->delete("add_to_cart",$row);
+                }
+               }
+               
+            //   send data 
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'sokhushaboo202@gmail.com';                     //SMTP username
+                $mail->Password   = 'dhhbcaqljukamhsj';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                //Recipients
+                $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
+                $mail->addAddress($food_data['bank_ifsc'],$food_data['bank_name']);
+               
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Food Order Confirmation';
+                $mail->Body    = "
+                                <div style='height:70vh;width:50%;margin:5px auto;text-align:center;border:1px solid black;padding:20px'>
+                                    <h1 style='color:blue'>Your Food Order Successfully</h1>
+                                    <h3>Your Order Will Be Delivered Within 5 hours</h3>
+                                    <h3>Thankyou For Choosing Our Hotel !....</h3>
+                                </div>
+                               
+                ";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                    
+                $status=$mail->send();
+                if($status){
+                    unset($_SESSION['customer_data']);
+                    redirect(base_url()."usercontroller/payment_successfull");  
+                }
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+
+        }else{
+            redirect(base_url()."usercontroller/payment_failed");
+        }
+
+    }
+   
     public function order_confirm(){
         $this->load->view("user/order_confirm");
     }

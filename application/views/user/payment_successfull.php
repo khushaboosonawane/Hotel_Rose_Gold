@@ -1,13 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+     <?php
+    $basic_info=$this->db->query("Select * from basic_info")->result_array();
+    ?>
+    <title><?= $basic_info[0]['hotel_name'] ?></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="<?= base_url() ?>public/upload/hotel_logo/<?= $basic_info['0']['hotel_logo'] ?>" />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -57,7 +61,7 @@
                     <h2> Your payment was successful </h2>
                    <p> Thank you for your payment. we will <br>
                     be in contact with more details shortly </p>  
-                    <a href="<?= base_url() ?>usercontroller/rooms_suits">
+                    <a href="<?= base_url() ?>usercontroller/">
                         <button class="btn btn-primary btn-lg my-5">Click Here To Go Back</button>    
                     </a>
             </div> 

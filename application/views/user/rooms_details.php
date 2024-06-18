@@ -9,7 +9,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
             if(count($special_rooms)>0){
                 foreach($special_rooms as $row){
             ?>
-            <div class="text-center item bg-img" data-overlay-dark="5" data-background="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>"></div>
+            <div class="text-center item bg-img" data-overlay-dark="5" data-background="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" style="height:100%;width:100%;object-fit:cover"></div>
             <?php
                 }
             }else{
@@ -119,6 +119,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         </div>
                     </div>
                 </div>
+               
                 <div class="col-md-3 offset-md-1">
                     <img src="<?= base_url() ?>public/upload/rooms_image/<?= $room_details[0]['room_image'] ?>" style="margin:20px 10px;height:30vh;width:100%;object-fit:cover" alt="">
                     <h6>Amenities</h6>
@@ -180,7 +181,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                 ?>
                 <div class="col-md-4">
                     <div class="item">
-                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:70vh;width:100%;object-fit:cover"> </div>
+                        <div class="position-re o-hidden"> <img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:50vh;width:100%;object-fit:cover"> </div>
 
                         <div class="con">
                             <span>

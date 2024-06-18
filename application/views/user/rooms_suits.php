@@ -28,7 +28,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <div class="clients-logo">
                                 <div class="item">
                                     <div class="position-re o-hidden"> 
-                                        <img src="<?= base_url() ?>public/upload/rooms_image/<?=  $row['room_image'] ?>" style="height:380px;width:100%" alt=""> 
+                                        <img src="<?= base_url() ?>public/upload/rooms_image/<?=  $row['room_image'] ?>" style="height:300px;width:100%;object-fit:cover" alt=""> 
                                     </div> 
                                     <span class="category">
                                         <a href="<?= base_url() ?>usercontroller/rooms_details/<?= $row['room_id'] ?>" class="btn-effect" style="padding:15px 9px !important"><span>Details</span></a>

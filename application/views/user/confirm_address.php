@@ -125,7 +125,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                     Address & Payment
                 </div>
                 <div class="card-body p-4">
-                    <form role="form" action="<?= base_url() ?>usercontroller/save_address" class="row" method="post">
+                    <form role="form" action="<?= base_url() ?>usercontroller/checkFoodAddress" class="row" method="post">
                     <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
@@ -173,32 +173,32 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                             <hr>
                             <div class="row">
-                                <h3>Enter Bank Details</h3>
+                                <h3>Enter Delivered Person Details</h3>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Bank Name</span>
-                                        <input type="text" class="form-control" placeholder="Enter Bank Name" aria-label="Username" name="bank_name" aria-describedby="basic-addon1">
+                                        <span class="input-group-text" id="basic-addon1">Deliverd Name</span>
+                                        <input type="text" class="form-control" placeholder="Enter Delivered Name" aria-label="Username" name="bank_name" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Bank Account Number</span>
-                                        <input type="text" class="form-control" placeholder="Enter Bank Account Number" aria-label="Username" name="bank_account_number" aria-describedby="basic-addon1">
+                                        <span class="input-group-text" id="basic-addon1">Delivered Mobile</span>
+                                        <input type="number" class="form-control" placeholder="Enter Delivered mobile Number" aria-label="Username" name="bank_account_number" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Bank IFSC Code</span>
-                                        <input type="text" class="form-control" placeholder="Enter Bank Account Number" aria-label="Username" name="bank_ifsc" aria-describedby="basic-addon1">
+                                        <span class="input-group-text" id="basic-addon1">Delivered Email</span>
+                                        <input type="email" class="form-control" placeholder="Enter Delivered Email" aria-label="Username" name="bank_ifsc" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Total Amount</span>
-                                        <input type="text" class="form-control" placeholder="Enter Bank Account Number" aria-label="Username" name="amount" value="<?= number_format($total) ?> &#8377;" aria-describedby="basic-addon1" readonly>
+                                        <input type="text" class="form-control" placeholder="Enter Bank Account Number" aria-label="Username" name="amount" value="<?= $total ?>" aria-describedby="basic-addon1" readonly>
                                     </div>
                                 </div>
 
@@ -206,7 +206,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <hr>
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button class='btn btn-primary'>Confirm Address</button>
+                                    <button class='btn btn-primary'>Proceed To Pay</button>
                                 </div>
                             </div>
                     </form>

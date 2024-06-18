@@ -32,6 +32,18 @@
       }
       ?>
   </div>
+  <div class="row">
+      <?php
+      if(isset($_SESSION['login_data'])){
+        ?>
+        <div class="col-md-3" id="msg4" style="position:absolute;top:100px;right:20px;z-index:999">
+           <p class="text-center text-white py-2" style="background: linear-gradient(66deg, rgba(220, 52, 85), rgb(252, 175, 59));"><?= $_SESSION['login_data'] ?></p>
+        </div>
+        <?php
+      }
+      ?>
+      
+  </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -45,6 +57,21 @@
 </script>
 <?php
 unset($_SESSION['update_data']);
+?>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+             $("#msg4").fadeOut(2000);
+        },2000)
+    })
+   
+</script>
+<?php
+unset($_SESSION['login_data']);
 ?>
 
 <script>

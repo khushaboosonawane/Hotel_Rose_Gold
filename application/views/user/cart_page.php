@@ -1,6 +1,58 @@
 <?php
 defined("BASEPATH") or exit("no direct script is allowed");
 ?>
+<style>
+    .buttons {
+    margin: 10%;
+    text-align: center;
+}
+
+.btn-hover {
+    width: 163px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 42px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+
+.btn-hover.color-6 {
+    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+}
+.btn-hover.color-10 {
+        background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+
+
+
+
+
+</style>
 <!-- Header Banner -->
 <div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="6" data-background="<?= base_url() ?>public/upload/banner_image/cart.jpeg" style="background-position:center center">
     <div class="container">
@@ -26,14 +78,20 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             
                             ?>
                             <tr>
-                                <td><?= $key+1 ?></td>
-                                <td><?= $row['room_name'] ?></td>
-                                <td><?= number_format($row['room_price']) ?> &#8377;</td>
-                                <td><img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:200px;width:200px;object-fit:cover"></td>
+                                <td>
+                                    <a href="<?= base_url() ?>usercontroller/remove_room_from_cart/<?= $row['cart_id'] ?>">
+                                        <button class="btn-hover color-10">Remove From Cart</button>
+                                    </a>
+                                </td>
+                                <th><?= $row['room_name'] ?></th>
+                                <th style="height:100%;width:250px"><?= $row['room_desc'] ?></th>
+                                <th><?= number_format($row['room_price']) ?> &#8377;</th>
+                                <td><img src="<?= base_url() ?>public/upload/rooms_image/<?= $row['room_image'] ?>" alt="" style="height:200px;width:300px;object-fit:cover"></td>
                                 <td>
                                     <a href="<?= base_url() ?>usercontroller/book_room/<?= $row['room_id'] ?>">
-                                        <button class="btn btn-primary">Book</button>
+                                    <button class="btn-hover color-6">BOOK NOW</button>
                                     </a>
+                                    
                                 </td>
                             </tr>
                             <?php
@@ -73,7 +131,11 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                 $sub_total+=$row['qty']*$row['food_price'];
                                 ?>
                                 <tr>
-                                    <td><?= $key+1 ?></td>
+                                <td>
+                                    <a href="<?= base_url() ?>usercontroller/remove_room_from_cart/<?= $row['cart_id'] ?>">
+                                        <button class="btn-hover color-10">Remove From Cart</button>
+                                    </a>
+                                </td>
                                     <td><?= $row['food_name'] ?></td>
                                     <td><?= number_format($row['food_price']) ?> &#8377;</td>
                                     <td class="d-flex justify-content-around">
