@@ -8600,6 +8600,13 @@ pre {
 .table-borderless tbody + tbody {
   border: 0; }
 
+.table-borderless td{
+  color:white !important;
+}
+.table-bordered  td{
+  color:white;
+}
+
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #000000; }
 
@@ -12783,8 +12790,8 @@ a.close.disabled {
 
 .spinner-grow {
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: 1rem;
+  height: 1rem;
   vertical-align: text-bottom;
   background-color: currentColor;
   border-radius: 50%;

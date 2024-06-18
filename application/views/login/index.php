@@ -49,7 +49,7 @@
                   </div>
                   <div class="form-group">
                     <label>Password *</label>
-                    <input type="text" class="form-control p_input" name="user_pass" placeholder="Enter Password" required>
+                    <input type="password" class="form-control p_input" name="user_pass" placeholder="Enter Password" required>
                   </div>
                   
                   <div class="text-center">

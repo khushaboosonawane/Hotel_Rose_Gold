@@ -173,26 +173,26 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             </div>
                             <hr>
                             <div class="row">
-                                <h3>Enter Delivered Person Details</h3>
+                                <h3>Enter Payment Details</h3>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Deliverd Name</span>
-                                        <input type="text" class="form-control" placeholder="Enter Delivered Name" aria-label="Username" name="bank_name" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" placeholder="Enter Delivered Name" aria-label="Username" name="user_order_name" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Delivered Mobile</span>
-                                        <input type="number" class="form-control" placeholder="Enter Delivered mobile Number" aria-label="Username" name="bank_account_number" aria-describedby="basic-addon1">
+                                        <input type="number" class="form-control" placeholder="Enter Delivered mobile Number" aria-label="Username" name="user_order_mobile" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Delivered Email</span>
-                                        <input type="email" class="form-control" placeholder="Enter Delivered Email" aria-label="Username" name="bank_ifsc" aria-describedby="basic-addon1">
+                                        <input type="email" class="form-control" placeholder="Enter Delivered Email" aria-label="Username" name="user_order_email" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

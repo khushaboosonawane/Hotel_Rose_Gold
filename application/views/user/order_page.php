@@ -44,6 +44,9 @@ defined("BASEPATH") or exit("no direct script is allowed");
 .btn-hover.color-9 {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    width: 61%;
+    height: 20%;
+    border-radius: 0px;
 }
 
 </style>
@@ -87,7 +90,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                         
                             </h2>
                             <tr>
-                                <th>View</th>
+                                <th>View Details</th>
                                 <th>Room Name</th>
                                 <th>Room Price</th>
                                 <th>Booking Date</th>
@@ -165,7 +168,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <?php
                             ?>
                             <tr>
-                                <th>View</th>
+                                <th>View Order Details</th>
                                 <th>Order Date</th>
                                 <th>Food Name</th>
                                 <th>Food Price</th>
@@ -179,8 +182,8 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                     ?>
                                     <tr>
                                     <td style='width:10% !important'>
-                                        <a href="<?= base_url() ?>usercontroller/view_order_details/<?= $row['food_id'] ?>">
-                                        <button class="btn-hover color-9">View Order Details</button>
+                                        <a href="<?= base_url() ?>usercontroller/view_order_details/<?= $row['order_id'] ?>">
+                                        <button class="btn-hover color-9"><i class="ri-arrow-right-double-line"></i></button>
                                         </a>
                                         
                                     </td>

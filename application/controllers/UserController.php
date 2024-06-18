@@ -309,6 +309,7 @@ class UserController extends CI_Controller{
               'notes'=> array('key1'=> 'value3','key2'=> 'value2')
             ));
             $_SESSION['customer_data']=$_POST;
+            
             $this->load->view("user/razorpay_checkpayout",['customerdata'=>$_POST,"order"=>$order,"key"=>$key,"secret"=>$secret,"basic_info"=>$basic_info]);
             
        
@@ -552,9 +553,9 @@ class UserController extends CI_Controller{
                 $food_data['tal']=$_SESSION['order_food_data']['tal'];
                 $food_data['street']=$_SESSION['order_food_data']['street'];
                 $food_data['pincode']=$_SESSION['order_food_data']['pincode'];
-                $food_data['bank_name']=$_SESSION['order_food_data']['bank_name'];
-                $food_data['bank_account_number']=$_SESSION['order_food_data']['bank_account_number'];
-                $food_data['bank_ifsc']=$_SESSION['order_food_data']['bank_ifsc'];
+                $food_data['user_order_name']=$_SESSION['order_food_data']['user_order_name'];
+                $food_data['user_order_mobile']=$_SESSION['order_food_data']['user_order_mobile'];
+                $food_data['user_order_email']=$_SESSION['order_food_data']['user_order_email'];
                 $food_data['amount']=$_SESSION['order_food_data']['amount'];
                 $food_data['user_id']=$_SESSION['user_id'];
                 $user_id=$_SESSION['user_id'];
@@ -571,6 +572,18 @@ class UserController extends CI_Controller{
                         $result[$key]['order_date']=date('Y-m-d H:iA');
                         $result[$key]['order_status']="Active";
                         $result[$key]['order_qty']=$row['qty'];
+                        $result[$key]['deliver_to']=$_SESSION['order_food_data']['deliver_to'];
+                        $result[$key]['country']=$_SESSION['order_food_data']['country'];
+                        $result[$key]['state']=$_SESSION['order_food_data']['state'];
+                        $result[$key]['dist']=$_SESSION['order_food_data']['dist'];
+                        $result[$key]['tal']=$_SESSION['order_food_data']['tal'];
+                        $result[$key]['street']=$_SESSION['order_food_data']['street'];
+                        $result[$key]['pincode']=$_SESSION['order_food_data']['pincode'];
+                        $result[$key]['user_order_name']=$_SESSION['order_food_data']['user_order_name'];
+                        $result[$key]['user_order_mobile']=$_SESSION['order_food_data']['user_order_mobile'];
+                        $result[$key]['user_order_email']=$_SESSION['order_food_data']['user_order_email'];
+                        $result[$key]['razor_order_id ']=$razorpay_order_id;
+
                     }
                 }
                }
@@ -598,13 +611,13 @@ class UserController extends CI_Controller{
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 //Recipients
                 $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
-                $mail->addAddress($food_data['bank_ifsc'],$food_data['bank_name']);
+                $mail->addAddress($food_data['user_order_email'],$food_data['user_order_name']);
                
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Food Order Confirmation';
                 $mail->Body    = "
-                                <div style='height:70vh;width:50%;margin:5px auto;text-align:center;border:1px solid black;padding:20px'>
+                                <div style='height:50vh;width:50%;margin:5px auto;text-align:center;border:1px solid black;padding:20px'>
                                     <h1 style='color:blue'>Your Food Order Successfully</h1>
                                     <h3>Your Order Will Be Delivered Within 5 hours</h3>
                                     <h3>Thankyou For Choosing Our Hotel !....</h3>
@@ -655,6 +668,48 @@ class UserController extends CI_Controller{
         $this->load->view("user/metting_events",$data);
         $this->footer();
     }
+    public function view_order_details($order_id){
+        $this->navbar();
+        $data['order_details']=$this->db->query("select * from food,order_food where food.food_id=order_food.food_id and order_food.order_id='$order_id'")->result_array();
+        $data['sub_total']=($this->db->query("select sum(order_qty*food_price) as total_amount from order_food,food where order_food.food_id=food.food_id and order_id=$order_id")->result_array())[0]['total_amount'];
+        
+        $this->load->view("user/view_order_details",$data);
+        $this->footer();
+    }
     
 }
 ?>
+
+<!-- Array
+(
+    [0] => Array
+        (
+            [food_id] => 3
+            [cat_id] => 6
+            [sub_cat_id] => 5
+            [food_name] => Dosa
+            [food_rating] => 5
+            [food_desc] => South Indian cuisine is a flavorful journey through the southern states of India, celebrated for its vibrant spices, diverse ingredients, and unique cooking techniques. Rice, lentils, coconut, and an array of fresh vegetables form the backbone of South Indian dishes. Iconic dishes like dosa (fermented rice and lentil crepes), idli (steamed rice cakes), and vada (savory fried lentil donuts) are breakfast staples, often served with chutneys and sambar (a tangy lentil soup). The region's cuisine also boasts a variety of aromatic rice dishes such as biryani and lemon rice. Coconut-based curries like avial and kootu, as well as spicy seafood delicacies like fish curry and meen varuval, showcase the region's coastal influences. South 
+            [food_price] => 200
+            [off_price] => 30% OFF 200Rs
+            [food_image] => 17179054444500southfood.jpg
+            [order_id] => 1
+            [user_id] => 1
+            [order_date] => 2024-06-18 09:35AM
+            [order_status] => Delivered
+            [order_qty] => 4
+            [deliver_to] => dhiraj sonawane
+            [country] => India
+            [state] => MH
+            [dist] => Ahemadnagar
+            [tal] => Newasa
+            [street] => Vantkothe Erandol Jalgaon Maharashtra
+            [pincode] => 425110
+            [user_order_name] => khushaboo sonawane
+            [user_order_mobile] => 9665065113
+            [user_order_email] => sokhushaboo202@gmail.com
+            [razor_order_id] => order_OO5IoGWXSxDAYH
+            [order_deliver_date] => 2024-06-18 09:36AM
+        )
+
+) -->

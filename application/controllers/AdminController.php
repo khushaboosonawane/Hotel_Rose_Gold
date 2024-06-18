@@ -750,7 +750,8 @@ class AdminController extends CI_Controller{
         redirect(base_url()."admincontroller/order_food");
     }
     public function deliver_order($order_id){
-        $this->My_model->update_cond("order_food",['order_status'=>'Delivered'],['order_id'=>$order_id]);
+        $order_deliver_date=date('Y-m-d H:iA');
+        $this->My_model->update_cond("order_food",['order_status'=>'Delivered','order_deliver_date'=>$order_deliver_date],['order_id'=>$order_id]);
         $_SESSION['update_data']="Order Deliver";
         redirect(base_url()."admincontroller/order_food");
     }
@@ -761,7 +762,10 @@ class AdminController extends CI_Controller{
     }
     public function view_details($order_id){
         $this->navbar();
-        $data['order_detail']=$this->db->query("select * from user_data,order_food,food where user_data.user_id=order_food.user_id and food.food_id=order_food.food_id and order_id='$order_id'")->result_array();
+        $data['order_detail']=$this->db->query("select * from food,user_data,order_food where order_food.food_id=food.food_id and order_food.user_id=user_data.user_id and order_food.order_id='$order_id'")->result_array();
+        $data['order_detail_status']=$this->db->query("select * from order_food where order_id='$order_id'")->result_array();
+    
+             
         $this->load->view("admin/view_details",$data);
         $this->footer();
     }

@@ -48,9 +48,9 @@ var options = {
     "order_id": "<?= $order['id'] ?>", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "callback_url": "<?= base_url() ?>usercontroller/paymentfoodstatus",
     "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-        "name": "<?= $customerdata['bank_name'] ?>", //your customer's name
-        "email": "<?= $customerdata['bank_account_number'] ?>",
-        "contact": "<?= $customerdata['bank_ifsc'] ?>" //Provide the customer's phone number for better conversion rates 
+        "name": "<?= $customerdata['user_order_name'] ?>", //your customer's name
+        "email": "<?= $customerdata['user_order_mobile'] ?>",
+        "contact": "<?= $customerdata['user_order_email'] ?>" //Provide the customer's phone number for better conversion rates 
     },
     "notes": {
         "address": "246, Professor Chowk, Savedi, Ahmednagar, Maharashtra 414003"

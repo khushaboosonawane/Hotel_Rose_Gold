@@ -1,6 +1,12 @@
+<?php
+defined("BASEPATH") or exit("no direct script is allowed");
+?>
+
+
+
 <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Dropdowns </h3>
+              <h3 class="page-title"> Food Details </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
@@ -36,17 +42,72 @@
                         </div>
                     </div>
 
-                    <div class="template-demo">
+                    <div class="template-demo table-responsive">
                       <table class="table table-bordered text-center table-hover">
                         <tr>
+                            <th>Status</th>
+                            <?php
+                            if($order_detail[0]['order_status']='Delivered'){
+                              ?>
+                              <th>Order Delivery Date</th>
+                              <?php
+                            }
+                            ?>
                             <th>User Name</th>
+                            <th>User Mobile</th>
+                            <th>User Email</th>
+                            <th>Order Address</th>
                             <th>Order Date</th>
                             <th>Qty</th>
                             <th>Price</th>
                             <th>Total Price</th>
                         </tr>
+
+                       
                         <tr>
-                            <td><?= $order_detail[0]['user_name'] ?></td>
+                        <?php
+                        if($order_detail_status[0]['order_status']=='Delivered'){
+                          ?>
+                          
+                          <td style="height:100%;width:30%;">
+                             <button class="btn btn-outline-success btn-sm d-flex align-items-center">
+                             <span class="spinner-grow text-success" style="font-size:3px !important"></span> &nbsp;
+                             <span><?= $order_detail_status[0]['order_status'] ?></span>
+                             </button>
+                           </td>
+                          <?php
+
+                        }else{
+                          ?>
+                          <td style="height:100%;width:30%;">
+                             
+                             <button class="btn btn-outline-danger btn-sm d-flex align-items-center">
+                             <span class="spinner-grow text-danger" style="font-size:3px !important"></span> &nbsp;
+                             <span><?= $order_detail_status[0]['order_status'] ?></span>
+                             </button>
+                           </td>
+                          <?php
+                        }
+                        
+                        ?>
+                            
+                            
+                            
+                            <?php
+                            if($order_detail[0]['order_status']='Delivered'){
+                              ?>
+                              <td><?= $order_detail[0]['order_deliver_date'] ?></td>
+                              <?php
+                            }
+                            ?>
+                            <td><?= $order_detail[0]['user_order_name'] ?></td>
+                            <td style="width:18%">+91 &nbsp; <?= $order_detail[0]['user_order_mobile'] ?></td>
+                            <td><?= $order_detail[0]['user_order_email'] ?></td>
+                            <td style="width:20%">
+                              <?= $order_detail[0]['state'] ?> &nbsp; <?= $order_detail[0]['dist'] ?> &nbsp;
+                              <?= $order_detail[0]['tal'] ?> &nbsp; <?= $order_detail[0]['street'] ?> &nbsp;
+                              <?= $order_detail[0]['pincode'] ?>
+                            </td>
                             <td><?= $order_detail[0]['order_date'] ?></td>
                             <td><?= $order_detail[0]['order_qty'] ?></td>
                             <td><?= number_format($order_detail[0]['food_price']) ?> &#8377;</td>
