@@ -12,3 +12,7 @@ Welcome to the Hotel Rose Gold Project! This project is a comprehensive solution
 <b> Technologies Used </b>: <br>
 <b>Frontend</b>: HTML, CSS, Bootstrap, JavaScript, Jquery <br>
 <b>Backend</b>: PHP, CodeIgniter, MYSQL
+
+<b>APIs</b>
+ 1 . Integration with third-party services such as payment gateways and external booking platforms.
+ 2 . Integration with third-party services such as Email gateways For Booking Confirmation
