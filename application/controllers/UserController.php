@@ -12,9 +12,11 @@ class UserController extends CI_Controller{
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
         $mail = new PHPMailer(true);
+        
     }
     public function check_user_login(){
-        $cond=['user_email'=>$_POST['user_email'],'user_password'=>$_POST['user_password']];
+        $user_password=hash("sha256",$_POST['user_password']);
+        $cond=['user_email'=>$_POST['user_email'],'user_password'=>$user_password];
         $data=$this->My_model->select("user_data",$cond);
         if(count($data)>0){
             $_SESSION['user_id']=$data[0]['user_id'];
@@ -169,11 +171,13 @@ class UserController extends CI_Controller{
             move_uploaded_file($_FILES['user_image']['tmp_name'],"public/upload/user_image/$imagename");
             $_POST['user_image']=$imagename;
             $_POST['login_date']=date('Y-m-d H:iA');
+            $_POST['user_password']=hash("sha256",$_POST['user_password']);
             $this->My_model->insert("user_data",$_POST);
             $_SESSION['login_success']="Account Created Successfully";
             redirect(base_url()."usercontroller/userprofile");
         }else{
             $_POST['login_date']=date('Y-m-d H:iA');
+            $_POST['user_password']=hash("sha256",$_POST['user_password']);
             $this->My_model->insert("user_data",$_POST);
             $_SESSION['login_success']="Account Created Successfully";
             redirect(base_url()."usercontroller/userprofile");
@@ -311,7 +315,16 @@ class UserController extends CI_Controller{
             $hall_data['razor_order_id ']=$razorpay_order_id;
             $this->My_model->insert("book_hall",$hall_data);
             $_SESSION['login_success']="Hall Book Successfully";
-
+            $mt_id=$_SESSION['hall_data']['mt_id'];
+            $hall_details=$this->db->query("select * from metting_halls,book_hall where metting_halls.mt_id=$mt_id and book_hall.mt_id='$mt_id'")->result_array();
+           
+            
+            $image="../public/upload/hall_image/".$hall_details[0]['hall_image'];
+            $hallname=$hall_details[0]['hall_title'];
+            $hallinfo=$hall_details[0]['hall_info'];
+            $hallsize=$hall_details[0]['hall_size'];
+            $hallprice=number_format($hall_details[0]['hall_price']);
+            
             try {
                 //Server settings
                 $mail->SMTPDebug = 0;                      //Enable verbose debug output
@@ -325,12 +338,20 @@ class UserController extends CI_Controller{
                 //Recipients
                 $mail->setFrom('sokhushaboo202@gmail.com', 'khushaboo sonawane');
                 $mail->addAddress($_SESSION['hall_data']['user_email'], $_SESSION['hall_data']['user_name']);
-                
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Hall Booking';
+                $mail->Subject = 'Hall Booking Information';
                 $mail->Body    = "
-                                <h1>Your Booking Confirmation Will Be Inform You On Your Registered Email Within 24 Hour</h1>
+                                    <div style='height:40vh;width:50%;margin:5px auto;box-shadow:0 0 20px black;padding:10px'>
+                                        <h1 style='text-align:center;'>Hall Booking Details</h1>
+                                        <h2>$hallname</h2>
+                                        <p style='font-size:10px;text-align:left'>
+                                            $hallinfo
+                                        </p>
+                                        <b>Hall Size : </b><span style='font-size:15px;font-weight:bold'>$hallsize</span>
+                                        <h3>Hall Price : $hallprice &#8377;</h3>
+                                    </div>
+                                <h3>Your Booking Confirmation Will Be Inform You On Your Registered Email Within 24 Hour</h3>
                                 <h2>Thanku For Your Booking</h2>
 
                                 

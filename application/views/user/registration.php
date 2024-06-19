@@ -67,6 +67,12 @@ defined("BASEPATH") or exit("no direct script is allowed");
                             <div class="col-md-6 form-group">
                                 <input name="user_image" type="file" class="form-control" >
                             </div>
+                            <small style='color:blue' class="my-3">
+                                <a href="<?= base_url() ?>usercontroller/userprofile">
+                                Already Have An Account Login To Your Account
+                                </a>
+                                
+                            </small>
                             <div class="col-md-12">
                                 <button type="submit" class="butn-dark2"><span>Create Account</span></button>
                             </div>
