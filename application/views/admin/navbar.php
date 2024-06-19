@@ -318,7 +318,7 @@
               <li class="nav-item dropdown">
                   <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                     <div class="navbar-profile">
-                      <img class="img-xs rounded-circle" src="<?= base_url() ?>public/upload/admin_image/<?= $admin_data[0]['admin_image'] ?>" alt="">
+                      <img class="img-xs rounded-circle" src="<?= base_url() ?>public/upload/admin_image/<?= $admin_data[0]['admin_image'] ?>" style="height:40px;width:40px;object-fit:cover" alt="">
                       <p class="mb-0 d-none d-sm-block navbar-profile-name"><?= $admin_data[0]['admin_name'] ?></p>
                       <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                     </div>
@@ -337,8 +337,8 @@
                       </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item" href="<?= base_url() ?>admincontroller/logout_user">
-                      <div class="preview-thumbnail" onclick="return confirm('Are You Sure To Logout From Account')">
+                    <a class="dropdown-item preview-item" href="<?= base_url() ?>admincontroller/logout_user" onclick="return confirm('Are You Sure To Logout From Account')">
+                      <div class="preview-thumbnail" >
                         <div class="preview-icon bg-dark rounded-circle">
                           <i class="mdi mdi-logout text-danger" ></i>
                         </div>

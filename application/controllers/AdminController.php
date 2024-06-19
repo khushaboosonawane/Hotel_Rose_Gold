@@ -4,8 +4,8 @@ class AdminController extends CI_Controller{
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
         if(!isset($_SESSION['admin_id'])){
-            $data['admin_data']=$this->My_model->select("admin_data",['admin_id'=>$_SESSION['admin_id']]);
-            $_SESSION['login_data']=$data['admin_data'][0]['admin_name']."Login Successfull";
+            $admin_data=$this->My_model->select("admin_data",['admin_id'=>$_SESSION['admin_id']]);
+            $_SESSION['login_data']=$admin_data[0]['admin_name']."Login Successfull";
             redirect(base_url()."adminlogincontroller/");
             exit();
         }

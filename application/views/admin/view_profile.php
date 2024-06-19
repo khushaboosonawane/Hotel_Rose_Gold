@@ -3,7 +3,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
 ?>
 <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Dropdowns </h3>
+              <h3 class="page-title"> <span style='color:#ff512f'><?= $admin_data[0]['admin_name'] ?></span> Profile Information </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?= base_url() ?>admincontroller/">Dashboard</a></li>
@@ -23,7 +23,10 @@ defined("BASEPATH") or exit("no direct script is allowed");
                      if(isset($_SESSION['admin_id'])){
                         ?>
                         <div class="col-md-3">
-                            <img src="<?= base_url() ?>public/upload/admin_image/<?= $admin_data[0]['admin_image'] ?>" style="height:150px;width:150px;object-fit:cover;border-radius:50%;outline:2px solid #ff5031;outline-offset:10px" alt="">
+                          <a href="<?= base_url() ?>public/upload/admin_image/<?= $admin_data[0]['admin_image'] ?>" traget="__self">
+                          <img src="<?= base_url() ?>public/upload/admin_image/<?= $admin_data[0]['admin_image'] ?>" style="height:200px;width:200px;object-fit:cover;border-radius:50%;outline:2px solid #ff5031;outline-offset:10px" alt="">
+                          </a>
+                            
                         </div>
                         <div class="col col-md-6">
                             <table>
@@ -31,7 +34,7 @@ defined("BASEPATH") or exit("no direct script is allowed");
                                     <td>Name : <?= $admin_data[0]['admin_name'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Mobile : <?= $admin_data[0]['admin_mobile'] ?></td>
+                                    <td>Mobile : +91 <?= $admin_data[0]['admin_mobile'] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Email : <?= $admin_data[0]['admin_email'] ?></td>
